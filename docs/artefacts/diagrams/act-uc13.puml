@@ -1,0 +1,38 @@
+@startuml
+!include common.iuml
+mainframe act UC13 Zpracovat komentáře zákazníka
+|Pracovník|
+start
+:Otevře sdílenou revizi a zvolí\n„Komentáře k rev. N (n nevyřízených)“;
+|Systém|
+:Načte komentáře revize a zobrazí je,\nnevyřízené nahoře;
+repeat
+  |Pracovník|
+  :Vybere nevyřízený komentář;
+  if (Komentář vyžaduje změnu menu?) then ([ano])
+    :Zvolí „Upravit menu podle komentáře“;
+    |Systém|
+    :Otevře nejnovější revizi (u sdílené\nvytvoří pracovní kopii) a zvýrazní položku;
+    |Pracovník|
+    :Upraví menu a uloží revizi (UC08);
+    |Systém|
+    :Předvyplní poznámku\n„Upraveno v revizi č. N“;
+    |Pracovník|
+  endif
+  :Zapíše poznámku k vyřízení a zvolí\n„Označit jako vyřízený“;
+  |Systém|
+  :Ověří komentář a poznámku;
+  if (Komentář je již vyřízený?) then ([ano])
+    :Nic neuloží, zobrazí kdo a kdy\nkomentář vyřídil a obnoví seznam;
+  else ([ne])
+    :Uloží příznak vyřízený, poznámku,\nautora a datum vyřízení;
+    :Přesune komentář mezi vyřízené\na aktualizuje počet nevyřízených;
+  endif
+repeat while (Zbývá nevyřízený komentář\na pracovník pokračuje?) is ([ano]) not ([ne])
+if (Zbývá nevyřízený komentář?) then ([ne])
+  :Zobrazí „Všechny komentáře jsou vyřízeny“;
+else ([ano, pracovník zpracování zavřel])
+  :Ponechá nevyřízené komentáře\na zobrazí jejich počet;
+endif
+stop
+@enduml

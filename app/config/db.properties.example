@@ -1,0 +1,12 @@
+# Copy to db.properties and fill in. db.properties is not committed.
+db.url=jdbc:oracle:thin:@//localhost:1521/FREEPDB1
+db.user=CATERING
+db.password=change-me
+# Folder of the document storage (second storage, files on disk)
+documents.dir=./documents
+# Web UI for customers (share links)
+web.port=8080
+web.baseUrl=http://localhost:8080
+# true = the desktop app also starts the customer web server and the link scheduler (dev/demo on one machine).
+# false (default) = they run only on the application server (WebMain).
+web.embedded=false

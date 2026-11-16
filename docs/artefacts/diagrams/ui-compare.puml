@@ -1,0 +1,15 @@
+@startsalt
+scale 2
+{+
+<b>Porovnání revizí – Svatební menu
+{ Starší revize: | ^rev. 2^ | Novější revize: | ^rev. 3^ | [Porovnat] }
+{#
+<b>Změna | <b>Kategorie | <b>Položka | <b>Původně | <b>Nově
+PŘIDÁNO (zeleně) | Hlavní chod | Rizoto s hříbky | – | 30 porcí × 180 Kč
+ODEBRÁNO (červeně) | Předkrmy | Paštika | 50 ks × 60 Kč | –
+ZMĚNĚNO (žlutě) | Předkrmy | Caprese | 40 ks | 30 ks
+}
+Rozdíl celkové ceny: + 1 700 Kč
+[Otevřít revizi] | [Zavřít]
+}
+@endsalt

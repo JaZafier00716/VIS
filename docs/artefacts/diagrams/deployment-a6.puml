@@ -1,0 +1,48 @@
+@startuml
+!include common.iuml
+skinparam componentStyle uml2
+skinparam nodesep 40
+skinparam ranksep 90
+left to right direction
+
+node "Pracovní stanice (1..30)\nWindows 10/11 nebo Linux" as PC <<device>> {
+  node "JRE 21 + JavaFX 21" as JRE1 <<executionEnvironment>> {
+    artifact "catering-is-1.0.jar + lib/\n(hlavní třída DesktopApp)" as JAR1 <<artifact>>
+    artifact "config/db.properties" as CFG1 <<artifact>>
+  }
+}
+
+node "Počítač nebo telefon zákazníka\n(internet, 0..*)" as CL <<device>> {
+  node "Webový prohlížeč" as BR <<executionEnvironment>>
+}
+
+node "Počítač manažera\n(firemní síť nebo VPN, 0..*)" as MG <<device>> {
+  node "Webový prohlížeč" as BR2 <<executionEnvironment>>
+}
+
+node "Aplikační server\nUbuntu Server 22.04 LTS" as AS <<device>> {
+  node "Reverzní proxy (nginx)\nHTTPS, port 443" as PROXY <<executionEnvironment>>
+  node "Java 21 (služba systemd)" as JRE2 <<executionEnvironment>> {
+    artifact "catering-is-1.0.jar + lib/\n(hlavní třída WebMain,\nHttpServer na portu 8080,\nExpiredLinkScheduler)" as JAR2 <<artifact>>
+    artifact "config/db.properties" as CFG2 <<artifact>>
+  }
+  node "Souborový systém\n(sdílení SMB / NFS)" as FS <<executionEnvironment>> {
+    artifact "documents/\n(soubory dokumentů)" as DOCS <<artifact>>
+  }
+}
+
+node "Databázový server\nOracle Linux 9" as DBS <<device>> {
+  node "Oracle Database 19c+" as ORA <<executionEnvironment>> {
+    artifact "schéma CATERING\n(tabulky, sekvence)" as SCHEMA <<artifact>>
+  }
+}
+
+CFG1 <.. JAR1 : <<read>>
+CFG2 <.. JAR2 : <<read>>
+PROXY ..> JAR2 : HTTP, port 8080\n(localhost)
+CL -- AS : <<HTTPS, TCP 443>>\nje dostupná jen cesta /menu/
+MG -- AS : <<HTTPS, TCP 443>>\ncesta /manager jen z firemní sítě
+AS -- PC : <<SMB / NFS>>
+PC -- DBS : <<JDBC, TCP 1521>>
+AS -- DBS : <<JDBC, TCP 1521>>
+@enduml

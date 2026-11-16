@@ -1,0 +1,46 @@
+@startuml
+!include common.iuml
+skinparam componentStyle uml2
+node "Pracovní stanice (1..30)\nWindows 10/11, Linux (např. Ubuntu 22.04+)\nnebo macOS 13+, 4 GB RAM" as PC <<device>> {
+  node "Java 21 + JavaFX 21" as JRE1 <<executionEnvironment>> {
+    artifact "catering-is.jar\n(desktopový režim)" as APP1 {
+      component "Desktop UI (JavaFX)" as DUI
+      component "BL (služby, doménový model)" as BL1
+      component "DAL (Data Mappery, JDBC)" as DAL1
+    }
+  }
+}
+node "Aplikační server\nUbuntu Server 22.04 LTS, 8 GB RAM, 500 GB" as AS <<device>> {
+  node "Java 21 (služba systemd)" as JRE2 <<executionEnvironment>> {
+    artifact "catering-is.jar\n(serverový režim)" as APP2 {
+      component "Web UI\n(JDK HttpServer, port 8080)" as WUI
+      component "Plánovač\n(denně UC18)" as SCH
+      component "BL (služby, doménový model)" as BL2
+      component "DAL (Data Mappery, JDBC)" as DAL2
+    }
+  }
+  node "Reverzní proxy\n(HTTPS, port 443)" as RP <<executionEnvironment>>
+  node "Souborový systém\n(sdílená složka SMB / NFS)" as FSN <<executionEnvironment>> {
+    artifact "Úložiště dokumentů\n(soubory projektů)" as DOCS
+  }
+}
+node "Databázový server\nOracle Linux 9, 16 GB RAM, 200 GB" as DBS <<device>> {
+  node "Oracle Database 19c+" as ORA <<executionEnvironment>> {
+    artifact "schéma catering\n(tabulky, sekvence)" as SCHEMA
+  }
+}
+node "Zařízení zákazníka / manažera (0..*)" as CL <<device>> {
+  node "Webový prohlížeč" as BR <<executionEnvironment>>
+}
+DUI ..> BL1
+BL1 ..> DAL1
+WUI ..> BL2
+SCH ..> BL2
+BL2 ..> DAL2
+DAL2 ..> DOCS
+PC --- FSN : <<SMB / NFS>>
+PC -- DBS : <<JDBC, TCP 1521>>
+AS -- DBS : <<JDBC, TCP 1521>>
+RP -- CL : <<HTTPS, TCP 443>>
+RP ..> WUI : <<HTTP, TCP 8080>>
+@enduml

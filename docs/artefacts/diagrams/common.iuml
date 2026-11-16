@@ -1,0 +1,6 @@
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam monochrome true
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam dpi 200

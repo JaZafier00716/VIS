@@ -1,0 +1,24 @@
+<!doctype html><html lang="cs"><head><meta charset="utf-8"><link rel="stylesheet" href="theme.css"><style>body{width:688px}
+.qr{width:150px;height:150px;border:1px solid var(--border);border-radius:8px;padding:10px;background:#fff;flex:none}
+.qr div{width:100%;height:100%;background-image:conic-gradient(#1B2430 25%,#fff 0 50%,#1B2430 0 75%,#fff 0);background-size:16px 16px;position:relative}
+.qr div::before,.qr div::after,.qr span{content:"";position:absolute;width:36px;height:36px;border:7px solid #1B2430;background:#fff;box-shadow:inset 0 0 0 5px #fff,inset 0 0 0 20px #1B2430}
+.qr div::before{left:0;top:0}.qr div::after{right:0;top:0}.qr span{left:0;bottom:0}
+</style></head><body>
+<div class="dialog">
+ <div class="dialog-h"><div class="icon-circle" style="background:var(--ok-soft);color:var(--ok)"><i data-i="check"></i></div>Nabídka je sdílena se zákazníkem</div>
+ <div class="dialog-sub">Revize 3 menu <b>Svatební menu</b> je nyní uzamčena (stav SDÍLENÁ). Pošlete zákazníkovi odkaz nebo mu ukažte QR kód.</div>
+ <div class="dialog-b">
+  <div class="field"><span class="label">Odkaz pro zákazníka</span><div class="row"><div class="input" style="flex:1"><i data-i="link" style="color:var(--faint)"></i>https://menu.catering-firma.cz/menu/7f3a9c2e41b8</div><span class="btn"><i data-i="copy"></i>Kopírovat</span></div></div>
+  <div class="row" style="gap:18px;align-items:flex-start">
+   <div class="qr"><div><span></span></div></div>
+   <div class="col" style="gap:10px;padding-top:4px">
+    <div class="row"><i data-i="clock" style="color:var(--muted)"></i><span>Platnost <b>14 dní</b>, do <b>12. 11. 2026</b></span></div>
+    <div class="row"><i data-i="lock" style="color:var(--muted)"></i><span>Revize 3 je jen pro čtení</span></div>
+    <span class="btn sm" style="align-self:flex-start"><i data-i="print"></i>Vytisknout QR kód</span>
+   </div>
+  </div>
+  <div class="banner info"><i data-i="info"></i><span>Předchozí odkazy na toto menu byly zneplatněny. Zákazník na nich uvidí odkaz na tuto nabídku.</span></div>
+ </div>
+ <div class="dialog-f"><span class="btn primary">Hotovo</span></div>
+</div>
+<script src="icons.js"></script></body></html>

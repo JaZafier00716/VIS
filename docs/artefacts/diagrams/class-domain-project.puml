@@ -1,0 +1,104 @@
+@startuml
+!include common.iuml
+hide circle
+hide empty members
+skinparam classAttributeIconSize 0
+skinparam nodesep 40
+skinparam ranksep 50
+
+abstract class DomainObject <<abstract>> {
+  - id : Long
+  + isNew() : boolean
+}
+class Customer {
+  - name : String
+  - companyName : String
+  - email : String
+  - phone : String
+  - city : String
+  + {static} create(name : String, companyName : String, email : String, phone : String, city : String) : Customer
+  + update(name : String, companyName : String, email : String, phone : String, city : String) : void
+  + displayName() : String
+}
+class Project {
+  - responsibleUserId : long
+  - name : String
+  - eventDate : LocalDate
+  - eventPlace : String
+  - guestCount : int
+  - status : ProjectStatus
+  - note : String
+  + {static} create(name : String, customer : Customer, eventDate : LocalDate, eventPlace : String, guestCount : Integer, responsibleUserId : long, today : LocalDate) : Project
+  + update(name : String, eventDate : LocalDate, eventPlace : String, guestCount : Integer, note : String, today : LocalDate) : void
+  + archive() : void
+  + reactivate() : void
+  + isArchived() : boolean
+  + requireNotArchived() : void
+}
+abstract class ProjectNode <<abstract>> {
+  - projectId : Long
+  - name : String
+  - parent : Folder
+  - createdAt : LocalDateTime
+  + {abstract} type() : NodeType
+  + {abstract} isDeletable() : boolean
+  + {abstract} countDocuments() : int
+  + path() : String
+}
+class Folder {
+  - children : List<ProjectNode>
+  + add(child : ProjectNode) : void
+  + remove(child : ProjectNode) : void
+  + containsName(name : String) : boolean
+  + suggestFreeName(name : String) : String
+  + find(nodeId : long) : Optional<ProjectNode>
+}
+class Document {
+  - contentType : String
+  - sizeBytes : long
+  - storageKey : String
+  + {static} checkSize(sizeBytes : long) : void
+  + formattedSize() : String
+}
+class Menu {
+  - menuId : Long
+  - activeShareLink : boolean
+  + hasActiveShareLink() : boolean
+}
+enum ProjectStatus <<enumeration>> {
+  IN_PROGRESS
+  CONFIRMED
+  DONE
+  ARCHIVED
+}
+enum NodeType <<enumeration>> {
+  FOLDER
+  DOCUMENT
+  MENU
+}
+class RuntimeException
+class ValidationException {
+  - fieldErrors : Map<String, String>
+  + {static} throwIfAny(errors : Map<String, String>) : void
+}
+class DuplicateNameException {
+  - suggestedName : String
+}
+class ConflictException
+RuntimeException <|-- ValidationException
+ValidationException <|-- DuplicateNameException
+RuntimeException <|-- ConflictException
+
+DomainObject <|-- Customer
+DomainObject <|-- Project
+DomainObject <|-- ProjectNode
+Project "0..*" --> "1" Customer : customer
+Project "1" *--> "1" Folder : rootFolder
+Project ..> ProjectStatus
+ProjectNode <|-- Folder
+ProjectNode <|-- Document
+ProjectNode <|-- Menu
+ProjectNode ..> NodeType
+Folder "0..1" *--> "0..*" ProjectNode : children
+Folder ..> DuplicateNameException : <<throw>>
+@enduml

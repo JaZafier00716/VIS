@@ -1,0 +1,113 @@
+@startuml
+!include common.iuml
+hide methods
+hide circle
+skinparam classAttributeIconSize 0
+left to right direction
+
+class User {
+  username
+  fullName
+  email
+  passwordHash
+  active
+}
+class Role {
+  name
+}
+class Customer {
+  name
+  email
+  phone
+  companyName
+  address
+}
+class Project {
+  name
+  eventDate
+  eventPlace
+  guestCount
+  note
+  status : ProjectStatus
+}
+abstract class ProjectNode {
+  name
+  createdAt
+  modifiedAt
+}
+class Folder
+class Document {
+  contentType
+  sizeBytes
+  storageKey
+}
+class Menu
+class MenuRevision {
+  number
+  createdAt
+  modifiedAt
+  note
+  state : RevisionState
+}
+class MenuCategory {
+  name
+  position
+}
+class MenuItem {
+  quantity
+  unitPrice
+  note
+}
+class Product {
+  name
+  description
+  unit
+  defaultPrice
+  photo
+}
+class Allergen {
+  code
+  name
+}
+class ShareLink {
+  token
+  createdAt
+  validUntil
+  active
+}
+class Comment {
+  authorName
+  text
+  createdAt
+  resolved
+  resolutionNote
+  resolvedAt
+}
+
+User "0..*" -- "1..*" Role : má >
+Customer "1" -- "0..*" Project : objednává >
+User "1" -- "0..*" Project : odpovídá za >
+Project "1" *-- "1" Folder : kořenová složka >
+ProjectNode <|-- Folder
+ProjectNode <|-- Document
+Folder "0..1" *-- "0..*" ProjectNode : obsahuje >
+ProjectNode <|-- Menu
+Menu "1" *-- "1..*" MenuRevision
+MenuRevision "1" *-- "0..*" MenuCategory
+MenuCategory "1" *-- "0..*" MenuItem
+MenuItem "0..*" -- "1" Product : vychází z >
+Product "0..*" -- "0..*" Allergen : obsahuje >
+User "1" -- "0..*" MenuRevision : vytvořil >
+MenuRevision "1" -- "0..*" ShareLink : zpřístupněna >
+MenuRevision "1" *-- "0..*" Comment
+Comment "0..*" -- "0..1" MenuItem : týká se >
+User "0..1" -- "0..*" Comment : vyřídil >
+enum ProjectStatus <<enumeration>> {
+  IN_PROGRESS
+  ARCHIVED
+}
+enum RevisionState <<enumeration>> {
+  DRAFT
+  SHARED
+}
+@enduml

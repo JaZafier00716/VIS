@@ -1,0 +1,91 @@
+@startuml
+!include common.iuml
+hide circle
+hide empty members
+skinparam classAttributeIconSize 0
+
+interface MenuMapper <<interface>> {
+  + insertMenu(menu : Menu, projectId : long) : void
+  + findRevisionHeaders(menuId : long) : List<MenuRevision>
+  + findRevision(menuId : long, revisionNo : int) : Optional<MenuRevision>
+  + findLatestHeader(menuId : long) : Optional<MenuRevision>
+  + insertRevision(revision : MenuRevision) : void
+  + overwriteRevision(revision : MenuRevision) : boolean
+  + markShared(menuId : long, revisionNo : int, loadedSavedAt : LocalDateTime) : boolean
+  + findComments(menuId : long, revisionNo : int) : List<Comment>
+  + findComment(commentId : long) : Optional<Comment>
+  + insertComment(comment : Comment) : void
+  + updateResolution(comment : Comment) : boolean
+  + findGuestCount(menuId : long) : int
+  + findProjectId(menuId : long) : long
+  + findTitle(menuId : long) : String
+}
+interface ProjectMapper <<interface>> {
+  + findAll() : List<Project>
+  + findById(projectId : long) : Optional<Project>
+  + insert(project : Project) : void
+  + update(project : Project) : void
+  + findBySupervisor(supervisorId : long) : List<Project>
+  + search(text : String, from : LocalDate, to : LocalDate, includeArchived : boolean) : List<Project>
+}
+interface ProjectNodeMapper <<interface>> {
+  + loadTree(projectId : long) : Folder
+  + insert(node : ProjectNode) : void
+  + delete(node : ProjectNode) : void
+}
+interface CustomerMapper <<interface>> {
+  + findAll() : List<Customer>
+  + findById(customerId : long) : Optional<Customer>
+  + insert(customer : Customer) : void
+  + update(customer : Customer) : void
+  + delete(customerId : long) : void
+  + countProjects(customerId : long) : int
+}
+interface ProductMapper <<interface>> {
+  + findAll() : List<Product>
+  + findAllergens() : List<Allergen>
+  + insert(product : Product) : void
+  + update(product : Product) : void
+  + delete(productId : long) : void
+  + isUsed(productId : long) : boolean
+  + loadPhoto(productId : long) : byte[]
+  + findPriceHistory(productId : long) : List<PriceChange>
+}
+interface ShareLinkMapper <<interface>> {
+  + findByToken(token : String) : Optional<ShareLink>
+  + findByMenu(menuId : long) : List<ShareLink>
+  + findActive() : List<ShareLink>
+  + insert(link : ShareLink) : void
+  + update(link : ShareLink) : void
+}
+interface UserMapper <<interface>> {
+  + findAll() : List<User>
+  + findById(userId : long) : Optional<User>
+  + findByUsername(username : String) : Optional<User>
+  + insert(user : User) : void
+  + update(user : User) : void
+}
+interface DocumentStorage <<interface>> {
+  + store(key : String, source : Path) : void
+  + retrieve(key : String, target : Path) : void
+  + delete(key : String) : void
+  + exists(key : String) : boolean
+}
+interface MenuDocumentRenderer <<interface>> {
+  + render(revision : MenuRevision, title : String, guestCount : int, strategy : PriceStrategy, target : Path) : void
+}
+interface TransactionRunner <<interface>> {
+  + inTransaction<T>(work : Supplier<T>) : T
+  + inTransaction(work : Runnable) : void
+}
+
+MenuMapper -[hidden]right- ProjectMapper
+ProjectMapper -[hidden]right- ProductMapper
+ProjectMapper -[hidden]down- ProjectNodeMapper
+ProjectNodeMapper -[hidden]down- CustomerMapper
+ProductMapper -[hidden]down- ShareLinkMapper
+ShareLinkMapper -[hidden]down- UserMapper
+MenuMapper -[hidden]down- DocumentStorage
+DocumentStorage -[hidden]down- TransactionRunner
+CustomerMapper -[hidden]down- MenuDocumentRenderer
+@enduml

@@ -1,0 +1,80 @@
+@startuml
+!include common.iuml
+mainframe sd UC11b Zobrazit sdílenou nabídku a přidat komentář (kroky 4–8)
+hide footbox
+actor ":Zákazník" as C
+participant ":MenuHandler" as MH
+participant ":MenuPage" as MP
+participant ":SharingService" as SS
+participant ":ShareLink" as L
+participant ":MenuRevision" as R
+participant ":Comment" as CO
+participant ":ShareLinkMapper" as LM
+participant ":MenuMapper" as MM
+participant ":Oracle" as DB <<database>>
+
+C -> MH : GET /menu/{token} (4)
+MH -> SS : openSharedMenu(token)
+note over SS, DB : v jedné transakci (TransactionRunner.inTransaction)
+SS -> LM : findByToken(token)
+LM -> DB : SELECT share_links
+LM --> SS : link, nebo prázdný →\nnew UnknownShareLink(token)
+SS -> L : exists(), isValid(now)
+alt odkaz neexistuje (5.1)
+  SS --> MH : SharedMenuView(UNKNOWN)
+  MH -> MP : unknownLink()
+  MH --> C : 404 „Odkaz není platný,\nkontaktujte pracovníka“
+else odkaz je prošlý nebo nahrazený (5.1–5.3)
+  SS -> LM : findByMenu(menuId)
+  LM -> DB : SELECT share_links
+  SS --> MH : SharedMenuView(EXPIRED, currentToken)
+  MH -> MP : expired(currentToken)
+  alt existuje platný odkaz téhož menu
+    MH --> C : 410 „Odkaz již není platný“\n+ Zobrazit aktuální nabídku
+    C -> MH : Zobrazit aktuální nabídku (5.4):\nGET /menu/{currentToken}
+    note right of MH : dále jako platný odkaz (5.5)
+  else neexistuje
+    MH --> C : 410 „Odkaz již není platný“,\nkontaktujte pracovníka
+  end
+else odkaz je platný (5)
+  SS -> MM : findRevision(menuId, revisionNo)
+  MM -> DB : SELECT menu_revisions,\nmenu_categories, menu_items
+  SS -> R : getComments()
+  R -> MM : findComments(menuId, revisionNo)\n(Lazy Load)
+  MM -> DB : SELECT comments
+  SS -> MM : findTitle(menuId), findGuestCount(menuId)
+  SS --> MH : SharedMenuView(VALID, revision)
+  MH -> MP : menu(view, strategy, Form.EMPTY, sent)
+  MH --> C : stránka s kategoriemi, položkami,\ncenami, alergeny a komentáři
+end
+opt zákazník odešle komentář (6)
+  C -> MH : POST /menu/{token}/comments\n(author, body, target)
+  MH -> SS : addComment(token, authorName,\nbody, categoryId, productId)
+  note over SS, DB : v jedné transakci
+  SS -> LM : findByToken(token)
+  LM -> DB : SELECT share_links
+  SS -> L : isValid(now)
+  alt odkaz mezitím přestal platit
+    SS --> MH : LinkNotValidException
+    MH -> SS : openSharedMenu(token)
+    MH --> C : 410 „Odkaz již není platný“ (jako 5.1–5.3)
+  else odkaz je platný
+    create CO
+    SS -> CO : Comment.create(menuId, revisionNo, categoryId,\nproductId, authorName, body, now)
+    alt jméno nebo text chybí, text má více než 2000 znaků (7.1)
+      CO --> SS : ValidationException(chyby polí)
+      SS --> MH : ValidationException (rollback)
+      MH -> SS : openSharedMenu(token)
+      MH -> MP : menu(view, strategy, Form(chyby), false)
+      MH --> C : 400 stránka se zvýrazněnými poli (7.2)
+    else komentář je v pořádku (7)
+      SS -> MM : insertComment(comment)
+      MM -> DB : INSERT comments (nevyřízený)
+      SS --> MH : comment (commit)
+      MH --> C : 303 → /menu/{token}?ok=1
+      C -> MH : GET /menu/{token}?ok=1
+      MH --> C : potvrzení a komentář v seznamu (8)
+    end
+  end
+end
+@enduml

@@ -1,0 +1,124 @@
+@startuml
+!include common.iuml
+hide circle
+hide empty members
+skinparam classAttributeIconSize 0
+
+abstract class DomainObject <<abstract>> {
+  - id : Long
+  + isNew() : boolean
+}
+
+class MenuRevision {
+  - menuId : long
+  - revisionNo : int
+  - state : RevisionState
+  - note : String
+  - createdBy : Long
+  - createdAt : LocalDateTime
+  - stored : boolean
+  - latestRevisionNo : Integer
+  - loadedSavedAt : LocalDateTime
+  - commentLoader : Supplier<List<Comment>>
+  + {static} first(menuId : long) : MenuRevision
+  + addCategory(name : String) : MenuCategory
+  + insertCategory(index : int, category : MenuCategory) : void
+  + removeCategory(category : MenuCategory) : int
+  + addItem(category : MenuCategory, product : Product, quantity : BigDecimal, unitPrice : Money, note : String) : MenuItem
+  + insertItem(category : MenuCategory, index : int, item : MenuItem) : void
+  + changeItem(item : MenuItem, quantity : BigDecimal, unitPrice : Money, note : String) : void
+  + removeItem(category : MenuCategory, item : MenuItem) : int
+  + isEditable() : boolean
+  + markHistorical(latestRevisionNo : int) : void
+  + totalPrice(strategy : PriceStrategy) : Money
+  + pricePerGuest(strategy : PriceStrategy, guestCount : int) : Money
+  + findProblems() : List<String>
+  + validate() : void
+  + createWorkingCopy() : MenuRevision
+  + markShared() : void
+  + snapshotForSave(note : String, userId : long, savedAt : LocalDateTime) : MenuRevision
+  + recordSave(note : String, userId : long, savedAt : LocalDateTime) : void
+  + markStored() : void
+  + addListener(listener : MenuRevisionListener) : void
+  + removeListener(listener : MenuRevisionListener) : void
+}
+
+class MenuCategory {
+  - name : String
+  + subtotal(strategy : PriceStrategy) : Money
+  + findItem(productId : long) : Optional<MenuItem>
+}
+
+class MenuItem {
+  - quantity : BigDecimal
+  - unitPrice : Money
+  - note : String
+  + price(strategy : PriceStrategy) : Money
+  + copy() : MenuItem
+}
+
+class Product {
+  - name : String
+  - description : String
+  - unit : String
+  - currentPrice : Money
+  - vatRate : BigDecimal
+  - photo : byte[]
+  + {static} create(name : String, description : String, unit : String, price : BigDecimal, vatRate : BigDecimal, allergens : List<Allergen>, photo : byte[]) : Product
+  + update(name : String, description : String, unit : String, price : BigDecimal, vatRate : BigDecimal, allergens : List<Allergen>, photo : byte[]) : void
+}
+
+class Allergen <<record>> {
+  - id : int
+  - name : String
+}
+
+class PriceChange <<record>> {
+  - changedAt : LocalDateTime
+  - oldPrice : Money
+  - newPrice : Money
+}
+
+
+class Money <<value object>> {
+  - amount : BigDecimal
+  + {static} of(amount : BigDecimal) : Money
+  + plus(other : Money) : Money
+  + minus(other : Money) : Money
+  + times(factor : BigDecimal) : Money
+  + dividedBy(divisor : int) : Money
+  + isNegative() : boolean
+  + format() : String
+}
+
+class RevisionComparison {
+  - rows : List<Row>
+  + changes() : List<Row>
+  + olderTotal(strategy : PriceStrategy) : Money
+  + newerTotal(strategy : PriceStrategy) : Money
+  + difference(strategy : PriceStrategy) : Money
+}
+
+enum RevisionState <<enumeration>> {
+  WORKING
+  SHARED
+}
+
+interface PriceStrategy <<interface>>
+interface MenuRevisionListener <<interface>>
+class Comment
+
+MenuRevision "1" *-down-> "0..*" MenuCategory : categories
+MenuCategory "1" *-down-> "0..*" MenuItem : items
+MenuItem "0..*" -down-> "1" Product : product
+Product "0..*" -right-> "0..*" Allergen : allergens
+MenuRevision "1" o-left-> "0..*" MenuRevisionListener : listeners
+RevisionComparison "0..*" -down-> "2" MenuRevision : older, newer
+MenuRevision .left.> RevisionState
+MenuRevision .left.> PriceStrategy
+MenuItem .right.> Money
+MenuRevision "1" *-left-> "0..*" Comment : comments {lazy}
+PriceChange .down.> Money
+DomainObject <|-down- MenuCategory
+DomainObject <|-down- Product
+@enduml

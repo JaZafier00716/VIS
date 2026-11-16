@@ -1,0 +1,39 @@
+\section{Vize informačního systému}\label{sec:vize}
+
+\subsection{Účel a základní princip systému}
+
+Informační systém je určen pro cateringové společnosti a slouží k evidenci a správě cateringových zakázek. Základem systému jsou projekty, které představují jednotlivé zakázky nebo události. V rámci projektu je možné spravovat menu a další dokumenty související se zakázkou. Obsah projektu může být organizován do složek podobným způsobem jako v jednoduchém souborovém systému.
+
+\subsection{Pracovníci a správa projektů}
+
+Pracovníci cateringové společnosti používají desktopovou aplikaci, ve které mohou vytvářet a spravovat projekty, pracovat s jejich obsahem, vytvářet a upravovat menu a spravovat související dokumenty. Menu může obsahovat jednotlivé položky organizované do kategorií a pracovník může upravovat jejich údaje, například množství nebo cenu.
+
+Rozpracovanou verzi menu lze průběžně ukládat. Jakmile je verze zpřístupněna zákazníkovi, zůstane beze změny a další úpravy, například na základě připomínek zákazníka, vzniknou jako nová verze. Zpřístupněné verze zůstávají zachovány a pracovník může mezi verzemi přepínat.
+
+\subsection{Administrátor a zákazník}
+
+Administrátor používá stejné desktopové rozhraní jako ostatní pracovníci, ale může přepnout do administrátorského režimu. V něm může spravovat uživatelské účty pracovníků a jejich oprávnění.
+
+Zákazník používá webové rozhraní, prostřednictvím kterého si může zobrazit nabídku zpřístupněnou pracovníkem. K nabídce může přidávat připomínky, ale nemůže přímo upravovat její obsah. Přístup k nabídce může být zákazníkovi předán pomocí odkazu nebo QR kódu. Webové rozhraní může být využíváno také vedoucími pracovníky pro kontrolu projektů v režimu pouze pro čtení.
+
+\subsection{Hlavní funkce určené k implementaci}
+
+V rámci systému budou implementovány zejména funkce související se správou cateringových zakázek, tvorbou menu a komunikací se zákazníkem. Pracovník bude moci vytvořit nový projekt pro konkrétní zakázku a spravovat jeho obsah. Součástí projektu bude možné vytvářet a organizovat dokumenty a další informace potřebné pro zpracování zakázky.
+
+Další hlavní funkcí bude tvorba a úprava menu. Pracovník bude moci vytvářet kategorie a jednotlivé položky menu a upravovat jejich údaje, například množství nebo cenu. Verze menu, které viděl zákazník, budou zachovány, aby bylo možné dohledat změny a porovnat jednotlivé verze.
+
+Třetí hlavní funkcí bude zpřístupnění menu zákazníkovi prostřednictvím webového rozhraní a následná práce s jeho připomínkami. Zákazník si bude moci zpřístupněné menu prohlédnout a přidat k němu připomínky. Pracovník bude moci na připomínky reagovat úpravou menu, přičemž provedené změny budou zaznamenány jako nová verze menu.
+
+Kromě těchto tří hlavních funkcí bude implementována také správa uživatelských účtů a jejich oprávnění, kterou administrátor provádí v administrátorském režimu desktopové aplikace. Podpůrnými funkcemi budou evidence zákazníků, katalog pokrmů a nápojů s cenami, alergeny a fotografiemi, vyhledávání a archivace projektů, export menu do PDF, automatické zneplatnění odkazů, jejichž platnost skončila, stahování dokumentů na stanici a mazání nepotřebných položek projektu.
+
+\subsection{Ukládání dat}
+
+Systém bude uchovávat data ve dvou typech úložišť. Strukturovaná data, například informace o projektech, uživatelích, menu a jejich verzích, budou ukládána v relační databázi. Dokumenty, PDF soubory a další soubory související s projekty budou ukládány v samostatném souborovém úložišti. Tato dvě úložiště budou společně tvořit základ pro ukládání dat systému.
+
+\subsection{Předpokládaný rozsah nasazení}
+
+V první fázi je systém určen pro nasazení v jednotlivých cateringových společnostech. Předpokládá se přibližně 10 až 30 interních uživatelů na jednu společnost, stovky zákazníků a desítky aktivních projektů. Se systémem bude současně pracovat několik až nižší desítky interních uživatelů a webové rozhraní může být současně přístupné více zákazníkům.
+
+\subsection{Možnosti budoucího rozšíření}
+
+Do budoucna může být systém rozšířen tak, aby umožňoval obsluhu více cateringových společností v rámci jednoho systému, přičemž jednotlivé společnosti budou mít vzájemně oddělená data a vlastní uživatelské účty. Systém může být dále rozšířen například o pokročilejší řízení průběhu projektů, automatická upozornění, statistiky, kalendář nebo propojení s dalšími systémy používanými cateringovými společnostmi.

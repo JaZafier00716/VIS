@@ -1,0 +1,34 @@
+<!doctype html><html lang="cs"><head><meta charset="utf-8"><link rel="stylesheet" href="theme.css"><style>
+body{width:1328px}
+.wrap{display:grid;grid-template-columns:1fr 380px;gap:18px;padding:18px 22px}
+.adm{background:#1B2430;color:#fff;display:flex;align-items:center;gap:10px;padding:0 16px;height:44px;font-weight:600}
+.adm .btn{height:28px;background:transparent;color:#fff;border-color:#4B5563;font-size:12px}
+.roles{display:flex;gap:4px;flex-wrap:wrap}
+.chk{display:flex;align-items:center;gap:8px}
+</style></head><body>
+<div class="window">
+ <div class="titlebar">Catering IS · Administrace<div class="dots"><span></span><span></span><span></span></div></div>
+ <div class="adm"><i data-i="shield"></i>Administrátorský režim<div class="spacer"></div><span class="btn"><i data-i="x"></i>Ukončit režim administrátora</span></div>
+ <div class="wrap">
+  <div class="col" style="gap:12px">
+   <div class="row"><h1 style="font-size:20px;font-weight:700">Uživatelé a oprávnění</h1><span class="chip neutral nodot">3</span><div class="spacer"></div><div class="input placeholder" style="width:220px"><i data-i="search"></i>Hledat uživatele…</div><span class="btn"><i data-i="plus"></i>Nový uživatel</span></div>
+   <div class="card" style="overflow:hidden"><table>
+    <tr><th>Uživatel</th><th>Role</th><th>Stav</th><th></th></tr>
+    <tr><td><div class="row"><div class="avatar">JZ</div><div class="col"><b>Jan Zámostný</b><span class="faint" style="font-size:12px">jzamostny</span></div></div></td><td><div class="roles"><span class="chip accent nodot">Pracovník</span><span class="chip info nodot">Administrátor</span></div></td><td><span class="chip ok">Aktivní</span></td><td class="num"><span class="btn sm ghost"><i data-i="edit"></i></span></td></tr>
+    <tr class="sel"><td><div class="row"><div class="avatar">PN</div><div class="col"><b>Petr Novák</b><span class="faint" style="font-size:12px">pnovak</span></div></div></td><td><div class="roles"><span class="chip accent nodot">Pracovník</span></div></td><td><span class="chip ok">Aktivní</span></td><td class="num"><span class="btn sm ghost"><i data-i="edit"></i></span></td></tr>
+    <tr><td><div class="row"><div class="avatar" style="background:#EEF1F4;color:var(--muted)">MD</div><div class="col"><b>Marie Dvořáková</b><span class="faint" style="font-size:12px">mdvorakova</span></div></div></td><td><div class="roles"><span class="chip warn nodot">Manažer</span></div></td><td><span class="chip neutral">Neaktivní</span></td><td class="num"><span class="btn sm ghost"><i data-i="edit"></i></span></td></tr>
+   </table></div>
+  </div>
+  <div class="card">
+   <div class="card-h">Upravit uživatele<div class="spacer"></div><i data-i="x" style="color:var(--faint)"></i></div>
+   <div class="card-b col" style="gap:14px">
+    <div class="row"><div class="avatar">PN</div><div class="col"><b>Petr Novák</b><span class="faint" style="font-size:12px">pnovak · pnovak@catering-firma.cz</span></div></div>
+    <div class="field"><span class="label">Role</span><div class="col" style="gap:8px;margin-top:2px"><span class="chk"><span class="check on"></span>Pracovník</span><span class="chk"><span class="check"></span>Manažer</span><span class="chk"><span class="check"></span>Administrátor</span></div></div>
+    <div class="field"><span class="label">Nastavit nové heslo</span><div class="input placeholder">Ponechte prázdné, pokud se nemění</div><span class="help">Nejméně 8 znaků. Použijte, když uživatel heslo zapomněl.</span></div>
+    <div class="row" style="justify-content:space-between"><div class="col"><span class="label">Účet je aktivní</span><span class="help">Neaktivní uživatel se nepřihlásí.</span></div><span class="toggle on"></span></div>
+   </div>
+   <div class="dialog-f" style="border-radius:0 0 8px 8px"><span class="btn">Zrušit</span><span class="btn primary">Uložit</span></div>
+  </div>
+ </div>
+</div>
+<script src="icons.js"></script></body></html>

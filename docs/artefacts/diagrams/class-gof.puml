@@ -1,0 +1,126 @@
+@startuml
+!include common.iuml
+hide circle
+hide empty members
+skinparam classAttributeIconSize 0
+
+package "Command" <<Rectangle>> {
+  interface MenuEditCommand <<interface>> {
+    + execute() : void
+    + undo() : void
+    + description() : String
+  }
+  class MenuEditor <<invoker>> {
+    - undoStack : Deque<MenuEditCommand>
+    - log : List<String>
+    + execute(command : MenuEditCommand) : void
+    + canUndo() : boolean
+    + undo() : String
+  }
+  class AddCategoryCommand {
+    - revision : MenuRevision
+    - name : String
+    - created : MenuCategory
+  }
+  class RemoveCategoryCommand {
+    - revision : MenuRevision
+    - category : MenuCategory
+    - index : int
+  }
+  class AddItemCommand {
+    - revision : MenuRevision
+    - category : MenuCategory
+    - product : Product
+    - quantity : BigDecimal
+    - unitPrice : Money
+    - created : MenuItem
+  }
+  class ChangeItemCommand {
+    - revision : MenuRevision
+    - item : MenuItem
+    - newQuantity : BigDecimal
+    - newPrice : Money
+    - newNote : String
+    - oldQuantity : BigDecimal
+    - oldPrice : Money
+    - oldNote : String
+  }
+  class RemoveItemCommand {
+    - revision : MenuRevision
+    - category : MenuCategory
+    - item : MenuItem
+    - index : int
+  }
+}
+
+class MenuRevision <<receiver, subject>> {
+  + addListener(listener : MenuRevisionListener) : void
+  + removeListener(listener : MenuRevisionListener) : void
+  + totalPrice(strategy : PriceStrategy) : Money
+}
+
+class MenuEditorWindow <<presentation>>
+
+package "Observer" <<Rectangle>> {
+  interface MenuRevisionListener <<interface>> {
+    + revisionChanged(revision : MenuRevision) : void
+  }
+}
+
+package "Strategy" <<Rectangle>> {
+  interface PriceStrategy <<interface>> {
+    + {static} WITHOUT_VAT : PriceStrategy
+    + {static} WITH_VAT : PriceStrategy
+    + lineTotal(item : MenuItem) : Money
+    + label() : String
+  }
+  class PriceWithoutVat {
+    + lineTotal(item : MenuItem) : Money
+    + label() : String
+  }
+  class PriceWithVat {
+    + lineTotal(item : MenuItem) : Money
+    + label() : String
+  }
+}
+
+package "Factory Method" <<Rectangle>> {
+  abstract class NodeCreator <<abstract>> {
+    # {abstract} createNode(name : String) : ProjectNode
+    + createIn(parent : Folder, name : String) : ProjectNode
+  }
+  class FolderCreator {
+    # createNode(name : String) : ProjectNode
+  }
+  class MenuCreator {
+    # createNode(name : String) : ProjectNode
+  }
+  class DocumentCreator {
+    - contentType : String
+    - sizeBytes : long
+    # createNode(name : String) : ProjectNode
+  }
+}
+
+MenuEditCommand <|.. AddCategoryCommand
+MenuEditCommand <|.. RemoveCategoryCommand
+MenuEditCommand <|.. AddItemCommand
+MenuEditCommand <|.. ChangeItemCommand
+MenuEditCommand <|.. RemoveItemCommand
+MenuEditor "1" o--> "0..*" MenuEditCommand : undoStack
+MenuEditor "0..*" --> "1" MenuRevision : revision
+
+MenuRevision "1" o--> "0..*" MenuRevisionListener : listeners
+MenuEditorWindow --> "1" MenuEditor : editor
+MenuEditorWindow ..> MenuRevisionListener : <<create>>
+MenuEditorWindow ..> PriceStrategy : <<use>>
+MenuRevision ..> PriceStrategy
+
+PriceStrategy <|.. PriceWithoutVat
+PriceStrategy <|.. PriceWithVat
+
+NodeCreator <|-- FolderCreator
+NodeCreator <|-- MenuCreator
+NodeCreator <|-- DocumentCreator
+PriceWithVat -[hidden]down- NodeCreator
+@enduml

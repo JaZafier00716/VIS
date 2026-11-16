@@ -1,0 +1,52 @@
+/* One small theme for the desktop UI, follows the A4 mockups (teal accent #0F766E). */
+.root {
+    -fx-font-size: 13px;
+    -fx-base: #f8fafc;
+    -fx-accent: #0F766E;
+    -fx-focus-color: #0F766E;
+    -fx-faint-focus-color: #0F766E22;
+    -fx-background-color: #f3f4f6;
+}
+.top-bar { -fx-background-color: white; -fx-border-color: transparent transparent #e5e7eb transparent; -fx-padding: 10 16; -fx-spacing: 12; -fx-alignment: center-left; }
+.logo { -fx-background-color: #0F766E; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 3 8; -fx-background-radius: 6; }
+.app-name { -fx-font-size: 17px; -fx-font-weight: bold; }
+.side { -fx-background-color: white; -fx-border-color: transparent #e5e7eb transparent transparent; -fx-padding: 12; -fx-spacing: 8; }
+.content { -fx-padding: 16; -fx-spacing: 10; }
+.h1 { -fx-font-size: 22px; -fx-font-weight: bold; }
+.h2 { -fx-font-size: 16px; -fx-font-weight: bold; }
+.muted { -fx-text-fill: #6b7280; }
+.section { -fx-text-fill: #6b7280; -fx-font-weight: bold; -fx-font-size: 11px; }
+.card { -fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 12; -fx-spacing: 8; }
+
+.button.primary, .menu-button.primary, .toggle-button.primary:selected { -fx-base: #0F766E; -fx-text-fill: white; }
+.menu-button.primary > .label, .menu-button.primary > .arrow-button > .arrow { -fx-text-fill: white; -fx-background-color: white; }
+.menu-button.primary > .label { -fx-background-color: transparent; }
+.button.danger { -fx-base: #b91c1c; -fx-text-fill: white; }
+.button.danger .icon { -fx-fill: white; }
+.icon { -fx-fill: #0F766E; }
+
+.badge { -fx-background-radius: 10; -fx-padding: 1 8; -fx-font-weight: bold; -fx-font-size: 11px; }
+.badge-shared { -fx-background-color: #dbeafe; -fx-text-fill: #1d4ed8; }
+.badge-working { -fx-background-color: #dcfce7; -fx-text-fill: #15803d; }
+.badge-open { -fx-background-color: #fee2e2; -fx-text-fill: #b91c1c; }
+.badge-archived { -fx-background-color: #e5e7eb; -fx-text-fill: #4b5563; }
+.badge-status { -fx-background-color: #ffedd5; -fx-text-fill: #c2410c; }
+
+.banner { -fx-background-color: #fef3c7; -fx-border-color: #fcd34d; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 14; -fx-spacing: 12; -fx-alignment: center-left; }
+.banner .label { -fx-text-fill: #92400e; }
+.info { -fx-background-color: #eff6ff; -fx-border-color: #bfdbfe; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 14; -fx-text-fill: #1e3a8a; }
+.admin-bar { -fx-background-color: #1f2937; -fx-padding: 10 16; -fx-spacing: 12; -fx-alignment: center-left; }
+.admin-bar .label { -fx-text-fill: white; -fx-font-weight: bold; }
+
+.total { -fx-font-size: 20px; -fx-font-weight: bold; }
+.category-row { -fx-font-weight: bold; -fx-background-color: #f9fafb; }
+.error-row { -fx-background-color: #fee2e2; }
+.highlight-row { -fx-background-color: #ccfbf1; }
+/* UC10 revision comparison */
+.added-row { -fx-background-color: #dcfce7; }
+.removed-row { -fx-background-color: #fee2e2; }
+.changed-row { -fx-background-color: #fef3c7; }
+
+/* field errors (ValidationException.getFieldErrors) */
+.field-error { -fx-border-color: #dc2626; -fx-border-radius: 3; }
+.error-text { -fx-text-fill: #dc2626; -fx-font-size: 12px; }

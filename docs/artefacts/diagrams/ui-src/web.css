@@ -1,0 +1,15 @@
+/* Plain HTML page served by JDK HttpServer. Single stylesheet, no JavaScript needed. */
+.phone{width:390px;background:var(--bg);border:1px solid var(--border-strong);border-radius:28px;overflow:hidden;box-shadow:0 8px 24px rgba(20,30,40,.14)}
+.url{height:44px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted);gap:6px}
+.url span{background:#F1F3F5;border-radius:8px;padding:5px 12px;display:flex;gap:6px;align-items:center}
+.hero{background:var(--accent);color:#fff;padding:18px 18px 20px}
+.hero h1{font-size:20px;line-height:1.25;margin-top:6px}
+.hero .sub{opacity:.85;font-size:12.5px;margin-top:4px}
+.pg{padding:14px;display:flex;flex-direction:column;gap:14px}
+.cat{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;padding:12px 14px 4px}
+.it{padding:8px 14px 10px;display:grid;grid-template-columns:1fr auto;gap:2px 8px;border-bottom:1px solid #EDF0F3}
+.it .n{font-weight:600}.it .p{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.it .d{font-size:12px;color:var(--muted)}
+.al{display:inline-block;min-width:18px;height:18px;line-height:18px;text-align:center;border-radius:4px;background:#EEF1F4;color:var(--muted);font-size:10.5px;font-weight:700;margin-left:2px}
+.tot{display:flex;justify-content:space-between;align-items:baseline;padding:14px;background:#F8FAFB;border-top:1px solid var(--border);border-radius:0 0 8px 8px}
+.c{padding:10px 14px;border-bottom:1px solid #EDF0F3;display:flex;flex-direction:column;gap:3px}

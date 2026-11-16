@@ -1,0 +1,52 @@
+@startuml
+!include common.iuml
+mainframe sd UC02a Vytvořit projekt (kroky 1–4)
+hide footbox
+actor ":Pracovník" as W
+participant ":MainWindow" as MW
+participant ":NewProjectDialog" as ND
+participant ":ProjectService" as PS
+participant ":Project" as P
+participant ":CustomerMapper" as CM
+participant ":ProjectMapper" as PM
+participant ":ProjectNodeMapper" as NM
+participant ":Oracle" as DB <<database>>
+
+W -> MW : Nový projekt
+create ND
+MW -> ND : new NewProjectDialog(projects, user)
+ND -> PS : findAllCustomers()
+PS -> CM : findAll()
+CM -> DB : SELECT customers
+CM --> PS : zákazníci
+PS --> ND : zákazníci
+ND --> W : formulář projektu se seznamem zákazníků
+loop dokud projekt nevznikne a pracovník nezvolí Zrušit
+  W -> ND : vyplní údaje, Vytvořit projekt
+  ND -> PS : createProject(name, customerId,\neventDate, eventPlace,\nguestCount, worker)
+  PS -> PS : AccessPolicy.requireWorker(worker)
+  note over PS, DB : v jedné transakci (TransactionRunner.inTransaction)
+  PS -> CM : findById(customerId)
+  CM -> DB : SELECT customers
+  PS -> P : Project.create(name, customer,\neventDate, eventPlace, guestCount,\nresponsibleUserId, today)
+  alt údaje chybí nebo jsou neplatné (4.1)
+    P --> PS : ValidationException(chyby polí)
+    PS --> ND : ValidationException (rollback)
+    ND --> W : zvýrazní chybná pole s popisem chyby (4.2)
+  else údaje jsou v pořádku
+    P --> PS : project (ROZPRACOVANÝ, kořenová Folder)
+    PS -> PM : insert(project)
+    PM -> DB : INSERT projects
+    PS -> NM : insert(rootFolder)
+    NM -> DB : INSERT project_nodes (FOLDER)
+    PS --> ND : project (commit)
+    ND --> MW : project
+    MW -> MW : projectCreated(project)
+    MW -> PS : loadTree(projectId)
+    PS -> NM : loadTree(projectId)
+    NM -> DB : SELECT project_nodes
+    PS --> MW : kořenová Folder (Composite)
+    MW --> W : strom obsahu vlevo,\nprázdná kořenová složka vpravo
+  end
+end
+@enduml

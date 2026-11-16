@@ -1,0 +1,62 @@
+@startuml
+!include common.iuml
+mainframe sd UC11a Sdílet nabídku se zákazníkem (kroky 1–3)
+hide footbox
+actor ":Pracovník" as W
+participant ":MenuEditorWindow" as EW
+participant ":ShareDialog" as SD
+participant ":SharingService" as SS
+participant ":MenuRevision" as R
+participant "old:ShareLink" as OL
+participant "link:ShareLink" as NL
+participant ":MenuMapper" as MM
+participant ":ShareLinkMapper" as LM
+participant ":Oracle" as DB <<database>>
+
+W -> EW : vybere uloženou revizi,\nSdílet se zákazníkem (1)
+EW -> SS : shareRevision(revision)
+SS -> R : isStored(), validate()
+note over SS, DB : v jedné transakci (TransactionRunner.inTransaction)
+SS -> MM : findLatestHeader(menuId)
+MM -> DB : SELECT menu_revisions
+alt revize je PRACOVNÍ, ale mezitím vznikla novější
+  SS --> EW : ConflictException (rollback)
+  EW --> W : „Menu mezitím změnil jiný pracovník.“
+  EW -> EW : openLatest()
+  note right of EW : MenuService.openLatestRevision(menuId),\nnejnovější revize (UC08 krok 2)
+else sdílení je možné
+  opt revize je PRACOVNÍ
+    SS -> MM : markShared(menuId, revisionNo, loadedSavedAt)
+    MM -> DB : UPDATE menu_revisions SET state = 'SHARED'\nWHERE state = 'WORKING'\nAND created_at = loadedSavedAt
+    opt 0 řádků: mezitím uložil nebo sdílel jiný pracovník
+      MM --> SS : false
+      SS --> EW : ConflictException (rollback)
+    end
+  end
+  SS -> LM : findByMenu(menuId)
+  LM -> DB : SELECT share_links
+  loop pro každý aktivní odkaz menu
+    SS -> OL : deactivate()
+    SS -> LM : update(old)
+    LM -> DB : UPDATE share_links (active = 'N')
+  end
+  create NL
+  SS -> NL : ShareLink.create(menuId, revisionNo, now)\n(náhodný token, platnost 14 dní)
+  SS -> LM : insert(link)
+  LM -> DB : INSERT share_links
+  opt revize byla PRACOVNÍ (po commitu)
+    SS -> R : markShared()
+    R -> R : validate(), state = SHARED,\nrevisionChanged → refresh editoru
+  end
+  SS --> EW : link
+  EW -> EW : load(revision)
+  EW --> W : revize jen pro čtení (SDÍLENÁ)
+  create SD
+  EW -> SD : new ShareDialog(sharing, link, menuName)
+  SD -> SS : shareUrl(link)
+  SS --> SD : baseUrl/menu/{token}
+  SD --> W : dialog s odkazem, QR kódem\na platností do (3)
+  W -> SD : Kopírovat, Hotovo
+  note over W : pracovník předá odkaz\nzákazníkovi mimo systém
+end
+@enduml
