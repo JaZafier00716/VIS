@@ -1,0 +1,44 @@
+@startuml
+!include common.iuml
+mainframe act UC08 Upravit menu a uložit revizi
+|Pracovník|
+start
+:Otevře projekt a vybere menu;
+repeat
+  |Systém|
+  :Načte nejnovější revizi menu;
+  if (Revize je sdílená se zákazníkem?) then ([ano])
+    :Zobrazí revizi jen pro čtení\ns upozorněním;
+    |Pracovník|
+    :Zvolí „Vytvořit pracovní kopii“;
+    |Systém|
+    :Vytvoří pracovní kopii\na povolí editaci;
+  else ([ne])
+    :Zobrazí revizi s povolenou editací;
+  endif
+  repeat
+    |Pracovník|
+    :Upraví kategorie, položky,\nmnožství a ceny;
+    |Systém|
+    :Přepočítá ceny kategorií,\ncelkovou cenu a cenu na hosta;
+    |Pracovník|
+    :Zvolí „Uložit revizi“\na zadá poznámku;
+    |Systém|
+    :Zkontroluje menu;
+    if (Menu obsahuje chyby?) then ([ano])
+      :Zvýrazní chybné položky;
+    endif
+  repeat while (Menu obsahuje chyby?) is ([ano]) not ([ne])
+  if (Revize byla mezitím sdílena\nnebo vznikla novější?) then ([ano])
+    :Nic neuloží, zobrazí zprávu;
+  else ([ne])
+    if (Jde o pracovní kopii sdílené revize?) then ([ano])
+      :Uloží novou revizi (číslo + 1)\nv jedné transakci;
+    else ([ne])
+      :Přepíše pracovní revizi\nv jedné transakci;
+    endif
+    :Zobrazí potvrzení a aktualizuje\nseznam revizí;
+  endif
+repeat while (Uložení se nepodařilo\nkvůli změně revize?) is ([ano]) not ([ne])
+stop
+@enduml

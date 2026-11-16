@@ -1,0 +1,28 @@
+@startuml
+!include common.iuml
+|Pracovník|
+start
+:Otevře menu a zvolí „Porovnat revize“;
+|Systém|
+if (Menu má alespoň dvě revize?) then (ne)
+  :Oznámí, že není co porovnat;
+  stop
+endif
+:Zobrazí seznam revizí menu;
+|Pracovník|
+:Vybere dvě revize a potvrdí;
+|Systém|
+while (Vybrána dvakrát stejná revize?) is (ano)
+  :Zobrazí „Vyberte dvě různé revize“;
+  |Pracovník|
+  :Vybere jinou revizi;
+  |Systém|
+endwhile (ne)
+:Určí přidané, odebrané\na změněné položky;
+:Zobrazí tabulku rozdílů s barevným\nzvýrazněním a rozdíl celkové ceny;
+|Pracovník|
+if (Chce otevřít revizi?) then (ano)
+  :Zvolí „Otevřít revizi“ (UC09);
+endif
+stop
+@enduml

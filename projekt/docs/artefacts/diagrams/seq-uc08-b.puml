@@ -1,0 +1,65 @@
+@startuml
+!include common.iuml
+mainframe sd UC08b Uložit revizi (kroky 5–8, 6.1–6.3, 7.1–7.3)
+hide footbox
+actor ":Pracovník" as W
+participant ":MenuEditorWindow" as EW
+participant ":MenuService" as MS
+participant ":MenuRevision" as R
+participant ":MenuMapper" as MM
+participant ":Oracle" as DB <<database>>
+
+W -> EW : Uložit revizi (5)
+EW --> W : dialog Poznámka k revizi
+W -> EW : poznámka
+EW -> MS : saveRevision(revision, note, worker)
+MS -> MS : AccessPolicy.requireWorker(worker)
+MS -> R : validate()
+alt menu nesplňuje kontroly (6.1)
+  R --> MS : ValidationException(problémy)
+  MS --> EW : ValidationException
+  EW --> W : „Menu obsahuje chyby a nebylo uloženo“,\nchybné řádky červeně (6.2)
+else menu je v pořádku
+  MS -> R : snapshotForSave(note, userId, now)
+  R --> MS : toSave (kopie hlavičky, objekt revize se zatím nemění)
+  note over MS, DB : v jedné transakci (TransactionRunner.inTransaction)
+  MS -> MM : findLatestHeader(menuId)
+  MM -> DB : SELECT menu_revisions
+  MM --> MS : latest
+  alt isStored(): uložená PRACOVNÍ revize (7)
+    opt latest není tato revize ve stavu WORKING\n(mezitím sdílena nebo vznikla novější)
+      MS -> MS : throw ConflictException
+    end
+    MS -> MM : overwriteRevision(toSave)
+    MM -> DB : UPDATE menu_revisions\nWHERE state = 'WORKING'\nAND created_at = loadedSavedAt
+    opt 0 řádků: mezitím uložil jiný pracovník
+      MM --> MS : false
+      MS -> MS : throw ConflictException
+    end
+    MM -> DB : DELETE menu_categories (+ items),\nINSERT menu_categories, menu_items
+    MM --> MS : true
+  else pracovní kopie sdílené revize (2.5)
+    opt latest.revisionNo ≠ revisionNo − 1\n(mezitím vznikla novější revize)
+      MS -> MS : throw ConflictException
+    end
+    opt latest není SDÍLENÁ\n(mezitím vznikla pracovní revize)
+      MS -> MS : throw ConflictException
+    end
+    MS -> MM : insertRevision(toSave)
+    MM -> DB : INSERT menu_revisions,\nmenu_categories, menu_items
+  end
+  alt ConflictException (7.1)
+    MS --> EW : ConflictException (rollback)
+    EW --> W : „Menu mezitím změnil jiný pracovník.\nNačítám nejnovější revizi.“ (7.2)
+    EW -> MS : openLatestRevision(menuId)
+    MS --> EW : nejnovější revize
+    EW --> W : pokračuje krokem 2 (7.3)
+  else uloženo
+    MS -> R : recordSave(note, userId, now)
+    MS -> R : markStored()
+    MS --> EW : revisionNo (po commitu)
+    EW -> EW : load(revision)
+    EW --> W : „Uloženo jako revize č. N.“,\naktualizovaný seznam revizí (8)
+  end
+end
+@enduml

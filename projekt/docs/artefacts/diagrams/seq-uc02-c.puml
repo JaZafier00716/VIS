@@ -1,0 +1,59 @@
+@startuml
+!include common.iuml
+mainframe sd UC02c Nahrát a stáhnout dokumenty (kroky 7.1–7.12)
+hide footbox
+actor ":Pracovník" as W
+participant ":MainWindow" as MW
+participant ":UploadConflictDialog" as CD
+participant ":DocumentService" as DS
+participant ":DocumentCreator" as NC
+participant ":Folder" as F
+participant ":DocumentStorage" as FS
+participant ":ProjectNodeMapper" as NM
+participant ":Oracle" as DB <<database>>
+participant "složka dokumentů" as DIR <<file system>>
+
+W -> MW : Nahrát dokument (7.1)
+MW --> W : dialog výběru souboru na stanici (7.2)
+W -> MW : vybere soubor (7.3)
+MW -> CD : createWithRename(folder,\nfileName, create)
+CD -> DS : createDocument(parent, file, name)
+create NC
+DS -> NC : new DocumentCreator(\ncontentType, size)
+NC -> NC : Document.checkSize(size)
+alt soubor je větší než 20 MB (7.4)
+  NC --> DS : ValidationException
+  DS --> MW : ValidationException
+  MW --> W : „Soubor je větší než povolených 20 MB.“
+else velikost je v pořádku
+  DS -> NC : createIn(parent, name)
+  NC -> F : add(new Document(...))
+  alt název je ve složce obsazen (7.5)
+    F --> DS : DuplicateNameException(suggestedName)
+    DS --> CD : DuplicateNameException
+    CD --> W : dialog Název již existuje,\nPřejmenovat / Zrušit (8.1)
+    note right of CD : Přejmenovat zopakuje createDocument\ns novým názvem (8.2–8.5)
+  else název je volný
+    DS -> FS : store(storageKey, file)
+    FS -> DIR : zápis souboru (7.6)
+    DS -> NM : insert(document)
+    NM -> DB : INSERT project_nodes (DOCUMENT)
+    note right of DS : selže-li INSERT (rollback),\nDocumentService soubor smaže:\nDocumentStorage.delete(storageKey)
+    DS --> CD : document (commit)
+    CD --> MW : document
+    MW --> W : dokument v obsahu aktivní složky (7.7)
+  end
+end
+opt pracovník chce dokumenty stáhnout
+  W -> MW : označí dokumenty, Stáhnout (7.8)
+  MW --> W : dialog výběru cílové složky (7.9)
+  W -> MW : cílová složka, potvrdí (7.10)
+  MW -> DS : downloadDocuments(documents, targetDir)
+  loop pro každý označený dokument
+    DS -> FS : retrieve(storageKey, target)
+    FS -> DIR : kopie souboru do cílové složky
+  end
+  DS --> MW : počet stažených dokumentů
+  MW --> W : „Staženo N dokumentů do složky …“ (7.12)
+end
+@enduml

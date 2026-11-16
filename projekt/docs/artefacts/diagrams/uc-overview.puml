@@ -1,0 +1,61 @@
+@startuml
+!include common.iuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Pracovník" as W
+actor "Administrátor" as A
+actor "Zákazník" as C
+actor "Manažer" as M
+actor "Čas" as T
+
+rectangle "IS pro cateringové společnosti" {
+  usecase "01 - Přihlásit se" as UC01
+  usecase UC02 as "02 - Vytvořit projekt\na spravovat jeho dokumenty\n--\nextension points\nNové menu: krok 7"
+  usecase "03 - Upravit a archivovat projekt" as UC03
+  usecase "04 - Vyhledat projekt" as UC04
+  usecase "05 - Spravovat zákazníky" as UC05 <<CRUD>>
+  usecase "06 - Spravovat katalog produktů" as UC06 <<CRUD>>
+  usecase "07 - Vytvořit menu projektu" as UC07
+  usecase "08 - Upravit menu\na uložit revizi" as UC08
+  usecase "09 - Přepnout zobrazenou revizi menu" as UC09
+  usecase "10 - Porovnat revize menu" as UC10
+  usecase "11 - Sdílet nabídku se zákazníkem\na přidat komentář" as UC11
+  usecase "12 - Zobrazit sdílenou nabídku" as UC12
+  usecase UC13 as "13 - Zpracovat komentáře zákazníka\n--\nextension points\nzměna menu: krok 3.1"
+  usecase "14 - Exportovat menu do PDF" as UC14
+  usecase "15 - Prohlížet projekty\n(jen pro čtení)" as UC15
+  usecase "16 - Spravovat uživatele\na oprávnění" as UC16
+  usecase "17 - Přepnout do\nadministrátorského režimu" as UC17
+  usecase "18 - Zneplatnit prošlé odkazy" as UC18
+  usecase "19 - Smazat položku projektu" as UC19
+}
+
+W -- UC01
+W -- UC02
+W -- UC03
+W -- UC04
+W -- UC05
+W -- UC06
+W -- UC07
+W -- UC08
+W -- UC09
+W -- UC10
+W -- UC11
+W -- UC13
+W -- UC14
+W -- UC19
+C -- UC11
+C -- UC12
+M -- UC01
+M -- UC15
+A -- UC01
+A -- UC16
+A -- UC17
+T -- UC18
+
+UC11 ..> UC12 : <<include>>
+UC16 ..> UC17 : <<include>>
+UC08 ..> UC13 : <<extend>>\n(změna menu)
+UC07 ..> UC02 : <<extend>>\n(Nové menu)
+@enduml

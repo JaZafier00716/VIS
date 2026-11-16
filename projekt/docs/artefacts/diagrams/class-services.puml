@@ -1,0 +1,150 @@
+@startuml
+!include common.iuml
+hide circle
+hide empty members
+skinparam classAttributeIconSize 0
+left to right direction
+
+class ProjectService <<facade>> {
+  - tx : TransactionRunner
+  - clock : Clock
+  + findAllCustomers() : List<Customer>
+  + findAllProjects() : List<Project>
+  + createProject(name : String, customerId : Long, eventDate : LocalDate, eventPlace : String, guestCount : Integer, worker : User) : Project
+  + updateProject(projectId : long, name : String, eventDate : LocalDate, eventPlace : String, guestCount : Integer, note : String) : Project
+  + archiveProject(projectId : long) : Project
+  + searchProjects(text : String, from : LocalDate, to : LocalDate, includeArchived : boolean) : List<Project>
+  + reactivateProject(projectId : long, worker : User) : Project
+  + searchManagedProjects(manager : User, text : String) : List<Project>
+  + findManagedProject(manager : User, projectId : long) : Optional<Project>
+  + loadTree(projectId : long) : Folder
+}
+
+class DocumentService <<facade>> {
+  - tx : TransactionRunner
+  + createFolder(parent : Folder, name : String) : Folder
+  + listContent(folder : Folder) : List<ProjectNode>
+  + createDocument(parent : Folder, file : Path, name : String) : Document
+  + downloadDocuments(documents : List<Document>, targetDir : Path) : int
+  + deleteNodes(selected : List<ProjectNode>) : void
+}
+
+class MenuService <<facade>> {
+  - tx : TransactionRunner
+  - clock : Clock
+  + createMenu(parent : Folder, name : String, worker : User) : Menu
+  + openLatestRevision(menuId : long) : MenuRevision
+  + openRevision(menuId : long, revisionNo : int) : MenuRevision
+  + compareRevisions(menuId : long, a : int, b : int) : RevisionComparison
+  + listRevisions(menuId : long) : List<MenuRevision>
+  + findProducts() : List<Product>
+  + createWorkingCopy(shared : MenuRevision) : MenuRevision
+  + saveRevision(revision : MenuRevision, note : String, worker : User) : int
+  + projectIdOf(menuId : long) : long
+  + guestCount(menuId : long) : int
+  + title(menuId : long) : String
+}
+
+class MenuExportService <<facade>> {
+  - menus : MenuService
+  - documents : DocumentService
+  + {static} fileName(menu : Menu, revisionNo : int) : String
+  + exportPdf(menu : Menu, revisionNo : int, target : Folder, strategy : PriceStrategy) : Document
+}
+
+class SharingService <<facade>> {
+  - tx : TransactionRunner
+  - clock : Clock
+  - baseUrl : String
+  + shareRevision(revision : MenuRevision) : ShareLink
+  + shareUrl(link : ShareLink) : String
+  + findValidLink(menuId : long) : Optional<ShareLink>
+  + openSharedMenu(token : String) : SharedMenuView
+  + addComment(token : String, authorName : String, body : String, categoryId : Long, productId : Long) : Comment
+  + listComments(menuId : long, revisionNo : int) : List<Comment>
+  + countUnresolved(menuId : long, revisionNo : int) : long
+  + resolveComment(commentId : long, note : String, worker : User) : Comment
+  + deactivateExpiredLinks() : int
+}
+
+class SharedMenuView <<record>> {
+  - status : Status
+  - link : ShareLink
+  - revision : MenuRevision
+  - title : String
+  - guestCount : int
+  - currentToken : String
+  - readOnly : boolean
+}
+
+class LinkNotValidException
+
+class CatalogService <<facade>> {
+  - tx : TransactionRunner
+  + findProducts() : List<Product>
+  + findAllergens() : List<Allergen>
+  + loadPhoto(productId : long) : byte[]
+  + findPriceHistory(productId : long) : List<PriceChange>
+  + create(name : String, description : String, unit : String, price : BigDecimal, vatRate : BigDecimal, allergens : List<Allergen>, photo : byte[]) : Product
+  + update(productId : long, name : String, description : String, unit : String, price : BigDecimal, vatRate : BigDecimal, allergens : List<Allergen>, photo : byte[]) : Product
+  + delete(productId : long) : void
+}
+
+class CustomerService <<facade>> {
+  - tx : TransactionRunner
+  + findAll() : List<Customer>
+  + search(text : String) : List<Customer>
+  + create(name : String, companyName : String, email : String, phone : String, city : String) : Customer
+  + update(customerId : long, name : String, companyName : String, email : String, phone : String, city : String) : Customer
+  + delete(customerId : long) : void
+}
+
+class AuthService <<facade>> {
+  - tx : TransactionRunner
+  + login(username : String, password : String) : User
+  + loginDesktop(username : String, password : String) : User
+  + findActiveUser(userId : long) : Optional<User>
+}
+
+class UserService <<facade>> {
+  - tx : TransactionRunner
+  + findAllUsers(admin : User) : List<User>
+  + createUser(admin : User, username : String, fullName : String, email : String, password : String, roles : Set<Role>) : User
+  + updateUser(admin : User, userId : long, roles : Set<Role>, active : boolean, newPassword : String) : User
+}
+
+package "business.port" <<Rectangle>> {
+  interface ProjectMapper <<interface>>
+  interface CustomerMapper <<interface>>
+  interface ProjectNodeMapper <<interface>>
+  interface MenuMapper <<interface>>
+  interface ProductMapper <<interface>>
+  interface ShareLinkMapper <<interface>>
+  interface UserMapper <<interface>>
+  interface DocumentStorage <<interface>>
+  interface MenuDocumentRenderer <<interface>>
+  interface TransactionRunner <<interface>>
+}
+
+ProjectService --> "1" ProjectMapper : projects
+ProjectService --> "1" CustomerMapper : customers
+ProjectService --> "1" ProjectNodeMapper : nodes
+DocumentService --> "1" ProjectNodeMapper : nodes
+DocumentService --> "1" ProjectMapper : projects
+DocumentService --> "1" DocumentStorage : storage
+MenuService --> "1" MenuMapper : menus
+MenuService --> "1" ProjectMapper : projects
+MenuService --> "1" ProjectNodeMapper : nodes
+MenuService --> "1" ProductMapper : products
+MenuExportService --> "1" MenuDocumentRenderer : renderer
+SharingService --> "1" MenuMapper : menus
+SharingService --> "1" ProjectMapper : projects
+SharingService --> "1" ShareLinkMapper : links
+SharingService ..> SharedMenuView : <<create>>
+SharingService ..> LinkNotValidException : <<throw>>
+CatalogService --> "1" ProductMapper : products
+CustomerService --> "1" CustomerMapper : customers
+AuthService --> "1" UserMapper : users
+UserService --> "1" UserMapper : users
+
+@enduml

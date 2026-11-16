@@ -1,0 +1,45 @@
+@startuml
+!include common.iuml
+mainframe act UC11 Sdílet nabídku se zákazníkem a přidat komentář
+|Pracovník|
+start
+:Vybere revizi menu a zvolí\n„Sdílet se zákazníkem“;
+|Systém|
+:Ověří, že revize obsahuje\nalespoň jednu kategorii;
+:Označí revizi jako sdílenou,\nzneplatní starší odkazy menu;
+:Vytvoří odkaz s platností 14 dní\na zobrazí odkaz a QR kód;
+|Pracovník|
+:Předá odkaz zákazníkovi;
+|Zákazník|
+:Otevře odkaz ve webovém prohlížeči;
+|Systém|
+if (Odkaz existuje a je platný?) then ([ano])
+  :Zobrazí sdílenou revizi menu\na dosavadní komentáře;
+else ([ne])
+  :Zobrazí „Odkaz již není platný“;
+  if (Existuje aktivní a neprošlý\nodkaz téhož menu?) then ([ano])
+    :Nabídne zobrazení aktuální nabídky;
+    |Zákazník|
+    :Zvolí „Zobrazit aktuální nabídku“;
+    |Systém|
+    :Zobrazí revizi tohoto odkazu;
+  else ([ne])
+    :Doporučí kontaktovat pracovníka;
+    stop
+  endif
+endif
+repeat
+  |Zákazník|
+  :Napíše komentář (k menu nebo\nk položce), vyplní jméno a odešle;
+  |Systém|
+  if (Odkaz mezitím přestal platit?) then ([ano])
+    :Komentář neuloží a zobrazí\n„Odkaz již není platný“;
+    stop
+  endif
+  :Ověří jméno a text komentáře;
+backward:Zvýrazní chybná pole;
+repeat while (Údaje chybí nebo je text\ndelší než 2000 znaků?) is ([ano]) not ([ne])
+:Uloží komentář jako nevyřízený;
+:Zobrazí potvrzení a komentář;
+stop
+@enduml

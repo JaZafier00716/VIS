@@ -1,0 +1,96 @@
+@startuml
+!include common.iuml
+mainframe act UC02 Vytvořit projekt a spravovat jeho dokumenty
+|Pracovník|
+start
+:Zvolí „Nový projekt“;
+|Systém|
+:Zobrazí formulář projektu\nse seznamem zákazníků;
+repeat
+  |Pracovník|
+  :Vyplní název, zákazníka, datum,\nmísto a počet hostů a potvrdí;
+  |Systém|
+  :Ověří údaje;
+backward:Zvýrazní chybná pole;
+repeat while (Údaje jsou neplatné?) is ([ano]) not ([ne])
+:Založí projekt s kořenovou složkou;
+:Zobrazí strom obsahu vlevo\na obsah kořenové složky vpravo;
+repeat
+  |Pracovník|
+  :Vybere složku, v nabídce „Nový“\nzvolí „Složka“ a zadá název;
+  |Systém|
+  :Ověří jedinečnost názvu ve složce;
+backward:Zobrazí dialog s volným názvem\n(Přejmenovat / Zrušit);
+repeat while (Název je obsazen?) is ([ano]) not ([ne])
+:Vytvoří podsložku;
+|Pracovník|
+:Vybere podsložku ve stromu;
+|Systém|
+:Nastaví ji jako aktivní složku\na vpravo zobrazí její obsah;
+|Pracovník|
+if (Co chce udělat?) then ([nové menu])
+  :V nabídce „Nový“ zvolí „Menu“\na zadá název;
+  |Systém|
+  repeat
+    :Ověří jedinečnost názvu;
+    if (Název je obsazen?) then ([ano])
+      :Nabídne „Přejmenovat“ / „Zrušit“;
+      |Pracovník|
+      if (Volba?) then ([Zrušit])
+        stop
+      else ([Přejmenovat])
+        :Potvrdí předvyplněný\nnebo upravený název;
+      endif
+      |Systém|
+    endif
+  repeat while (Byl zadán nový název?) is ([ano]) not ([ne])
+  :Vytvoří menu s první prázdnou\nrevizí (PRACOVNÍ) v aktivní složce;
+  :Zobrazí menu v obsahu složky;
+  |Pracovník|
+  :Otevře menu a sestaví je (UC08);
+else ([nahrát dokument])
+  :Zvolí „Nahrát dokument“;
+  |Systém|
+  :Zobrazí výběr souboru na stanici;
+  |Pracovník|
+  :Vybere soubor;
+  |Systém|
+  while (Soubor je větší než 20 MB?) is ([ano])
+    :Zobrazí chybu o velikosti souboru;
+    |Pracovník|
+    :Vybere jiný soubor;
+    |Systém|
+  endwhile ([ne])
+  repeat
+    :Ověří jedinečnost názvu;
+    if (Název je obsazen?) then ([ano])
+      :Nabídne „Přejmenovat“ / „Zrušit“;
+      |Pracovník|
+      if (Volba?) then ([Zrušit])
+        stop
+      else ([Přejmenovat])
+        :Potvrdí nový název;
+      endif
+      |Systém|
+    endif
+  repeat while (Byl zadán nový název?) is ([ano]) not ([ne])
+  :Uloží obsah do úložiště dokumentů\na metadata do databáze;
+  :Zobrazí dokument v obsahu složky;
+  |Pracovník|
+  if (Chce stáhnout dokumenty?) then ([ano])
+    :Označí jeden nebo více dokumentů\na zvolí „Stáhnout“;
+    |Systém|
+    :Nabídne výběr cílové složky na stanici;
+    |Pracovník|
+    if (Volba?) then ([Zrušit])
+      stop
+    else ([Potvrdit])
+    endif
+    |Systém|
+    :Načte dokumenty z úložiště\na uloží je do cílové složky;
+    :Zobrazí počet stažených dokumentů;
+  else ([ne])
+  endif
+endif
+stop
+@enduml

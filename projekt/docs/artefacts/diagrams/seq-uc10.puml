@@ -1,0 +1,30 @@
+@startuml
+!include common.iuml
+actor Pracovník as W
+participant "CompareView\n(JavaFX)" as UI
+participant MenuService as MS
+participant MenuMapper as MM
+participant RevisionComparison as RC
+database Oracle as DB
+
+W -> UI : Porovnat revize
+UI -> MS : listRevisions(menuId)
+MS -> MM : findRevisions(menuId)
+MM -> DB : SELECT menu_revisions
+MS --> UI : seznam revizí
+UI --> W : seznam revizí
+W -> UI : vybere revize A a B
+UI -> MS : compareRevisions(idA, idB)
+alt idA = idB
+  MS --> UI : SameRevisionException
+  UI --> W : „Vyberte dvě různé revize“
+  W -> UI : vybere jinou revizi B
+  UI -> MS : compareRevisions(idA, idB)
+end
+MS -> MM : findRevision(idA), findRevision(idB)
+MM -> DB : SELECT ... (2×)
+MS -> RC : compare(revA, revB)
+RC --> MS : řádky ADDED / REMOVED / CHANGED\n+ rozdíl ceny
+MS --> UI : výsledek porovnání
+UI --> W : tabulka s barevným zvýrazněním
+@enduml

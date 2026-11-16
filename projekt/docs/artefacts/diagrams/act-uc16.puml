@@ -1,0 +1,33 @@
+@startuml
+!include common.iuml
+mainframe act UC16 Spravovat uživatele a oprávnění
+|Administrátor|
+start
+:Přepne do administrátorského režimu;
+|Systém|
+:Ověří roli Administrátor a zobrazí\nseznam uživatelů;
+|Administrátor|
+:Zvolí „Nový uživatel“, vyplní údaje,\nheslo a role;
+|Systém|
+while (Údaje jsou neplatné nebo\njméno již existuje?) is ([ano])
+  :Zobrazí chybu u příslušného pole;
+  |Administrátor|
+  :Opraví údaje;
+  |Systém|
+endwhile ([ne])
+:Uloží uživatele a jeho role;
+repeat
+  |Administrátor|
+  :Vybere uživatele, změní role,\ndeaktivuje jej nebo nastaví nové heslo;
+  |Systém|
+  if (Nové heslo je kratší než 8 znaků?) then ([ano])
+    :Nic neuloží a zobrazí\nchybu u pole hesla;
+  elseif (Zůstane aktivní administrátor?) then ([ano])
+    :Uloží změnu;
+  else ([ne])
+    :Odmítne změnu a vrátí\npůvodní hodnoty;
+  endif
+repeat while (Změna byla odmítnuta?) is ([ano]) not ([ne])
+:Aktualizuje seznam uživatelů;
+stop
+@enduml

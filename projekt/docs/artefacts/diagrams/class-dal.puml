@@ -1,0 +1,109 @@
+@startuml
+!include common.iuml
+hide circle
+hide empty members
+skinparam classAttributeIconSize 0
+
+package "business.port" <<Rectangle>> {
+  interface MenuMapper <<interface>>
+  interface TransactionRunner <<interface>>
+  interface DocumentStorage <<interface>>
+  interface MenuDocumentRenderer <<interface>>
+}
+
+class DataAccessFactory <<factory>> {
+  - config : Properties
+  + transactions() : TransactionRunner
+  + userMapper() : UserMapper
+  + customerMapper() : CustomerMapper
+  + projectMapper() : ProjectMapper
+  + projectNodeMapper() : ProjectNodeMapper
+  + menuMapper() : MenuMapper
+  + shareLinkMapper() : ShareLinkMapper
+  + productMapper() : ProductMapper
+  + menuDocumentRenderer() : MenuDocumentRenderer
+  + documentStorage() : DocumentStorage
+}
+
+package "data.oracle" <<Rectangle>> {
+  class Database <<singleton>> {
+    - {static} instance : Database
+    - url : String
+    - user : String
+    - password : String
+    - current : ThreadLocal<Connection>
+    + {static} init(url : String, user : String, password : String) : Database
+    + {static} getInstance() : Database
+    + inTransaction<T>(work : Supplier<T>) : T
+    + connection() : Connection
+  }
+  class Jdbc <<utility>> {
+    ~ {static} query<T>(sql : String, mapper : RowMapper<T>, params : Object...) : List<T>
+    ~ {static} queryOne<T>(sql : String, mapper : RowMapper<T>, params : Object...) : Optional<T>
+    ~ {static} insert(sql : String, idColumn : String, params : Object...) : long
+    ~ {static} update(sql : String, params : Object...) : int
+  }
+  interface "Jdbc.RowMapper<T>" as RowMapper <<interface>> {
+    + map(rs : ResultSet) : T
+  }
+  class OracleMenuMapper <<data mapper>> {
+    + insertMenu(menu : Menu, projectId : long) : void
+    + findRevisionHeaders(menuId : long) : List<MenuRevision>
+    + findRevision(menuId : long, revisionNo : int) : Optional<MenuRevision>
+    + findLatestHeader(menuId : long) : Optional<MenuRevision>
+    + insertRevision(revision : MenuRevision) : void
+    + overwriteRevision(revision : MenuRevision) : boolean
+    + markShared(menuId : long, revisionNo : int, loadedSavedAt : LocalDateTime) : boolean
+    + findComments(menuId : long, revisionNo : int) : List<Comment>
+    + findComment(commentId : long) : Optional<Comment>
+    + insertComment(comment : Comment) : void
+    + updateResolution(comment : Comment) : boolean
+    + findGuestCount(menuId : long) : int
+    + findProjectId(menuId : long) : long
+    + findTitle(menuId : long) : String
+    - {static} insertContent(revision : MenuRevision) : void
+    - {static} readHeader(rs : ResultSet) : MenuRevision
+    - {static} readComment(rs : ResultSet) : Comment
+  }
+  class DataAccessException
+}
+
+class ConflictException <<business.domain>>
+
+package "data.file" <<Rectangle>> {
+  class FileDocumentStorage <<gateway>> {
+    - root : Path
+    + store(key : String, source : Path) : void
+    + retrieve(key : String, target : Path) : void
+    + delete(key : String) : void
+    + exists(key : String) : boolean
+  }
+  class InMemoryDocumentStorage <<service stub>> {
+    - files : Map<String, byte[]>
+    + store(key : String, source : Path) : void
+    + retrieve(key : String, target : Path) : void
+    + delete(key : String) : void
+    + exists(key : String) : boolean
+  }
+  class PdfMenuRenderer {
+    + render(revision : MenuRevision, title : String, guestCount : int, strategy : PriceStrategy, target : Path) : void
+  }
+}
+
+TransactionRunner <|.. Database
+MenuMapper <|.. OracleMenuMapper
+DocumentStorage <|.. FileDocumentStorage
+DocumentStorage <|.. InMemoryDocumentStorage
+MenuDocumentRenderer <|.. PdfMenuRenderer
+
+DataAccessFactory --> "1" Database : database
+DataAccessFactory ..> OracleMenuMapper : <<create>>
+DataAccessFactory ..> FileDocumentStorage : <<create>>
+DataAccessFactory ..> PdfMenuRenderer : <<create>>
+OracleMenuMapper ..> Jdbc
+OracleMenuMapper ..> Database : getInstance()
+Jdbc ..> Database : getInstance()
+Jdbc ..> RowMapper
+Jdbc ..> DataAccessException : <<throw>>
+Jdbc ..> ConflictException : <<throw>>
+@enduml

@@ -1,0 +1,73 @@
+\usepackage[czech]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+\usepackage[a4paper,top=20mm,bottom=20mm,left=20mm,right=20mm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{xltabular}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{caption}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{diagrams/}}
+
+\pagestyle{fancy}
+\fancyhf{} % clear existing header/footer
+
+\fancyfoot[L]{Jan Zámostný}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{\today}
+
+\renewcommand{\headrulewidth}{0pt} % no line under header
+\renewcommand{\footrulewidth}{0.5pt}
+
+\definecolor{vsbteal}{RGB}{0,164,153}
+\definecolor{darkgray}{RGB}{45,45,45}
+
+% Popis případu užití
+\usepackage{needspace}
+\newcommand{\ucpole}[1]{\par\medskip\needspace{4\baselineskip}\noindent\textbf{#1}\par\nopagebreak}
+\newcommand{\svc}[1]{\unskip\nobreak\hfil\penalty50\hskip1em\hbox{}\nobreak\hfill{\small\texttt{#1}}}
+\newlist{ucsteps}{enumerate}{1}
+\setlist[ucsteps]{label=\arabic*.,leftmargin=2.5em,itemsep=1pt}
+\newlist{ucalt}{description}{1}
+\setlist[ucalt]{leftmargin=2.5em,labelindent=0pt,itemsep=1pt,font=\normalfont}
+
+% Titulní strana: \titulni{podtitulek}
+\newcommand{\titulni}[1]{%
+\begin{center}
+    \includegraphics[width=115mm]{FEI-logo.pdf}
+\end{center}
+\vspace{47mm}
+\begin{center}
+    {\fontsize{29}{35}\selectfont\bfseries
+    Informační systém\par}
+    \vspace{3mm}
+    {\fontsize{29}{35}\selectfont\bfseries
+    pro cateringové společnosti\par}
+
+    \vspace{11mm}
+    {\fontsize{12}{14}\selectfont\color{darkgray}
+    Projekt do předmětu Vývoj informačních systémů\par}
+    \vspace{3mm}
+    {\fontsize{12}{14}\selectfont\color{darkgray}#1\par}
+\end{center}
+\newpage}
+
+\emergencystretch=3em
+
+% Odkazy: \odkaz{label}{text} je odkaz, pokud cíl v dokumentu existuje, jinak jen text
+\makeatletter
+\newcommand{\odkaz}[2]{\@ifundefined{r@#1}{#2}{\hyperref[#1]{#2}}}
+\newcommand{\ucref}[1]{\@ifundefined{r@ucd:#1}{\odkaz{ucb:#1}{UC#1}}{\hyperref[ucd:#1]{UC#1}}}
+\makeatother
+\definecolor{odkaz}{RGB}{0,110,103}
+\hypersetup{colorlinks=true,linkcolor=odkaz,urlcolor=odkaz}

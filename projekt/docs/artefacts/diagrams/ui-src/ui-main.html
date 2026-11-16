@@ -1,0 +1,73 @@
+<!doctype html><html lang="cs"><head><meta charset="utf-8"><link rel="stylesheet" href="theme.css"><style>
+body{width:1328px}
+.app{display:grid;grid-template-columns:290px 1fr;height:600px}
+.side{background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column}
+.picker{margin:14px 14px 6px;border:1px solid var(--border-strong);border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:10px}
+.node{display:flex;align-items:center;gap:8px;height:32px;padding-right:12px;border-radius:6px;margin:0 8px}
+.node .tw{width:14px;color:var(--faint);display:flex}.node .tw svg{width:13px;height:13px}
+.node.sel{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.node .meta{margin-left:auto;font-size:11.5px;color:var(--faint)}
+.main{padding:18px 22px;display:flex;flex-direction:column;gap:12px;overflow:hidden}
+.info{display:flex;gap:22px;font-size:12.5px;color:var(--muted)}.info b{color:var(--text);font-weight:500}
+.split{display:inline-flex}.split .btn:first-child{border-radius:6px 0 0 6px}.split .btn:last-child{border-radius:0 6px 6px 0;border-left:0;padding:0 8px}
+td .nm{display:flex;align-items:center;gap:10px}
+.selbar{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--accent-soft);border-bottom:1px solid #CBE7E3;color:var(--accent);font-weight:600}
+.pop{position:absolute;top:38px;left:0;width:200px;background:#fff;border:1px solid var(--border-strong);border-radius:8px;box-shadow:0 8px 20px rgba(20,30,40,.16);padding:4px;z-index:9}.pi{display:flex;align-items:center;gap:10px;height:34px;padding:0 10px;border-radius:6px}.pi:first-child{background:var(--accent-soft)}
+</style></head><body>
+<div class="window">
+ <div class="titlebar">Catering IS<div class="dots"><span></span><span></span><span></span></div></div>
+ <div class="topbar">
+  <div class="brand"><div class="logo">C</div>Catering IS</div>
+  <div class="input placeholder" style="width:320px;margin-left:28px"><i data-i="search"></i>Hledat projekt nebo zákazníka…</div>
+  <span class="btn" style="margin-left:6px"><i data-i="plus"></i>Nový projekt</span>
+  <div class="spacer"></div>
+  <span class="btn ghost"><i data-i="shield"></i>Administrace</span>
+  <div class="row"><div class="avatar">JZ</div><div class="col"><span class="strong" style="font-size:12px">Jan Zámostný</span><span class="faint" style="font-size:11px">Pracovník · Administrátor</span></div></div>
+ </div>
+ <div class="app">
+  <aside class="side">
+   <div class="picker"><div class="col" style="flex:1;gap:3px"><span class="faint" style="font-size:11px">Projekt</span><b>Svatba Novákových</b><span><span class="chip warn">ROZPRACOVANÝ</span></span></div><i data-i="chev" style="color:var(--faint)"></i></div>
+   <div class="sect" style="padding:10px 18px 6px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);font-weight:700">Obsah projektu</div>
+      <div class="node sel" style="padding-left:8px"><span class="tw"><i data-i="chev"></i></span><i data-i="folder"></i>Svatba Novákových</div>
+   <div class="node" style="padding-left:30px"><span class="tw"><i data-i="chevr"></i></span><i data-i="folder" style="color:var(--accent)"></i>Dokumenty</div>
+   <div class="node" style="padding-left:30px"><span class="tw"><i data-i="chev"></i></span><i data-i="folder" style="color:var(--accent)"></i>Fotky</div>
+   <div class="node" style="padding-left:52px"><span class="tw"></span><i data-i="file" style="color:var(--muted)"></i>salek.jpg</div>
+   <div class="node" style="padding-left:30px"><span class="tw"></span><i data-i="menu" style="color:var(--accent)"></i>Svatební menu</div>
+   <div class="node" style="padding-left:30px"><span class="tw"></span><i data-i="file" style="color:var(--muted)"></i>smlouva.pdf</div>
+   <div class="node" style="padding-left:30px"><span class="tw"></span><i data-i="file" style="color:var(--muted)"></i>pudorys-salu.pdf</div>
+   <div class="spacer"></div>
+   <div style="padding:12px 14px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:6px;font-size:12px">
+    <span class="faint" style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700">Detail projektu</span>
+    <div class="row"><span class="muted" style="width:78px">Zákazník</span>Jana Nováková</div>
+    <div class="row"><span class="muted" style="width:78px">Datum akce</span>14. 6. 2027</div>
+    <div class="row"><span class="muted" style="width:78px">Místo</span>Zámek Hradec</div>
+    <div class="row"><span class="muted" style="width:78px">Hosté</span>120</div>
+   </div>
+  </aside>
+  <main class="main">
+   <div class="row" style="font-size:12px;color:var(--muted)"><i data-i="home" style="width:14px;height:14px"></i>Svatba Novákových</div>
+   <div class="row"><h1 style="font-size:22px;font-weight:700">Svatba Novákových</h1><span class="faint" style="margin-left:4px">kořenová složka · 2 složky, 1 menu, 2 dokumenty</span></div>
+   <div class="row">
+    <div style="position:relative">
+     <span class="btn primary"><i data-i="plus"></i>Nový<i data-i="chev" style="margin-left:2px"></i></span>
+     <div class="pop"><div class="pi"><i data-i="folder" style="color:var(--accent)"></i>Složka</div><div class="pi"><i data-i="menu" style="color:var(--accent)"></i>Menu</div></div>
+    </div>
+    <span class="btn"><i data-i="upload"></i>Nahrát dokument</span>
+    <span class="btn"><i data-i="download"></i>Stáhnout (2)</span>
+    <span class="btn dangerfill"><i data-i="trash"></i>Smazat (2)</span>
+    <div class="spacer"></div>
+       </div>
+   <div class="card" style="overflow:hidden">
+        <table>
+     <tr><th style="width:36px"><span class="check"></span></th><th>Název</th><th>Typ</th><th class="num">Velikost</th><th>Změněno</th><th></th></tr>
+     <tr><td><span class="check"></span></td><td><div class="nm"><i data-i="folder" style="color:var(--accent)"></i><b>Dokumenty</b></div></td><td class="muted">Složka</td><td class="num muted">3 položky</td><td class="muted">28. 10. 2026</td><td></td></tr>
+     <tr><td><span class="check"></span></td><td><div class="nm"><i data-i="folder" style="color:var(--accent)"></i><b>Fotky</b></div></td><td class="muted">Složka</td><td class="num muted">1 položka</td><td class="muted">28. 10. 2026</td><td></td></tr>
+     <tr><td><span class="check"></span></td><td><div class="nm"><i data-i="menu" style="color:var(--accent)"></i><b>Svatební menu</b><span class="chip info nodot">rev. 3 · SDÍLENÁ</span><span class="badge" title="nevyřízené komentáře">2</span></div></td><td class="muted">Menu</td><td class="num">45 900 Kč</td><td class="muted">29. 10. 2026</td><td></td></tr>
+     <tr class="sel"><td><span class="check on"></span></td><td><div class="nm"><i data-i="file" style="color:var(--muted)"></i>smlouva.pdf</div></td><td class="muted">PDF</td><td class="num">240 kB</td><td class="muted">28. 10. 2026</td><td></td></tr>
+     <tr class="sel"><td><span class="check on"></span></td><td><div class="nm"><i data-i="file" style="color:var(--muted)"></i>pudorys-salu.pdf</div></td><td class="muted">PDF</td><td class="num">1,2 MB</td><td class="muted">28. 10. 2026</td><td></td></tr>
+    </table>
+   </div>
+     </main>
+ </div>
+</div>
+<script src="icons.js"></script></body></html>

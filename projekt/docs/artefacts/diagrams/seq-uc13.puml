@@ -1,0 +1,74 @@
+@startuml
+!include common.iuml
+mainframe sd UC13 Zpracovat komentáře zákazníka
+hide footbox
+actor ":Pracovník" as W
+participant ":MenuEditorWindow" as EW
+participant ":CommentsWindow" as CW
+participant ":SharingService" as SS
+participant ":Comment" as C
+participant ":MenuMapper" as MM
+participant ":Oracle" as DB <<database>>
+
+W -> EW : Komentáře k rev. N (1)
+create CW
+EW -> CW : new CommentsWindow(sharing, user,\neditor, menuId, revisionNo, menuName)
+CW -> SS : listComments(menuId, revisionNo)
+SS -> MM : findComments(menuId, revisionNo)
+MM -> DB : SELECT comments
+SS --> CW : komentáře (nevyřízené nahoře)
+CW --> W : seznam komentářů,\ndetail prvního nevyřízeného (2)
+loop dokud zbývá nevyřízený komentář a pracovník pokračuje
+  W -> CW : vybere komentář
+  opt komentář vyžaduje změnu menu (3.1)
+    W -> CW : Upravit menu podle komentáře
+    CW -> EW : editForComment(productId, afterSave)
+    opt zobrazená revize není editovatelná
+      EW -> EW : openLatest(), u sdílené revize\nload(createWorkingCopy(revision))
+    end
+    EW --> W : nejnovější revize se zvýrazněnou položkou (3.2)
+    ref over W, SS : UC08 kroky 3–7 (sd UC08a, UC08b): úpravy a MenuService.saveRevision() → číslo N
+    EW -> CW : afterSave.accept(N)
+    CW -> SS : listComments(menuId, revisionNo)
+    CW --> W : předvyplněná poznámka\n„Upraveno v revizi č. N“ (3.4)
+  end
+  W -> CW : poznámka (nejvýše 200 znaků),\nOznačit jako vyřízený (3)
+  CW -> SS : resolveComment(commentId, note, worker)
+SS -> SS : AccessPolicy.requireWorker(worker)
+  note over SS, DB : v jedné transakci (TransactionRunner.inTransaction)
+  SS -> MM : findComment(commentId)
+  MM -> DB : SELECT comments
+  MM --> SS : comment
+  SS -> C : resolve(userId, note, now)
+  alt komentář je již vyřízený (4.1)
+    C --> SS : ConflictException(kdo, kdy)
+    SS --> CW : ConflictException (rollback)
+    CW --> W : „Komentář již vyřídil … dne …“ (4.2)
+  else nevyřízený
+    SS -> MM : updateResolution(comment)
+    MM -> DB : UPDATE comments\nWHERE resolved = 'N'
+    alt 0 řádků: mezitím vyřídil jiný pracovník (4.1)
+      MM --> SS : false
+      SS --> CW : ConflictException (rollback)
+      CW --> W : „Komentář mezitím vyřídil jiný pracovník.“
+    else uloženo (5)
+      MM --> SS : true
+      SS --> CW : comment (commit)
+    end
+  end
+  CW -> SS : listComments(menuId, revisionNo)
+  SS -> MM : findComments(menuId, revisionNo)
+  MM -> DB : SELECT comments
+  CW -> EW : refreshCommentCount()
+  EW -> SS : countUnresolved(menuId, revisionNo)
+  CW --> W : aktuální seznam, komentář mezi vyřízenými,\npočet nevyřízených (6, 4.3)
+end
+alt žádný nevyřízený komentář nezůstal (7, 4.5)
+  CW --> W : „Všechny komentáře jsou vyřízeny.“
+else pracovník zvolí Zavřít (7.1)
+  W -> CW : Zavřít
+  CW -> EW : refreshCommentCount()
+  EW -> SS : countUnresolved(menuId, revisionNo)
+  EW --> W : editor menu s počtem nevyřízených (7.2)
+end
+@enduml

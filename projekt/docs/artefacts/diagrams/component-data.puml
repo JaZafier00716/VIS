@@ -1,0 +1,65 @@
+@startuml
+!include common.iuml
+skinparam componentStyle uml2
+skinparam nodesep 20
+skinparam ranksep 70
+
+component "Aplikační vrstva (business)" as BL <<component>>
+
+interface "UserMapper" as P_USR
+interface "CustomerMapper" as P_CUS
+interface "ProductMapper" as P_PRD
+interface "ProjectMapper" as P_PRJ
+interface "ProjectNodeMapper" as P_NOD
+interface "MenuMapper" as P_MEN
+interface "ShareLinkMapper" as P_SHL
+interface "TransactionRunner" as P_TX
+interface "DocumentStorage" as P_DST
+interface "MenuDocumentRenderer" as P_REN
+
+component "Datová vrstva" as DAL <<component>> {
+  component "Oracle mappery\n(Oracle*Mapper, Jdbc)" as D_MAP <<component>>
+  component "Připojení k databázi\n(Database)" as D_DB <<component>>
+  component "Úložiště dokumentů\n(FileDocumentStorage)" as D_FS <<component>>
+  component "Export PDF\n(PdfMenuRenderer)" as D_PDF <<component>>
+  component "DataAccessFactory" as D_FAC <<component>>
+}
+
+interface "JDBC / SQL" as I_SQL
+component "Databázový server Oracle" as ORA <<component>>
+interface "souborový systém" as I_FILE
+component "Složka dokumentů" as FOLDER <<component>>
+
+BL -down-( P_USR
+BL -down-( P_CUS
+BL -down-( P_PRD
+BL -down-( P_PRJ
+BL -down-( P_NOD
+BL -down-( P_MEN
+BL -down-( P_SHL
+BL -down-( P_TX
+BL -down-( P_DST
+BL -down-( P_REN
+
+D_MAP -up- P_USR
+D_MAP -up- P_CUS
+D_MAP -up- P_PRD
+D_MAP -up- P_PRJ
+D_MAP -up- P_NOD
+D_MAP -up- P_MEN
+D_MAP -up- P_SHL
+D_DB -up- P_TX
+D_FS -up- P_DST
+D_PDF -up- P_REN
+
+D_MAP ..> D_DB : <<use>>
+D_FAC .up.> D_MAP : <<create>>
+D_FAC .up.> D_DB : <<create>>
+D_FAC .up.> D_FS : <<create>>
+D_FAC .up.> D_PDF : <<create>>
+
+D_DB -down-( I_SQL
+ORA -up- I_SQL
+D_FS -down-( I_FILE
+FOLDER -up- I_FILE
+@enduml

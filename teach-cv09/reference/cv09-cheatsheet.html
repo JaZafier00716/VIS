@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CV09 cheat sheet</title><link rel="stylesheet" href="../assets/course.css"></head>
+<body><main>
+<p class="kicker">Reference · CV09 GoF patterns in cv3</p>
+<h1>CV09 cheat sheet</h1>
+<p class="lede">Slide task → classes → where it’s called → test → the “why” an examiner asks for.</p>
+
+<h2>Singleton · Úkol 1</h2>
+<p><code>business.service.numbering.OrderNumberGenerator</code>: <code>private static final INSTANCE</code>, private ctor, <code>getInstance()</code>, <code>synchronized getNextNumber()</code> from 1001.
+Called in <code>OrderService.newOrder</code> → <code>order.assignNumber(...)</code> (so also <code>PlaceOrderService</code>). <code>Order.number</code> ≠ <code>Order.id</code>.</p>
+<p class="side">Why: two generators could hand out the same number. Limit (slide): one instance per run, not persistence — the number is in memory only, reloaded orders have <code>number == null</code>, so messages show the ID.</p>
+
+<h2>Strategy · Úkol 2</h2>
+<p><code>business.pricing.IPricingStrategy { getName(); Money calculate(Order) }</code> ← <code>StandardPricing</code> (sum of <code>OrderItem::totalPrice</code>), <code>CompanyPricing</code> (standard × 0.90).
+Context: <code>OrderPricingService.calculatePrice(orderId, strategy)</code>. UI: menu 17 (s/f). CV08 <code>calculate()</code> uses <code>StandardPricing</code> for the items total.</p>
+<p class="side">Why: new pricing = new class, no <code>if</code> in the service. The 10 % is never stacked with the CV08 <code>DiscountPolicy</code>. Test: 2 × 1 000 Kč → 2 000 / 1 800.</p>
+
+<h2>Factory Method · Úkol 3</h2>
+<p>Product: abstract <code>OrderDocument</code> (<code>getTitle()</code>, <code>getContent()</code>) ← <code>OrderConfirmation</code>, <code>DeliveryNote</code>, <code>Invoice</code>.
+Creator: abstract <code>DocumentCreator</code> with factory method <code>protected abstract createDocument(Order)</code> and final shared logic <code>produce()</code>, <code>render()</code> ← <code>ConfirmationCreator</code>, <code>DeliveryNoteCreator</code>, <code>InvoiceCreator</code>.
+Service: <code>OrderDocumentService.createDocument(orderId, creator)</code>. UI: menu 18 (p/d/f).</p>
+<p class="side">Why: the subclass decides the concrete type, not a <code>switch</code> on a string (slide “Důležité”). Invoice = the extension, added without touching <code>DocumentCreator</code>.</p>
+
+<h2>Observer · Úkol 4</h2>
+<p>Subject: <code>Order</code> — transient <code>observers</code>, <code>registerObserver</code>, <code>unregisterObserver</code>, pending <code>StatusChange</code>s, <code>publishStatusChanges()</code>, <code>discardStatusChanges()</code>.
+Observers: <code>IOrderObserver.statusChanged(order, old, new)</code> ← <code>ProductionObserver</code> (→ Potvrzená), <code>ExpeditionObserver</code> (→ Připravena k expedici); output via <code>Consumer&lt;String&gt;</code>.
+Registered in <code>Main</code> constructor on <code>context.orderService()</code>.</p>
+<p class="side">Why pending + publish: invalid or unsaved change must not notify; notify only after a successful commit (slide). Observers are attached only during publish, so an unregistered one is never reached via a cached order.</p>
+
+<h2>Command · Úkol 5</h2>
+<p><code>IOrderCommand { getName(); getOrderId(); execute(); }</code> ← <code>ConfirmOrderCommand</code>, <code>StartProductionCommand</code>, <code>PrepareExpeditionCommand</code> (each holds <code>OrderService</code> = receiver + <code>orderId</code>; Lombok <code>@RequiredArgsConstructor</code>).
+Invoker: <code>OrderCommandExecutor.execute()</code> → <code>CommandLogEntry(time, operation, orderId, success, message)</code>, <code>getLog()</code>. UI: menu 11, 15, 16, history 19.</p>
+<p class="side">Why: one uniform way to run and log operations; new action = new class. No Undo (slide says not required). Invalid transition → logged as “odmítnuto”, not thrown.</p>
+
+<h2>Status life cycle</h2>
+<p><code>OrderStatus</code>: CEKA_NA_POTVRZENI “Nová” → POTVRZENA → VE_VYROBE → PRIPRAVENA_K_EXPEDICI → EXPEDOVANA → UZAVRENA. Rule: <code>canChangeTo(target) == (target == next())</code>. Transitions in <code>Order</code>: <code>confirm, startProduction, prepareForExpedition, ship, close</code>.</p>
+
+<h2>Scenarios on the slide → demo</h2>
+<div class="wrap"><table>
+<tr><th>Scenario</th><th>Patterns</th><th>In <code>Cv09Demonstrations</code></th></tr>
+<tr><td>A create + price</td><td>Singleton, Strategy</td><td>“Scénář A”</td></tr>
+<tr><td>B confirm</td><td>Command, Observer, Factory Method</td><td>“Scénář B”</td></tr>
+<tr><td>C production → expedition</td><td>Command, Observer, Factory Method</td><td>“Scénář C”</td></tr>
+</table></div>
+<p>Run: <code>mvn compile exec:java -Dexec.args="--demo"</code> · tests: <code>mvn test</code> (235).</p>
+<footer>Lessons: <a href="../lessons/0001-map-and-confirm-flow.html">1 · Map and confirm flow</a></footer>
+</main></body></html>

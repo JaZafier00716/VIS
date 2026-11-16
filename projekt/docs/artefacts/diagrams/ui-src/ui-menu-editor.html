@@ -1,0 +1,63 @@
+<!doctype html><html lang="cs"><head><meta charset="utf-8"><link rel="stylesheet" href="theme.css"><style>
+body{width:1328px}
+.ed{display:grid;grid-template-columns:1fr 330px;gap:18px;padding:18px 22px}
+.hdr{padding:16px 22px 0;display:flex;flex-direction:column;gap:12px}
+.ro td{color:#334155}
+.cmt{padding:10px 14px;border-bottom:1px solid #EDF0F3;display:flex;flex-direction:column;gap:4px}
+.sum{display:grid;grid-template-columns:1fr auto;row-gap:8px;font-variant-numeric:tabular-nums}.sum span:nth-child(even){text-align:right}
+.foot{display:flex;gap:10px;align-items:flex-end;padding:14px 22px;background:var(--surface);border-top:1px solid var(--border)}
+.sel{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 10px;border:1px solid var(--border-strong);border-radius:6px;background:#fff}
+.dis{opacity:.45}
+</style></head><body>
+<div class="window">
+ <div class="titlebar">Catering IS · Svatební menu<div class="dots"><span></span><span></span><span></span></div></div>
+ <div class="hdr">
+  <div class="row" style="font-size:12px;color:var(--muted)">Projekty<i data-i="chevr" style="width:13px"></i>Svatba Novákových<i data-i="chevr" style="width:13px"></i><span style="color:var(--text)">Svatební menu</span></div>
+  <div class="row">
+   <h1 style="font-size:22px;font-weight:700">Svatební menu</h1>
+   <span class="sel" style="margin-left:10px"><span class="chip info">SDÍLENÁ</span><b>rev. 3</b><span class="muted" style="font-size:12px">29. 10. 2026 · J. Zámostný</span><i data-i="chev" style="color:var(--faint)"></i></span>
+   <div class="spacer"></div>
+   <span class="btn"><i data-i="compare"></i>Porovnat revize</span>
+   <span class="btn primary"><i data-i="share"></i>Sdílet se zákazníkem</span>
+  </div>
+  <div class="banner warn"><i data-i="lock"></i><div><b>Revize je sdílena se zákazníkem, a proto je jen pro čtení.</b> Změny provedete v pracovní kopii, sdílená revize i odkaz zůstanou beze změny.</div><div class="spacer"></div><span class="btn sm" style="border-color:#E3B77A;background:#fff">Vytvořit pracovní kopii</span></div>
+ </div>
+ <div class="ed">
+  <div class="card" style="overflow:hidden">
+   <div class="row" style="padding:10px 12px;border-bottom:1px solid var(--border)">
+    <span class="btn sm dis"><i data-i="plus"></i>Přidat položku z katalogu</span><span class="btn sm dis">Přidat kategorii</span><span class="btn sm ghost dis"><i data-i="trash"></i>Odebrat</span>
+   </div>
+   <table class="ro">
+    <tr><th>Položka</th><th class="num">Množství</th><th class="num">Jedn. cena</th><th class="num">Cena</th><th>Alergeny</th></tr>
+    <tr class="group"><td colspan="3">Předkrmy</td><td class="num">14 200 Kč</td><td></td></tr>
+    <tr><td>Tatarák z hovězího</td><td class="num">120 ks</td><td class="num">95 Kč</td><td class="num">11 400 Kč</td><td class="muted">3, 10</td></tr>
+    <tr><td>Caprese <span class="chip err nodot" style="height:18px;margin-left:4px">1 komentář</span></td><td class="num">40 ks</td><td class="num">70 Kč</td><td class="num">2 800 Kč</td><td class="muted">7</td></tr>
+    <tr class="group"><td colspan="3">Hlavní chod</td><td class="num">25 200 Kč</td><td></td></tr>
+    <tr><td>Svíčková na smetaně <span class="chip err nodot" style="height:18px;margin-left:4px">1 komentář</span></td><td class="num">120 porcí</td><td class="num">210 Kč</td><td class="num">25 200 Kč</td><td class="muted">1, 7, 9</td></tr>
+    <tr class="group"><td colspan="3">Dezerty</td><td class="num">6 500 Kč</td><td></td></tr>
+    <tr><td>Svatební dort</td><td class="num">1 ks</td><td class="num">6 500 Kč</td><td class="num">6 500 Kč</td><td class="muted">1, 3, 7, 8</td></tr>
+   </table>
+   <div class="help row" style="padding:10px 12px;gap:6px"><i data-i="info" style="width:14px;height:14px"></i>V pracovní kopii se množství a cena upravují přímo v buňce. Chybné řádky se zvýrazní červeně.</div>
+  </div>
+  <div class="col" style="gap:14px">
+   <div class="card card-b">
+    <div class="sum">
+     <span class="muted">Položek</span><span>4</span>
+     <span class="muted">Na hosta (120)</span><span>383 Kč</span>
+     <span class="strong" style="font-size:15px;padding-top:6px;border-top:1px solid var(--border)">Celkem</span><span class="strong" style="font-size:18px;padding-top:4px;border-top:1px solid var(--border)">45 900 Kč</span>
+    </div>
+   </div>
+   <div class="card">
+    <div class="card-h"><i data-i="msg" style="color:var(--muted)"></i>Komentáře zákazníka<span class="badge">2</span></div>
+    <div class="cmt"><div class="row"><b style="font-size:12px">Jana N.</b><span class="faint" style="font-size:11px">2. 11. 2026 · Svíčková na smetaně</span></div><span>Prosíme vegetariánskou variantu hlavního chodu.</span></div>
+    <div class="cmt"><div class="row"><b style="font-size:12px">Jana N.</b><span class="faint" style="font-size:11px">2. 11. 2026 · Caprese</span></div><span>Caprese stačí 30 ks.</span></div>
+    <div style="padding:10px 14px"><span class="btn" style="width:100%;justify-content:center">Zpracovat komentáře</span></div>
+   </div>
+  </div>
+ </div>
+ <div class="foot">
+  <div class="field" style="flex:1"><span class="label">Poznámka k revizi</span><div class="input placeholder dis">Např. úprava dle připomínek zákazníka</div></div>
+  <span class="btn primary dis"><i data-i="save"></i>Uložit revizi<span class="kbd" style="color:#CDEAE6;border-color:#3E918A">Ctrl+S</span></span>
+ </div>
+</div>
+<script src="icons.js"></script></body></html>

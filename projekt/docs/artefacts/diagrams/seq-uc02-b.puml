@@ -1,0 +1,65 @@
+@startuml
+!include common.iuml
+mainframe sd UC02b Vytvořit složku a menu (kroky 5–9)
+hide footbox
+actor ":Pracovník" as W
+participant ":MainWindow" as MW
+participant ":UploadConflictDialog" as CD
+participant ":DocumentService" as DS
+participant ":MenuService" as MS
+participant ":NodeCreator" as NC
+participant ":Folder" as F
+participant ":ProjectNodeMapper" as NM
+participant ":MenuMapper" as MM
+participant ":Oracle" as DB <<database>>
+
+W -> MW : vybere složku, Nový > Složka
+MW --> W : dialog Název
+W -> MW : název složky
+MW -> CD : createWithRename(folder,\nname, create)
+CD -> DS : createFolder(parent, name)
+DS -> NC : createIn(parent, name)\n(FolderCreator)
+NC -> F : add(new Folder(name))
+alt název je ve složce obsazen (6.1)
+  F --> DS : DuplicateNameException(suggestedName)
+  DS --> CD : DuplicateNameException
+  CD --> W : dialog Název již existuje\n(navržený volný název, Přejmenovat / Zrušit)
+  note right of CD : Přejmenovat zopakuje createFolder\ns novým názvem, Zrušit nic nevytvoří
+else název je volný
+  DS -> NM : insert(folder)
+  NM -> DB : INSERT project_nodes (FOLDER)
+  DS --> CD : folder (commit)
+  CD --> MW : folder
+  MW --> W : podsložka ve stromu i v obsahu složky
+end
+W -> MW : vybere podsložku ve stromu
+MW -> DS : listContent(folder)
+DS --> MW : obsah složky
+MW --> W : aktivní složka a její obsah vpravo
+W -> MW : Nový > Menu, název menu
+MW -> CD : createWithRename(folder,\nname, create)
+CD -> MS : createMenu(parent, name, worker)
+MS -> MS : AccessPolicy.requireWorker(worker)
+MS -> NC : createIn(parent, name)\n(MenuCreator)
+NC -> F : add(new Menu(name))
+alt název je ve složce obsazen (8.1)
+  F --> MS : DuplicateNameException(suggestedName)
+  MS --> CD : DuplicateNameException
+  CD --> W : dialog Název již existuje\n(např. „Svatební menu (2)“)
+  W -> CD : upraví název, Přejmenovat (8.2)
+  CD -> MS : createMenu(parent,\nnewName, worker)
+  note right of CD : opakuje se, dokud je název obsazen (8.4).\nZrušit ukončí případ užití bez změn
+else název je volný
+  note over MS, DB : v jedné transakci (TransactionRunner.inTransaction)
+  MS -> NM : insert(menu)
+  NM -> DB : INSERT project_nodes (MENU)
+  MS -> MM : insertMenu(menu, projectId)
+  MM -> DB : INSERT menus
+  MS -> MS : MenuRevision.first(menuId)\nrecordSave(null, userId, now)
+  MS -> MM : insertRevision(first)
+  MM -> DB : INSERT menu_revisions (WORKING)
+  MS --> CD : menu (commit)
+  CD --> MW : menu
+  MW --> W : menu v obsahu složky (UC07),\notevření pokračuje v UC08
+end
+@enduml

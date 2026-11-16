@@ -1,0 +1,8 @@
+Date,Client,Project,Project Code,Task,Notes,Hours,Billable?,Invoiced?,Approved?,First Name,Last Name,Employee Id,Roles,Teams,Employee?,Billable Rate,Billable Amount,Cost Rate,Cost Amount,Currency,External Reference URL
+2026-10-09,Dettec,Futtec,,Code analysis,Onboarding,"3,0",No,No,No,Jan,Zámostný,,,,Yes,"0,0","0,0","0,0","0,0",Czech Koruna - CZK,
+2026-10-16,Dettec,Futtec,,Code analysis,Code analysis and docs creation,"8,0",No,No,No,Jan,Zámostný,,,,Yes,"0,0","0,0","0,0","0,0",Czech Koruna - CZK,
+2026-10-22,Dettec,Futtec,,Code analysis,Code analysis + testing,"8,0",No,No,No,Jan,Zámostný,,,,Yes,"0,0","0,0","0,0","0,0",Czech Koruna - CZK,
+2026-10-23,Dettec,Futtec,,Testing,Application testing,"8,0",No,No,No,Jan,Zámostný,,,,Yes,"0,0","0,0","0,0","0,0",Czech Koruna - CZK,
+2026-10-29,Dettec,Futtec,,Code analysis,Application testing,"8,0",No,No,No,Jan,Zámostný,,,,Yes,"0,0","0,0","0,0","0,0",Czech Koruna - CZK,
+2026-10-30,Dettec,Futtec,,Code analysis,Application testing + code review,"3,0",No,No,No,Jan,Zámostný,,,,Yes,"0,0","0,0","0,0","0,0",Czech Koruna - CZK,
+2026-10-30,Dettec,Futtec,,Code analysis,meeting,"30,0",No,No,No,Jan,Zámostný,,,,Yes,"0,0","0,0","0,0","0,0",Czech Koruna - CZK,

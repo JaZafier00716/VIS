@@ -1,0 +1,73 @@
+@startuml
+!include common.iuml
+mainframe sd UC08a Otevřít a upravit menu (kroky 1–4, 2.1–2.5)
+hide footbox
+actor ":Pracovník" as W
+participant ":MenuEditorWindow" as EW
+participant ":MenuService" as MS
+participant ":MenuEditor" as ED
+participant ":AddItemCommand" as CMD
+participant ":MenuRevision" as R
+participant ":MenuRevisionListener" as L
+participant ":MenuMapper" as MM
+participant ":ProductMapper" as PRM
+participant ":Oracle" as DB <<database>>
+
+W -> EW : otevře menu (MainWindow.openMenu)
+EW -> MS : guestCount(menuId)
+MS -> MM : findGuestCount(menuId)
+MM -> DB : SELECT projects.guest_count
+EW -> MS : openLatestRevision(menuId)
+MS -> MM : findLatestHeader(menuId)
+MM -> DB : SELECT menu_revisions
+MS -> MM : findRevision(menuId, revisionNo)
+MM -> DB : SELECT menu_revisions,\nmenu_categories, menu_items
+MS --> EW : revision
+EW -> EW : load(revision)
+create ED
+EW -> ED : new MenuEditor(revision)
+EW -> R : addListener(listener)
+EW -> MS : listRevisions(menuId)
+MS -> MM : findRevisionHeaders(menuId)
+MM -> DB : SELECT menu_revisions
+EW -> R : totalPrice(strategy),\npricePerGuest(strategy, guests)
+alt revize je SDÍLENÁ, isEditable() = false (2.1)
+  EW --> W : revize jen pro čtení, upozornění,\neditační prvky zakázány (2.2)
+  W -> EW : Vytvořit pracovní kopii (2.3)
+  EW -> MS : createWorkingCopy(revision)
+  MS -> MM : findLatestHeader(menuId)
+  MM -> DB : SELECT menu_revisions
+  alt nejnovější revize je PRACOVNÍ
+    MS --> EW : ConflictException (pracovní revize už existuje)
+    EW --> W : „Nejnovější revize je pracovní.\nUpravte ji, nebo ji nejprve sdílejte.“
+  else nejnovější revize je SDÍLENÁ
+    MS -> R : createWorkingCopy()
+    R --> MS : copy (číslo + 1, WORKING, neuložená)
+    MS --> EW : copy
+    EW -> EW : load(copy)
+    EW --> W : pracovní kopie, editace povolena (2.4)
+  end
+else revize je PRACOVNÍ
+  EW --> W : kategorie a položky, editace povolena
+end
+loop dokud pracovník upravuje menu (kroky 3–4)
+  W -> EW : + Přidat položku
+  EW -> MS : findProducts()
+  MS -> PRM : findAll()
+  PRM -> DB : SELECT products, allergens
+  MS --> EW : katalog produktů
+  EW --> W : dialog výběru produktu
+  W -> EW : produkt, množství, jednotková cena
+  create CMD
+  EW -> CMD : new AddItemCommand(revision, category,\nproduct, quantity, unitPrice)
+  EW -> ED : execute(command)
+  ED -> CMD : execute()
+  CMD -> R : addItem(category, product,\nquantity, unitPrice, null)
+  R -> L : revisionChanged(revision)
+  L -> EW : refresh()
+  EW -> R : totalPrice(strategy),\npricePerGuest(strategy, guests)
+  ED -> ED : push na zásobník Zpět, zápis do logu
+  EW --> W : řádky, cena kategorií, celkem, na hosta
+  note right of CMD : stejně AddCategoryCommand, ChangeItemCommand,\nRemoveItemCommand, RemoveCategoryCommand.\n„Zpět“ volá MenuEditor.undo() → command.undo()
+end
+@enduml

@@ -1,0 +1,90 @@
+@startuml
+!include common.iuml
+hide circle
+hide empty members
+skinparam classAttributeIconSize 0
+skinparam nodesep 40
+skinparam ranksep 50
+
+abstract class DomainObject <<abstract>> {
+  - id : Long
+  + isNew() : boolean
+}
+class User {
+  - username : String
+  - fullName : String
+  - email : String
+  - passwordHash : String
+  - active : boolean
+  - roles : EnumSet<Role>
+  + {static} create(username : String, fullName : String, email : String, password : String, roles : Set<Role>) : User
+  + {static} passwordError(password : String) : String
+  + checkPassword(password : String) : boolean
+  + changePassword(newPassword : String) : void
+  + changeRoles(newRoles : Set<Role>) : void
+  + isActiveAdmin() : boolean
+  + hasRole(role : Role) : boolean
+}
+class AccessPolicy <<policy>> {
+  + {static} canUseDesktopWorker(user : User) : boolean
+  + {static} canUseAdminMode(user : User) : boolean
+  + {static} canUseManagerWeb(user : User) : boolean
+  + {static} canLoginToDesktop(user : User) : boolean
+  + {static} requireWorker(user : User) : void
+  + {static} requireManager(user : User) : void
+}
+class PasswordHasher <<utility>> {
+  + {static} hash(password : String) : String
+  + {static} matches(password : String, stored : String) : boolean
+}
+class ShareLink {
+  - menuId : long
+  - revisionNo : int
+  - token : String
+  - createdAt : LocalDateTime
+  - validUntil : LocalDateTime
+  - active : boolean
+  + {static} create(menuId : long, revisionNo : int, now : LocalDateTime) : ShareLink
+  + isValid(now : LocalDateTime) : boolean
+  + exists() : boolean
+  + deactivate() : void
+}
+class UnknownShareLink {
+  + isValid(now : LocalDateTime) : boolean
+  + exists() : boolean
+}
+class Comment {
+  - menuId : long
+  - revisionNo : int
+  - categoryId : Long
+  - productId : Long
+  - productName : String
+  - authorName : String
+  - body : String
+  - createdAt : LocalDateTime
+  - resolved : boolean
+  - resolutionNote : String
+  - resolvedBy : Long
+  - resolvedByName : String
+  - resolvedAt : LocalDateTime
+  + {static} create(menuId : long, revisionNo : int, categoryId : Long, productId : Long, authorName : String, body : String, now : LocalDateTime) : Comment
+  + resolve(userId : long, note : String, now : LocalDateTime) : void
+  + isOnItem() : boolean
+}
+enum Role <<enumeration>> {
+  ADMIN
+  WORKER
+  MANAGER
+}
+
+DomainObject <|-- User
+DomainObject <|-- ShareLink
+User "0..*" --> "1..*" Role : roles
+User ..> PasswordHasher
+AccessPolicy ..> User
+AccessPolicy ..> Role
+ShareLink <|-- UnknownShareLink
+DomainObject <|-- Comment
+UnknownShareLink -[hidden]down- Comment
+Role -[hidden]right- UnknownShareLink
+@enduml

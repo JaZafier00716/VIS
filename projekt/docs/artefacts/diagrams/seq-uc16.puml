@@ -1,0 +1,81 @@
+@startuml
+!include common.iuml
+mainframe sd UC16 Spravovat uživatele a oprávnění
+hide footbox
+actor ":Administrátor" as A
+participant ":MainWindow" as MW
+participant ":UsersWindow" as UW
+participant ":UserService" as US
+participant ":User" as U
+participant ":UserMapper" as UM
+participant ":Oracle" as DB <<database>>
+
+A -> MW : Administrátorský režim (1)
+note right of MW : přepínač je jen u isActiveAdmin() (UC17)
+create UW
+MW -> UW : new UsersWindow(users, user)
+UW -> US : findAllUsers(admin)
+US -> US : requireAdmin(admin)
+US -> UM : findById(admin.id)
+UM -> DB : SELECT users, user_roles
+note right of US : čerstvý řádek z databáze,\nne objekt z přihlášení\n(platí i u createUser a updateUser)
+alt čerstvý řádek není aktivní administrátor
+  US --> UW : ValidationException
+  UW --> A : „Tato funkce je dostupná jen administrátorovi.“
+else je administrátor
+  US -> UM : findAll()
+  UM -> DB : SELECT users, user_roles
+  US --> UW : uživatelé
+  UW --> A : seznam uživatelů s rolemi a stavem (2)
+  A -> UW : Nový uživatel, jméno, celé jméno,\ne-mail, heslo, role, Uložit (3)
+  UW -> US : createUser(admin, username, fullName,\nemail, password, roles)
+  US -> US : requireAdmin(admin)
+  US -> U : User.create(username, fullName,\nemail, password, roles)
+  alt údaje jsou neplatné (4.1)
+    U --> US : ValidationException(chyby polí)
+    US --> UW : ValidationException
+    UW --> A : chyba u příslušného pole (4.2)
+  else údaje jsou platné
+    U --> US : user (hash hesla, aktivní)
+    note over US, DB : v jedné transakci (TransactionRunner.inTransaction)
+    US -> UM : findByUsername(username)
+    UM -> DB : SELECT users
+    alt uživatelské jméno již existuje (4.1)
+      US --> UW : ValidationException(username) (rollback)
+      UW --> A : „Uživatel … již existuje.“ u pole (4.2)
+    else jméno je volné
+      US -> UM : insert(user)
+      UM -> DB : INSERT users, user_roles
+      US --> UW : user (commit)
+      UW -> US : findAllUsers(admin)
+      UW --> A : „Uživatel byl uložen.“,\nuživatel v seznamu (5)
+    end
+  end
+  A -> UW : vybere uživatele, změní role, aktivitu\nnebo nové heslo, Uložit (6)
+  UW -> US : updateUser(admin, userId, roles,\nactive, newPassword)
+  US -> US : requireAdmin(admin)
+  note over US, DB : v jedné transakci (TransactionRunner.inTransaction)
+  US -> UM : findAll()
+  UM -> DB : SELECT users, user_roles
+  US -> U : changeRoles(roles)
+  US -> U : setActive(active)
+  opt nové heslo je vyplněno
+    US -> U : changePassword(newPassword)
+  end
+  alt heslo kratší než 8 znaků nebo žádná role
+    U --> US : ValidationException(pole)
+    US --> UW : ValidationException (rollback)
+    UW --> A : chyba u pole
+  else nezůstal by aktivní administrátor\n(žádný User.isActiveAdmin()) (7.1)
+    US --> UW : ValidationException(roles) (rollback)
+    UW --> A : „Systém musí mít alespoň jednoho\naktivního administrátora.“ (7.3)
+    UW -> UW : fill(editing): původní hodnoty
+  else v pořádku (7)
+    US -> UM : update(user)
+    UM -> DB : UPDATE users,\nDELETE/INSERT user_roles
+    US --> UW : user (commit)
+    UW -> US : findAllUsers(admin)
+    UW --> A : „Změny byly uloženy.“,\naktualizovaný seznam (8)
+  end
+end
+@enduml

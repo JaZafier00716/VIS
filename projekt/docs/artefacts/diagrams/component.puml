@@ -1,0 +1,67 @@
+@startuml
+!include common.iuml
+skinparam componentStyle uml2
+skinparam nodesep 30
+skinparam ranksep 60
+
+component "Prezentační vrstva" as PL <<component>> {
+  component "Desktopová aplikace\n(JavaFX, presentation.desktop)" as DESK <<component>>
+  component "Webová aplikace\n(JDK HttpServer, presentation.web)" as WEB <<component>>
+}
+
+interface "UserService" as I_USR
+interface "CustomerService" as I_CUS
+interface "CatalogService" as I_CAT
+interface "DocumentService" as I_DOC
+interface "MenuExportService" as I_EXP
+interface "AuthService" as I_AUTH
+interface "ProjectService" as I_PRJ
+interface "MenuService" as I_MEN
+interface "SharingService" as I_SHR
+
+component "Aplikační vrstva (business)" as BL <<component>> {
+  component "Uživatelé" as C_USR <<component>>
+  component "Zákazníci a katalog" as C_CUS <<component>>
+  component "Projekty a dokumenty" as C_PRJ <<component>>
+  component "Menu a revize" as C_MEN <<component>>
+  component "Sdílení a komentáře" as C_SHR <<component>>
+  component "Doménový model\n(domain, command, pricing)" as C_DOM <<component>>
+}
+
+component "Datová vrstva" as DAL <<component>>
+interface "porty\n(business.port)" as I_PORT
+
+C_USR -up- I_USR
+C_USR -up- I_AUTH
+C_CUS -up- I_CUS
+C_CUS -up- I_CAT
+C_PRJ -up- I_PRJ
+C_PRJ -up- I_DOC
+C_MEN -up- I_MEN
+C_MEN -up- I_EXP
+C_SHR -up- I_SHR
+
+DESK -down-( I_USR
+DESK -down-( I_CUS
+DESK -down-( I_CAT
+DESK -down-( I_DOC
+DESK -down-( I_EXP
+DESK -down-( I_AUTH
+DESK -down-( I_PRJ
+DESK -down-( I_MEN
+DESK -down-( I_SHR
+WEB -down-( I_AUTH
+WEB -down-( I_PRJ
+WEB -down-( I_MEN
+WEB -down-( I_SHR
+
+C_MEN ..> C_PRJ : <<use>>
+C_USR ..> C_DOM
+C_CUS ..> C_DOM
+C_PRJ ..> C_DOM
+C_MEN ..> C_DOM
+C_SHR ..> C_DOM
+
+BL -down-( I_PORT
+DAL -up- I_PORT
+@enduml

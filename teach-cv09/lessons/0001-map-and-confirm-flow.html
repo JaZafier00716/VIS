@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CV09 map and confirm flow</title><link rel="stylesheet" href="../assets/course.css"></head>
+<body><main>
+<p class="kicker">Lesson 1 · CV09 GoF patterns in cv3 · ~12 minutes</p>
+<h1>Where each task lives, and one click that touches four of them</h1>
+<p class="lede">The win for today: you can point at the class behind every Úkol 1–5 and tell the story of
+“Potvrdit objednávku” from the menu to the printed document, in the right order.</p>
+
+<h2>1 · The map</h2>
+<p>Everything new sits in the <strong>business layer</strong>, exactly where the slides put it (cv09, “Umístění jednotlivých vzorů”: all five are BL).
+The UI only picks an object and prints the result; the data layer did not change at all.</p>
+<div class="wrap"><table>
+<tr><th>Slide task</th><th>Package</th><th>The one class to point at</th><th>Proved by</th></tr>
+<tr><td>Úkol 1 Singleton</td><td><code>business.service.numbering</code></td><td><code>OrderNumberGenerator</code> — private ctor, <code>getInstance()</code>, <code>getNextNumber()</code></td><td><code>OrderNumberGeneratorTest</code></td></tr>
+<tr><td>Úkol 2 Strategy</td><td><code>business.pricing</code></td><td><code>IPricingStrategy</code> ← <code>StandardPricing</code>, <code>CompanyPricing</code>; used by <code>OrderPricingService.calculatePrice</code></td><td><code>PricingStrategyTest</code></td></tr>
+<tr><td>Úkol 3 Factory Method</td><td><code>business.document</code></td><td><code>DocumentCreator.createDocument()</code> ← <code>ConfirmationCreator</code>, <code>DeliveryNoteCreator</code>, <code>InvoiceCreator</code></td><td><code>DocumentFactoryMethodTest</code></td></tr>
+<tr><td>Úkol 4 Observer</td><td><code>business.observer</code> + <code>Order</code></td><td><code>Order</code> = Subject; <code>IOrderObserver</code> ← <code>ProductionObserver</code>, <code>ExpeditionObserver</code></td><td><code>OrderObserverTest</code></td></tr>
+<tr><td>Úkol 5 Command</td><td><code>business.command</code></td><td><code>IOrderCommand</code> ← 3 commands; <code>OrderCommandExecutor</code> keeps the log</td><td><code>OrderCommandTest</code></td></tr>
+</table></div>
+<p>Two supporting changes connect them: <code>OrderStatus</code> now has the whole life cycle Nová → … → Uzavřená
+with the rule “only to the next status” in <code>canChangeTo()</code>, and <code>OrderService</code> got one private
+<code>changeStatus()</code> that every status operation goes through.</p>
+<p class="side">Mnemonic from the slide summary: Singleton = <em>how many</em>, Strategy = <em>which algorithm</em>,
+Factory Method = <em>how to create</em>, Observer = <em>who is told</em>, Command = <em>how an operation is represented</em>.</p>
+
+<h2>2 · One click, traced</h2>
+<p>This is the slide’s <strong>Scénář B</strong> (“potvrzení objednávky”). In the console it is menu item 11; in the demo it is
+<code>Cv09Demonstrations</code>, block “Scénář B”.</p>
+<ol class="flow">
+<li><span class="tag">UI</span><code>Main</code>, <code>case "11"</code>: <code>execute(new ConfirmOrderCommand(context.orderService(), id))</code>. The UI builds an object; it doesn’t call <code>confirmOrder</code> itself.</li>
+<li><span class="tag">Command</span><code>OrderCommandExecutor.execute(command)</code> calls <code>command.execute()</code> without knowing which command it is, and catches a rejection.</li>
+<li><span class="tag">Command</span><code>ConfirmOrderCommand.execute()</code> → <code>orderService.confirmOrder(orderId)</code>. The service is the <em>receiver</em>.</li>
+<li><span class="tag">BL</span><code>OrderService.changeStatus(id, Order::confirm)</code>: load the order → <code>order.confirm()</code> → <code>orders.update</code> → <code>commit()</code>.</li>
+<li><span class="tag">Domain</span><code>Order.changeStatus(expected, target)</code> checks <code>OrderStatus.canChangeTo</code>. Invalid → <code>IllegalStateException</code>, nothing changes. Valid → the change is only <em>recorded as pending</em>.</li>
+<li><span class="tag">Observer</span>After the commit succeeds, the service attaches its observers, calls <code>order.publishStatusChanges()</code>, then detaches them. <code>ProductionObserver</code> prints “Objednávka … potvrzena – připravit výrobu”.</li>
+<li><span class="tag">Command</span>Back in the executor: a <code>CommandLogEntry(time, operation, orderId, success, message)</code> goes into the log (slide step 5).</li>
+<li><span class="tag">Factory</span>The demo then calls <code>orderDocumentService().createDocument(id, new ConfirmationCreator())</code> → <code>produce()</code> → the factory method <code>createDocument()</code> → <code>new OrderConfirmation(order)</code>.</li>
+</ol>
+<p>Here is step 4–6 in the real code (<code>src/business/service/OrderService.java</code>):</p>
+<pre><code>private void changeStatus(String orderId, Consumer&lt;Order&gt; transition) {
+    Order order = findOrder(orderId);
+    transition.accept(order);           // Order::confirm – throws if the transition is invalid
+    orders.update(order);
+    try {
+        commit();
+    } catch (RuntimeException e) {
+        order.discardStatusChanges();   // not saved → nobody is told
+        throw e;
+    }
+    observers.forEach(order::registerObserver);
+    try {
+        order.publishStatusChanges();   // notify only AFTER a successful save
+    } finally {
+        observers.forEach(order::unregisterObserver);
+    }
+}</code></pre>
+<p class="side">Why “pending, then publish”? The slide’s Observer page says: <em>“Neplatná nebo neúspěšná změna stavu nesmí vyvolat oznámení. Pokud změnu také ukládáte, návazné oznámení proveďte až po úspěšném uložení.”</em> If production were told first and the save then failed, it would start building furniture for an order that is still “Nová” in the database.</p>
+
+<h2>3 · Practise (from memory — scroll up only after answering)</h2>
+
+<div class="quiz" data-answer="c" data-why="Order.changeStatus asks OrderStatus.canChangeTo; the executor only catches the exception and logs it.">
+<p class="q">Q1. You run StartProductionCommand on an order in state “Nová”. Which class holds the rule that rejects it?</p>
+<label><input type="radio" name="q1" value="a"> OrderCommandExecutor</label>
+<label><input type="radio" name="q1" value="b"> StartProductionCommand</label>
+<label><input type="radio" name="q1" value="c"> OrderStatus</label>
+<label><input type="radio" name="q1" value="d"> ProductionObserver</label>
+<div class="fb"></div></div>
+
+<div class="quiz" data-answer="b" data-why="publishStatusChanges runs only after commit() returned; a failed commit discards the pending change.">
+<p class="q">Q2. When does ProductionObserver hear about a confirmation?</p>
+<label><input type="radio" name="q2" value="a"> right before update() runs</label>
+<label><input type="radio" name="q2" value="b"> right after commit() succeeds</label>
+<label><input type="radio" name="q2" value="c"> right when command is built</label>
+<label><input type="radio" name="q2" value="d"> right when executor logs it</label>
+<div class="fb"></div></div>
+
+<div class="quiz" data-answer="d" data-why="createDocument is abstract in DocumentCreator and each subclass decides the concrete document; produce/render are the shared final logic.">
+<p class="q">Q3. Which method is the factory method?</p>
+<label><input type="radio" name="q3" value="a"> produce()</label>
+<label><input type="radio" name="q3" value="b"> render()</label>
+<label><input type="radio" name="q3" value="c"> getContent()</label>
+<label><input type="radio" name="q3" value="d"> createDocument()</label>
+<div class="fb"></div></div>
+
+<div class="quiz order" data-order="find,transition,update,commit,register,publish,unregister" data-why="Say it at the defence as: change, save, then tell.">
+<p class="q">Q4. Put the steps of <code>OrderService.changeStatus</code> in order.</p>
+<ol>
+<li><select><option value="">–</option><option value="commit">commit()</option><option value="publish">order.publishStatusChanges()</option><option value="find">findOrder(id)</option><option value="unregister">unregister observers</option><option value="update">orders.update(order)</option><option value="register">register observers</option><option value="transition">transition.accept(order)</option></select></li>
+<li><select><option value="">–</option><option value="commit">commit()</option><option value="publish">order.publishStatusChanges()</option><option value="find">findOrder(id)</option><option value="unregister">unregister observers</option><option value="update">orders.update(order)</option><option value="register">register observers</option><option value="transition">transition.accept(order)</option></select></li>
+<li><select><option value="">–</option><option value="commit">commit()</option><option value="publish">order.publishStatusChanges()</option><option value="find">findOrder(id)</option><option value="unregister">unregister observers</option><option value="update">orders.update(order)</option><option value="register">register observers</option><option value="transition">transition.accept(order)</option></select></li>
+<li><select><option value="">–</option><option value="commit">commit()</option><option value="publish">order.publishStatusChanges()</option><option value="find">findOrder(id)</option><option value="unregister">unregister observers</option><option value="update">orders.update(order)</option><option value="register">register observers</option><option value="transition">transition.accept(order)</option></select></li>
+<li><select><option value="">–</option><option value="commit">commit()</option><option value="publish">order.publishStatusChanges()</option><option value="find">findOrder(id)</option><option value="unregister">unregister observers</option><option value="update">orders.update(order)</option><option value="register">register observers</option><option value="transition">transition.accept(order)</option></select></li>
+<li><select><option value="">–</option><option value="commit">commit()</option><option value="publish">order.publishStatusChanges()</option><option value="find">findOrder(id)</option><option value="unregister">unregister observers</option><option value="update">orders.update(order)</option><option value="register">register observers</option><option value="transition">transition.accept(order)</option></select></li>
+<li><select><option value="">–</option><option value="commit">commit()</option><option value="publish">order.publishStatusChanges()</option><option value="find">findOrder(id)</option><option value="unregister">unregister observers</option><option value="update">orders.update(order)</option><option value="register">register observers</option><option value="transition">transition.accept(order)</option></select></li>
+</ol><button>Check</button><div class="fb"></div></div>
+
+<h3>Your turn in the real project (5 min)</h3>
+<p>Run <code>mvn compile exec:java</code>, create an order (9), then try 15 “Zahájit výrobu” <em>before</em> 11. Read the log line, then do 11 → 15 → 16 → 19. Predict each printed line before you press Enter.</p>
+
+<h2>Read next</h2>
+<p>Primary source: the assignment itself, <code>VIS/presentations/VIS_cv09.pdf</code>, pages “Jak všechny vzory spolupracují?” and “Testovací scénáře” — they are exactly what you just traced.
+For the general vocabulary (Subject, Invoker, Receiver, Creator), skim <a href="https://refactoring.guru/design-patterns/observer">Refactoring.Guru: Observer</a> and <a href="https://refactoring.guru/design-patterns/command">Command</a>.</p>
+<p>Keep the <a href="../reference/cv09-cheatsheet.html">CV09 cheat sheet</a> open during the defence prep.</p>
+
+<footer>Stuck on anything, or want me to explain one class line by line? Just ask in the thread — I’m your teacher for this.
+Next lesson: Strategy and Factory Method — why there is no <code>if</code> choosing the algorithm or the document.</footer>
+</main><script src="../assets/quiz.js"></script></body></html>
