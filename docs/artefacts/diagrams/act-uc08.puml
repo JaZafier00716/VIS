@@ -12,7 +12,11 @@ repeat
     |Pracovník|
     :Zvolí „Vytvořit pracovní kopii“;
     |Systém|
-    :Vytvoří pracovní kopii\na povolí editaci;
+    if (Nejnovější revize je již pracovní?) then ([ano])
+      :Kopii nevytvoří a zobrazí zprávu,\nžádá otevřít nejnovější revizi;
+    else ([ne])
+      :Vytvoří pracovní kopii\na povolí editaci;
+    endif
   else ([ne])
     :Zobrazí revizi s povolenou editací;
   endif

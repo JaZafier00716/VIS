@@ -24,7 +24,7 @@ Model na obrázku~\ref{fig:domain} vychází z \odkaz{sec:vize}{Vize} a z \odkaz
   \item[MenuCategory, MenuItem] kategorie (například předkrmy) a položky revize s množstvím a cenou. Položka vychází z produktu v katalogu. Zjednodušení: revize ukládá u položky množství a jednotkovou cenu, ale název produktu, alergeny a sazbu DPH se čtou z aktuálního katalogu, takže sdílená revize zobrazuje aktuální názvy a alergeny.
   \item[Product, Allergen] katalog pokrmů a nápojů s výchozí cenou, fotografií a alergeny.
   \item[ShareLink] odkaz s omezenou platností, kterým je revize menu zpřístupněna zákazníkovi.
-  \item[Výčtové typy] \texttt{ProjectStatus} (IN\_PROGRESS, ARCHIVED) a \texttt{RevisionState} (WORKING, SHARED). Typ uzlu stromu (FOLDER, DOCUMENT, MENU) je uložen ve sloupci \texttt{node\_type}, viz Single Table Inheritance. V textu a v uživatelském rozhraní se stavy zobrazují česky: ROZPRACOVANÝ, ARCHIVOVANÝ, PRACOVNÍ a SDÍLENÁ.
+  \item[Výčtové typy] \texttt{ProjectStatus} (IN\_PROGRESS, ARCHIVED), \texttt{RevisionState} (WORKING, SHARED) a \texttt{Role} (ADMIN, WORKER, MANAGER). Typ uzlu stromu (FOLDER, DOCUMENT, MENU) je uložen ve sloupci \texttt{node\_type}, viz Single Table Inheritance. V textu a v uživatelském rozhraní se stavy zobrazují česky: ROZPRACOVANÝ, ARCHIVOVANÝ, PRACOVNÍ a SDÍLENÁ.
   \item[Comment] komentář zákazníka k revizi menu, případně ke konkrétní položce. Pracovník komentář vyřídí s poznámkou a systém si uloží, kdo a kdy jej vyřídil.
 \end{description}
 
@@ -178,6 +178,9 @@ Strukturovaná data jsou uložena na databázovém serveru Oracle. Zákazník a 
   \item[Identity Field, Foreign Key Mapping, Dependent Mapping, Association Table Mapping] identifikátory z databázových sekvencí, vazby přes cizí klíče, kategorie a položky revize ukládané a načítané spolu s revizí, vazba produktů a alergenů přes propojovací tabulku.
   \item[Lazy Load] komentáře revize se nenačítají s revizí v editoru menu. Načtou se samostatným dotazem až při jejich prvním zobrazení (zpracování komentářů, webová stránka nabídky).
   \item[Gateway] přístup k souborovému úložišti dokumentů je skryt za rozhraním \texttt{DocumentStorage}, takže aplikační logika nepracuje přímo se soubory.
+  \item[Layer Supertype, Value Object] třída \texttt{DomainObject} je společný předek entit s identifikátorem. Třída \texttt{Money} je neměnná peněžní částka porovnávaná podle hodnoty.
+  \item[Special Case, Service Stub] třída \texttt{UnknownShareLink} zastupuje neexistující odkaz, takže služba nekontroluje \texttt{null}. Třída \texttt{InMemoryDocumentStorage} nahrazuje úložiště dokumentů v testech.
+  \item[Optimistic Offline Lock] souběžná změna revize se pozná podle stavu a času posledního uložení. Tabulka nemá sloupec s verzí.
   \item[Transakce] uložení revize menu včetně kategorií a položek a sdílení revize probíhá v jedné JDBC transakci. Transakci řídí aplikační služba přes sdílené připojení \texttt{Database} (commit, při chybě rollback), mappery samy transakci neukončují. Pokud se při nahrávání dokumentu nepodaří zapsat záznam do databáze, služba soubor z úložiště smaže.
 \end{description}
 
@@ -188,4 +191,8 @@ Strukturovaná data jsou uložena na databázovém serveru Oracle. Zákazník a 
   \item[Factory] jedna továrna vytváří mappery a úložiště dokumentů podle konfigurace (připojení k databázi, cesta ke složce). Zbytek aplikace pracuje jen s rozhraními.
   \item[Singleton] jedna instance poskytovatele databázových připojení (\texttt{Database}), kterou sdílejí všechny mappery. Připojení JDBC otevírá pro každou transakci zvlášť a drží je pro aktuální vlákno.
   \item[Facade] aplikační služby tvoří jednoduché rozhraní nad doménou a datovou vrstvou. Desktopové i webové UI volají pouze tyto služby. \texttt{ProjectService} obsluhuje projekty, \texttt{CustomerService} zákazníky, \texttt{DocumentService} složky a dokumenty, \texttt{MenuService} menu a revize, \texttt{MenuExportService} export do PDF, \texttt{CatalogService} katalog produktů, \texttt{SharingService} sdílení, komentáře a denní zneplatnění odkazů (\ucref{18}), \texttt{AuthService} přihlášení a \texttt{UserService} uživatele.
+  \item[Factory Method] abstraktní třída \texttt{NodeCreator} provede společné kroky vytvoření uzlu stromu a potomci \texttt{FolderCreator}, \texttt{MenuCreator} a \texttt{DocumentCreator} určí, jaký uzel vznikne.
+  \item[Strategy] rozhraní \texttt{PriceStrategy} s implementacemi \texttt{PriceWithoutVat} a \texttt{PriceWithVat} určuje, zda se ceny zobrazují bez DPH nebo s DPH.
+  \item[Observer] \texttt{MenuRevision} oznamuje změny posluchači \texttt{MenuRevisionListener}, kterým je editor menu.
+  \item[Command] každá úprava menu je objekt s rozhraním \texttt{MenuEditCommand}. Třída \texttt{MenuEditor} je spouští a umožňuje vrátit poslední úpravu (Zpět).
 \end{description}
