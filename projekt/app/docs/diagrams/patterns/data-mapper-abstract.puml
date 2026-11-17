@@ -1,0 +1,27 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class "Domain object" as DO
+interface Mapper {
+  +find(id) : DO
+  +insert(DO)
+  +update(DO)
+}
+class ConcreteMapper
+class Database
+ConcreteMapper ..|> Mapper
+ConcreteMapper ..> DO : maps rows to objects
+ConcreteMapper --> Database : SQL
+Service --> Mapper
+@enduml

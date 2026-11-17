@@ -1,0 +1,32 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+package "Presentation layer" {
+  class UI
+}
+package "Business layer" {
+  class Service
+  class DomainObject
+  interface Port
+}
+package "Data layer" {
+  class Implementation
+}
+UI --> Service
+Service --> DomainObject
+Service --> Port
+Implementation ..|> Port
+Implementation --> DomainObject
+note right of Port : dependency inversion, business\nlayer does not know the data layer
+@enduml

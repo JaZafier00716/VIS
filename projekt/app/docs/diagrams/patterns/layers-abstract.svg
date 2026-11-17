@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="331px" preserveAspectRatio="none" style="width:515px;height:331px;" version="1.1" viewBox="0 0 515 331" width="515px" zoomAndPan="magnify"><defs/><g><!--MD5=[300eeb017b7f845b8de5778210c38acc]
+cluster Presentation layer--><polygon fill="#FFFFFF" points="84,24.5,217,24.5,224,49.5679,227,49.5679,227,110.5,84,110.5,84,24.5" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="84" x2="224" y1="49.5679" y2="49.5679"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="127" x="88" y="41.4659">Presentation layer</text><!--MD5=[62819591ea2854b3e5ddbcb48e83eaae]
+cluster Business layer--><polygon fill="#FFFFFF" points="22,134.5,126,134.5,133,159.5679,257,159.5679,257,319,22,319,22,134.5" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="22" x2="133" y1="159.5679" y2="159.5679"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="98" x="26" y="151.4659">Business layer</text><!--MD5=[b478489d90fc7ca3cadf48a1c8a16886]
+cluster Data layer--><polygon fill="#FFFFFF" points="281,134.5,357,134.5,364,159.5679,435,159.5679,435,220.5,281,220.5,281,134.5" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="281" x2="364" y1="159.5679" y2="159.5679"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="70" x="285" y="151.4659">Data layer</text><!--MD5=[df76e760f2062188d44f98c21a88999b]
+class UI--><rect fill="#FFFFFF" height="32" id="UI" style="stroke: #444444; stroke-width: 1.5;" width="45" x="107.5" y="62.5"/><ellipse cx="122.5" cy="78.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M125.4688,84.1406 Q124.8906,84.4375 124.25,84.5781 Q123.6094,84.7344 122.9063,84.7344 Q120.4063,84.7344 119.0781,83.0938 Q117.7656,81.4375 117.7656,78.3125 Q117.7656,75.1875 119.0781,73.5313 Q120.4063,71.875 122.9063,71.875 Q123.6094,71.875 124.25,72.0313 Q124.9063,72.1875 125.4688,72.4844 L125.4688,75.2031 Q124.8438,74.625 124.25,74.3594 Q123.6563,74.0781 123.0313,74.0781 Q121.6875,74.0781 121,75.1563 Q120.3125,76.2188 120.3125,78.3125 Q120.3125,80.4063 121,81.4844 Q121.6875,82.5469 123.0313,82.5469 Q123.6563,82.5469 124.25,82.2813 Q124.8438,82 125.4688,81.4219 L125.4688,84.1406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="13" x="136.5" y="83.156">UI</text><!--MD5=[dbb8b4f13c7b21394f9d757e58732f45]
+class Service--><rect fill="#FFFFFF" height="32" id="Service" style="stroke: #444444; stroke-width: 1.5;" width="73" x="93.5" y="172.5"/><ellipse cx="108.5" cy="188.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M111.4688,194.1406 Q110.8906,194.4375 110.25,194.5781 Q109.6094,194.7344 108.9063,194.7344 Q106.4063,194.7344 105.0781,193.0938 Q103.7656,191.4375 103.7656,188.3125 Q103.7656,185.1875 105.0781,183.5313 Q106.4063,181.875 108.9063,181.875 Q109.6094,181.875 110.25,182.0313 Q110.9063,182.1875 111.4688,182.4844 L111.4688,185.2031 Q110.8438,184.625 110.25,184.3594 Q109.6563,184.0781 109.0313,184.0781 Q107.6875,184.0781 107,185.1563 Q106.3125,186.2188 106.3125,188.3125 Q106.3125,190.4063 107,191.4844 Q107.6875,192.5469 109.0313,192.5469 Q109.6563,192.5469 110.25,192.2813 Q110.8438,192 111.4688,191.4219 L111.4688,194.1406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="41" x="122.5" y="193.156">Service</text><!--MD5=[0f565901def650a4b8c0802491169dd0]
+class DomainObject--><rect fill="#FFFFFF" height="32" id="DomainObject" style="stroke: #444444; stroke-width: 1.5;" width="112" x="129" y="271"/><ellipse cx="144" cy="287" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M146.9688,292.6406 Q146.3906,292.9375 145.75,293.0781 Q145.1094,293.2344 144.4063,293.2344 Q141.9063,293.2344 140.5781,291.5938 Q139.2656,289.9375 139.2656,286.8125 Q139.2656,283.6875 140.5781,282.0313 Q141.9063,280.375 144.4063,280.375 Q145.1094,280.375 145.75,280.5313 Q146.4063,280.6875 146.9688,280.9844 L146.9688,283.7031 Q146.3438,283.125 145.75,282.8594 Q145.1563,282.5781 144.5313,282.5781 Q143.1875,282.5781 142.5,283.6563 Q141.8125,284.7188 141.8125,286.8125 Q141.8125,288.9063 142.5,289.9844 Q143.1875,291.0469 144.5313,291.0469 Q145.1563,291.0469 145.75,290.7813 Q146.3438,290.5 146.9688,289.9219 L146.9688,292.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="80" x="158" y="291.656">DomainObject</text><!--MD5=[a0bfe97ac0a38e6e74cc1c7c7b744b71]
+class Port--><rect fill="#FFFFFF" height="32" id="Port" style="stroke: #444444; stroke-width: 1.5;" width="55" x="38.5" y="271"/><ellipse cx="53.5" cy="287" fill="#B4A7E5" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M49.4219,282.7656 L49.4219,280.6094 L56.8125,280.6094 L56.8125,282.7656 L54.3438,282.7656 L54.3438,290.8438 L56.8125,290.8438 L56.8125,293 L49.4219,293 L49.4219,290.8438 L51.8906,290.8438 L51.8906,282.7656 L49.4219,282.7656 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="23" x="67.5" y="291.656">Port</text><!--MD5=[62157b509973564ddc878c05b423c99e]
+class Implementation--><rect fill="#FFFFFF" height="32" id="Implementation" style="stroke: #444444; stroke-width: 1.5;" width="121" x="297.5" y="172.5"/><ellipse cx="312.5" cy="188.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M315.4688,194.1406 Q314.8906,194.4375 314.25,194.5781 Q313.6094,194.7344 312.9063,194.7344 Q310.4063,194.7344 309.0781,193.0938 Q307.7656,191.4375 307.7656,188.3125 Q307.7656,185.1875 309.0781,183.5313 Q310.4063,181.875 312.9063,181.875 Q313.6094,181.875 314.25,182.0313 Q314.9063,182.1875 315.4688,182.4844 L315.4688,185.2031 Q314.8438,184.625 314.25,184.3594 Q313.6563,184.0781 313.0313,184.0781 Q311.6875,184.0781 311,185.1563 Q310.3125,186.2188 310.3125,188.3125 Q310.3125,190.4063 311,191.4844 Q311.6875,192.5469 313.0313,192.5469 Q313.6563,192.5469 314.25,192.2813 Q314.8438,192 315.4688,191.4219 L315.4688,194.1406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="89" x="326.5" y="193.156">Implementation</text><path d="M276.5,264.5 L276.5,309.912 L503.5,309.912 L503.5,274.5 L493.5,264.5 L276.5,264.5 " fill="#FFFFE0" style="stroke: #999999; stroke-width: 1.0;"/><path d="M493.5,264.5 L493.5,274.5 L503.5,274.5 L493.5,264.5 " fill="#FFFFE0" style="stroke: #999999; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="190" x="282.5" y="283.397">dependency inversion, business</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="206" x="282.5" y="301.103">layer does not know the data layer</text><!--MD5=[48f45deb8b4a145c95e83849ae46de3c]
+link UI to Service--><path d="M130,94.52 C130,113.43 130,146.01 130,167.15 " fill="none" id="UI-&gt;Service" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="130,172.26,134,163.26,130,167.26,126,163.26,130,172.26" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[649dee2c5b546a120c681321fa349437]
+link Service to DomainObject--><path d="M138.59,204.58 C148.06,221.19 163.33,247.98 173.75,266.26 " fill="none" id="Service-&gt;DomainObject" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="176.29,270.71,175.3151,260.9095,173.817,266.3644,168.3621,264.8663,176.29,270.71" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[800fea79eb15ca3e1d1e21de374874b9]
+link Service to Port--><path d="M120,204.58 C108.98,221.19 91.22,247.98 79.09,266.26 " fill="none" id="Service-&gt;Port" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="76.14,270.71,84.4479,265.4205,78.9036,266.5432,77.781,260.9988,76.14,270.71" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[36b09011632172c11975603fe3bdb68f]
+link Implementation to Port--><path d="M322.39,204.5 C303.22,212.26 279.05,221.54 257,228.5 C199,246.82 178.11,243.19 112.96,265.19 " fill="none" id="Implementation-&gt;Port" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="115.05,271.88,93.86,271.93,110.39,258.68,115.05,271.88" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[0d3f4715ab5d640449a2520573ce51fe]
+link Implementation to DomainObject--><path d="M330.97,204.58 C300.08,221.81 249.59,249.97 216.83,268.25 " fill="none" id="Implementation-&gt;DomainObject" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="212.13,270.87,221.9378,269.9714,216.4947,268.4309,218.0352,262.9878,212.13,270.87" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[51d56aea637b51ad5625b4320dc4ec0f]
+link Port to GMN15--><path d="M84.87,270.89 C96.81,261.79 113.06,251.3 129.5,246.5 C198.48,226.37 280.83,246.17 334.21,264.48 " fill="none" id="Port-GMN15" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><!--MD5=[b36da67c1f133551560f008e70147fa4]
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+package "Presentation layer" {
+  class UI
+}
+package "Business layer" {
+  class Service
+  class DomainObject
+  interface Port
+}
+package "Data layer" {
+  class Implementation
+}
+UI - -> Service
+Service - -> DomainObject
+Service - -> Port
+Implementation ..|> Port
+Implementation - -> DomainObject
+note right of Port : dependency inversion, business\nlayer does not know the data layer
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.13+9-1-deb13u2-Debian
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

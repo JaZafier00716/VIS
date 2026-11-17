@@ -1,0 +1,35 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class MenuService {
+  +saveRevision(MenuRevision, String, User) : int
+}
+class MenuRevision {
+  -loadedSavedAt
+  +getLoadedSavedAt() : LocalDateTime
+}
+interface MenuMapper {
+  +overwriteRevision(MenuRevision) : boolean
+  +markShared(long, int, LocalDateTime) : boolean
+}
+class OracleMenuMapper {
+  UPDATE menu_revisions ...\nWHERE state = WORKING AND saved_at = loadedSavedAt
+}
+class ConflictException
+MenuService --> MenuMapper
+MenuService ..> ConflictException : <<throws>> when false
+OracleMenuMapper ..|> MenuMapper
+OracleMenuMapper ..> MenuRevision : reads getLoadedSavedAt()
+note bottom of OracleMenuMapper : no version column, the time of the\nlast save acts as the version
+@enduml

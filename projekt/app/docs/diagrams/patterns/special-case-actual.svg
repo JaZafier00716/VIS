@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="229px" preserveAspectRatio="none" style="width:470px;height:229px;" version="1.1" viewBox="0 0 470 229" width="470px" zoomAndPan="magnify"><defs/><g><!--MD5=[50645536a1ec19c425215977d615c09e]
+class SharingService--><rect fill="#FFFFFF" height="69.9638" id="SharingService" style="stroke: #444444; stroke-width: 1.5;" width="251" x="6" y="13.5"/><ellipse cx="85.25" cy="29.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M88.2188,35.1406 Q87.6406,35.4375 87,35.5781 Q86.3594,35.7344 85.6563,35.7344 Q83.1563,35.7344 81.8281,34.0938 Q80.5156,32.4375 80.5156,29.3125 Q80.5156,26.1875 81.8281,24.5313 Q83.1563,22.875 85.6563,22.875 Q86.3594,22.875 87,23.0313 Q87.6563,23.1875 88.2188,23.4844 L88.2188,26.2031 Q87.5938,25.625 87,25.3594 Q86.4063,25.0781 85.7813,25.0781 Q84.4375,25.0781 83.75,26.1563 Q83.0625,27.2188 83.0625,29.3125 Q83.0625,31.4063 83.75,32.4844 Q84.4375,33.5469 85.7813,33.5469 Q86.4063,33.5469 87,33.2813 Q87.5938,33 88.2188,32.4219 L88.2188,35.1406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="84" x="105.75" y="34.156">SharingService</text><line style="stroke: #444444; stroke-width: 1.5;" x1="7" x2="256" y1="45.5" y2="45.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="224" x="12" y="61.2589">+findValidLink(long) : Optional&lt;ShareLink&gt;</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="239" x="12" y="76.2408">+openSharedMenu(String) : SharedMenuView</text><!--MD5=[b058b85ca32d968836d094ea3d720ba6]
+class ShareLink--><rect fill="#FFFFFF" height="69.9638" id="ShareLink" style="stroke: #444444; stroke-width: 1.5;" width="186" x="160.5" y="149"/><ellipse cx="221.75" cy="165" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M224.7188,170.6406 Q224.1406,170.9375 223.5,171.0781 Q222.8594,171.2344 222.1563,171.2344 Q219.6563,171.2344 218.3281,169.5938 Q217.0156,167.9375 217.0156,164.8125 Q217.0156,161.6875 218.3281,160.0313 Q219.6563,158.375 222.1563,158.375 Q222.8594,158.375 223.5,158.5313 Q224.1563,158.6875 224.7188,158.9844 L224.7188,161.7031 Q224.0938,161.125 223.5,160.8594 Q222.9063,160.5781 222.2813,160.5781 Q220.9375,160.5781 220.25,161.6563 Q219.5625,162.7188 219.5625,164.8125 Q219.5625,166.9063 220.25,167.9844 Q220.9375,169.0469 222.2813,169.0469 Q222.9063,169.0469 223.5,168.7813 Q224.0938,168.5 224.7188,167.9219 L224.7188,170.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="55" x="242.25" y="169.656">ShareLink</text><line style="stroke: #444444; stroke-width: 1.5;" x1="161.5" x2="345.5" y1="181" y2="181"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="174" x="166.5" y="196.7589">+isValid(LocalDateTime) : boolean</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="93" x="166.5" y="211.7408">+exists() : boolean</text><!--MD5=[8246e8b7eb55c34439dd878b9d23608d]
+class UnknownShareLink--><rect fill="#FFFFFF" height="80.652" id="UnknownShareLink" style="stroke: #444444; stroke-width: 1.5;" width="167" x="292" y="8"/><ellipse cx="319.6" cy="29.3441" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M322.5688,34.9847 Q321.9906,35.2816 321.35,35.4222 Q320.7094,35.5785 320.0063,35.5785 Q317.5063,35.5785 316.1781,33.9379 Q314.8656,32.2816 314.8656,29.1566 Q314.8656,26.0316 316.1781,24.3754 Q317.5063,22.7191 320.0063,22.7191 Q320.7094,22.7191 321.35,22.8754 Q322.0063,23.0316 322.5688,23.3285 L322.5688,26.0472 Q321.9438,25.4691 321.35,25.2035 Q320.7563,24.9222 320.1313,24.9222 Q318.7875,24.9222 318.1,26.0004 Q317.4125,27.0629 317.4125,29.1566 Q317.4125,31.2504 318.1,32.3285 Q318.7875,33.391 320.1313,33.391 Q320.7563,33.391 321.35,33.1254 Q321.9438,32.8441 322.5688,32.266 L322.5688,34.9847 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="77" x="351.4" y="25.8281">«Special Case»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="107" x="336.4" y="42.1722">UnknownShareLink</text><line style="stroke: #444444; stroke-width: 1.5;" x1="293" x2="458" y1="50.6882" y2="50.6882"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="155" x="298" y="66.4471">+isValid(LocalDateTime) : false</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="74" x="298" y="81.429">+exists() : false</text><!--MD5=[be800aa8d7eed85c71a3dd074f1135f0]
+link SharingService to ShareLink--><path d="M162.6,83.53 C179.68,102.22 200.91,125.45 218.55,144.76 " fill="none" id="SharingService-&gt;ShareLink" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="222.03,148.56,218.9069,139.2194,218.6553,144.8707,213.004,144.619,222.03,148.56" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[f80438b34a4fcb799bea674127e9def2]
+link UnknownShareLink to ShareLink--><path d="M339.23,89.19 C326.54,103.08 312.13,118.84 298.8,133.43 " fill="none" id="UnknownShareLink-&gt;ShareLink" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="303.54,138.62,284.88,148.66,293.21,129.17,303.54,138.62" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[47f72010c2f2507118cc94b246cfd011]
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class SharingService {
+  +findValidLink(long) : Optional<ShareLink>
+  +openSharedMenu(String) : SharedMenuView
+}
+class ShareLink {
+  +isValid(LocalDateTime) : boolean
+  +exists() : boolean
+}
+class UnknownShareLink <<Special Case>> {
+  +isValid(LocalDateTime) : false
+  +exists() : false
+}
+SharingService - -> ShareLink
+UnknownShareLink - -|> ShareLink
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.13+9-1-deb13u2-Debian
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

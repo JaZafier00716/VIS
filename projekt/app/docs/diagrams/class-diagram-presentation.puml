@@ -1,0 +1,185 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+  BackgroundColor<<external>> #EEEEEE
+  BorderColor<<external>> #999999
+}
+
+left to right direction
+hide empty members
+
+package "presentation.desktop" {
+  class CatalogWindow
+  class CommentsWindow
+  class CompareRevisionsWindow
+  class CustomersWindow
+  class DeleteDialog
+  class DesktopApp {
+    {static} main(String[]) : void
+    start(Stage) : void
+    stop() : void
+  }
+  class EditProjectDialog
+  class LoginDialog
+  class MainWindow
+  class MenuEditorWindow
+  class MenuItemDialog
+  class "MenuItemDialog.Values" as MenuItemDialog_Values <<record>>
+  class MenuPdfExport
+  class NewProjectDialog
+  class ProjectSearchDialog
+  interface Prompter {
+    text(String, String, String) : Optional<String>
+    confirm(String) : boolean
+    message(Alert.AlertType, String, String) : void
+    rename(Folder, String, String) : Optional<String>
+    confirmDelete(List<ProjectNode>) : boolean
+    openFile(Window) : Optional<Path>
+    chooseDirectory(Window) : Optional<Path>
+    addItem(List<Product>, int) : Optional<MenuItemDialog.Values>
+    editItem(MenuItem) : Optional<MenuItemDialog.Values>
+    show(ShareDialog) : void
+    dialog(Dialog<T>) : Optional<T>
+  }
+  class "Prompter.Dialogs" as Prompter_Dialogs {
+    text(String, String, String) : Optional<String>
+    confirm(String) : boolean
+    message(Alert.AlertType, String, String) : void
+    rename(Folder, String, String) : Optional<String>
+    confirmDelete(List<ProjectNode>) : boolean
+    openFile(Window) : Optional<Path>
+    chooseDirectory(Window) : Optional<Path>
+    addItem(List<Product>, int) : Optional<MenuItemDialog.Values>
+    editItem(MenuItem) : Optional<MenuItemDialog.Values>
+    show(ShareDialog) : void
+  }
+  class QrCode
+  class ShareDialog
+  class Ui
+  class "Ui.FieldErrors" as Ui_FieldErrors
+  class UploadConflictDialog
+  class UsersWindow
+}
+package "presentation.web" {
+  class ExpiredLinkScheduler {
+    start() : void
+    stop() : void
+  }
+  class ManagerHandler {
+    handle(HttpExchange) : void
+  }
+  class ManagerPage
+  class "ManagerPage.MenuSummary" as ManagerPage_MenuSummary <<record>>
+  class MenuHandler {
+    handle(HttpExchange) : void
+  }
+  class MenuPage
+  class "MenuPage.Form" as MenuPage_Form <<record>>
+  class WebMain {
+    {static} main(String[]) : void
+  }
+  class WebServer {
+    start() : void
+    stop() : void
+    port() : int
+  }
+}
+class Allergen <<external>>
+class AppContext <<external>>
+class AuthService <<external>>
+class CatalogService <<external>>
+class Comment <<external>>
+class Customer <<external>>
+class CustomerService <<external>>
+class Folder <<external>>
+class Menu <<external>>
+class MenuEditor <<external>>
+class MenuItem <<external>>
+class MenuRevision <<external>>
+interface MenuRevisionListener <<external>>
+class MenuService <<external>>
+class Money <<external>>
+interface PriceStrategy <<external>>
+class Product <<external>>
+class Project <<external>>
+class ProjectNode <<external>>
+class ProjectService <<external>>
+class RevisionComparison <<external>>
+class RevisionComparison_Row <<external>>
+class Role <<external>>
+class SharingService <<external>>
+class User <<external>>
+class UserService <<external>>
+Prompter_Dialogs ..|> Prompter
+CatalogWindow --> Allergen
+CatalogWindow --> CatalogService
+CatalogWindow --> Product
+CatalogWindow --> Ui
+CatalogWindow --> Ui_FieldErrors
+CommentsWindow --> Comment
+CommentsWindow --> MenuEditorWindow
+CommentsWindow --> SharingService
+CommentsWindow --> User
+CompareRevisionsWindow --> AppContext
+CompareRevisionsWindow --> MenuRevision
+CompareRevisionsWindow --> PriceStrategy
+CompareRevisionsWindow --> RevisionComparison
+CompareRevisionsWindow --> RevisionComparison_Row
+CustomersWindow --> Customer
+CustomersWindow --> CustomerService
+CustomersWindow --> Ui
+CustomersWindow --> Ui_FieldErrors
+DesktopApp --> ExpiredLinkScheduler
+DesktopApp --> WebServer
+EditProjectDialog --> Project
+EditProjectDialog --> ProjectService
+EditProjectDialog --> Ui
+EditProjectDialog --> Ui_FieldErrors
+EditProjectDialog --> User
+ExpiredLinkScheduler --> SharingService
+LoginDialog --> AuthService
+MainWindow --> AppContext
+MainWindow --> CatalogWindow
+MainWindow --> CustomersWindow
+MainWindow --> Folder
+MainWindow --> MenuItem
+MainWindow --> Project
+MainWindow --> ProjectNode
+MainWindow --> User
+ManagerHandler --> AuthService
+ManagerHandler --> MenuService
+ManagerHandler --> ProjectService
+ManagerHandler --> SharingService
+ManagerPage --> PriceStrategy
+ManagerPage_MenuSummary --> MenuRevision
+MenuEditorWindow --> AppContext
+MenuEditorWindow --> Menu
+MenuEditorWindow --> MenuEditor
+MenuEditorWindow --> MenuRevision
+MenuEditorWindow --> MenuRevisionListener
+MenuEditorWindow --> User
+MenuHandler --> SharingService
+MenuItemDialog_Values --> Money
+MenuItemDialog_Values --> Product
+NewProjectDialog --> Customer
+NewProjectDialog --> Project
+NewProjectDialog --> ProjectService
+NewProjectDialog --> Ui
+NewProjectDialog --> Ui_FieldErrors
+NewProjectDialog --> User
+ProjectSearchDialog --> Project
+ProjectSearchDialog --> ProjectService
+ProjectSearchDialog --> Ui
+ProjectSearchDialog --> Ui_FieldErrors
+Ui --> Prompter
+UsersWindow --> Role
+UsersWindow --> Ui
+UsersWindow --> Ui_FieldErrors
+UsersWindow --> User
+UsersWindow --> UserService
+@enduml

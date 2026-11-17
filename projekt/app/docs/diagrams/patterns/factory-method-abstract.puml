@@ -1,0 +1,28 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+abstract class Creator {
+  +anOperation()
+  #factoryMethod() : Product
+}
+class ConcreteCreator {
+  #factoryMethod() : Product
+}
+interface Product
+class ConcreteProduct
+ConcreteCreator --|> Creator
+ConcreteProduct ..|> Product
+Creator ..> Product
+ConcreteCreator ..> ConcreteProduct : creates
+@enduml

@@ -1,0 +1,53 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class MenuEditorWindow <<Client>> {
+  -run(MenuEditCommand)
+}
+class MenuEditor <<Invoker>> {
+  -undoStack : Deque<MenuEditCommand>
+  +execute(MenuEditCommand)
+  +canUndo() : boolean
+  +undo() : String
+}
+interface MenuEditCommand <<Command>> {
+  +execute()
+  +undo()
+  +description() : String
+}
+class AddItemCommand <<ConcreteCommand>>
+class ChangeItemCommand <<ConcreteCommand>>
+class RemoveItemCommand <<ConcreteCommand>>
+class AddCategoryCommand <<ConcreteCommand>>
+class RemoveCategoryCommand <<ConcreteCommand>>
+class MenuRevision <<Receiver>> {
+  +addItem(...) : MenuItem
+  +removeItem(MenuCategory, MenuItem) : int
+  +addCategory(String) : MenuCategory
+  +removeCategory(MenuCategory) : int
+}
+MenuEditorWindow ..> AddItemCommand : creates
+MenuEditorWindow --> MenuEditor
+MenuEditor o--> "*" MenuEditCommand
+AddItemCommand ..|> MenuEditCommand
+ChangeItemCommand ..|> MenuEditCommand
+RemoveItemCommand ..|> MenuEditCommand
+AddCategoryCommand ..|> MenuEditCommand
+RemoveCategoryCommand ..|> MenuEditCommand
+AddItemCommand --> MenuRevision
+ChangeItemCommand --> MenuRevision
+RemoveItemCommand --> MenuRevision
+AddCategoryCommand --> MenuRevision
+RemoveCategoryCommand --> MenuRevision
+@enduml

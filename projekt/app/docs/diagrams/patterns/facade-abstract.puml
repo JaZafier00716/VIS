@@ -1,0 +1,26 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class Client
+class Facade {
+  +simpleOperation()
+}
+class SubsystemA
+class SubsystemB
+class SubsystemC
+Client --> Facade
+Facade --> SubsystemA
+Facade --> SubsystemB
+Facade --> SubsystemC
+@enduml

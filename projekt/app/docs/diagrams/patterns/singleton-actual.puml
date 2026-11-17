@@ -1,0 +1,30 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class Database <<Singleton>> {
+  -{static} instance : Database
+  -Database(String, String, String)
+  +{static} init(String, String, String) : Database
+  +{static} getInstance() : Database
+  +inTransaction(Supplier<T>) : T
+  +connection() : Connection
+}
+class Jdbc
+class OracleMenuMapper
+class DataAccessFactory
+Database --> Database : instance
+DataAccessFactory ..> Database : init(...)
+Jdbc ..> Database : getInstance()
+OracleMenuMapper ..> Database : getInstance()
+@enduml

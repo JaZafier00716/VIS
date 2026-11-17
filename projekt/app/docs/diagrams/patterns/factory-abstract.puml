@@ -1,0 +1,30 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class Client
+class Factory {
+  +createA() : ProductA
+  +createB() : ProductB
+}
+interface ProductA
+interface ProductB
+class ConcreteA
+class ConcreteB
+Client --> Factory
+Client --> ProductA
+Factory ..> ConcreteA : creates
+Factory ..> ConcreteB : creates
+ConcreteA ..|> ProductA
+ConcreteB ..|> ProductB
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class "Value Object" as VO <<immutable>> {
+  -value
+  +operation(VO) : VO
+  +equals(Object) : boolean
+  +hashCode() : int
+}
+@enduml

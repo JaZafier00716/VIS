@@ -1,0 +1,35 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class Project <<Domain object>>
+interface ProjectMapper <<mapper interface (port)>> {
+  +findAll() : List<Project>
+  +findById(long) : Optional<Project>
+  +insert(Project)
+  +update(Project)
+}
+class OracleProjectMapper <<Data Mapper>>
+class Jdbc <<JDBC helper>> {
+  {static} query(...)
+  {static} update(...)
+  {static} insert(...)
+}
+class Database <<connection>>
+class ProjectService
+ProjectService --> ProjectMapper
+OracleProjectMapper ..|> ProjectMapper
+OracleProjectMapper ..> Project : rows <-> objects
+OracleProjectMapper --> Jdbc
+Jdbc --> Database
+@enduml

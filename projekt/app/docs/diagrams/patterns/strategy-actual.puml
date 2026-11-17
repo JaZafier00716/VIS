@@ -1,0 +1,35 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class MenuItem <<Context>> {
+  +price(PriceStrategy) : Money
+}
+interface PriceStrategy <<Strategy>> {
+  +lineTotal(MenuItem) : Money
+  +label() : String
+  {static} WITHOUT_VAT : PriceStrategy
+  {static} WITH_VAT : PriceStrategy
+}
+class PriceWithoutVat <<ConcreteStrategyA>> {
+  +lineTotal(MenuItem) : Money
+}
+class PriceWithVat <<ConcreteStrategyB>> {
+  +lineTotal(MenuItem) : Money
+}
+class MenuEditorWindow <<chooses the strategy>>
+MenuItem ..> PriceStrategy : strategy.lineTotal(this)
+PriceWithoutVat ..|> PriceStrategy
+PriceWithVat ..|> PriceStrategy
+MenuEditorWindow ..> PriceStrategy
+@enduml

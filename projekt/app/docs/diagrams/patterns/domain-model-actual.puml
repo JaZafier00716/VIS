@@ -1,0 +1,38 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class MenuRevision <<Domain Model>> {
+  +validate()
+  +findProblems() : List<String>
+  +markShared()
+  +createWorkingCopy() : MenuRevision
+  +addItem(...) : MenuItem
+}
+class Project <<Domain Model>> {
+  +archive()
+  +reactivate()
+  +requireNotArchived()
+}
+class AccessPolicy <<Domain Model>> {
+  {static} +canUseDesktopWorker(User) : boolean
+  {static} +canUseAdminMode(User) : boolean
+}
+class MenuService {
+  +saveRevision(MenuRevision, String, User) : int
+}
+MenuRevision "1" o-- "*" MenuCategory
+MenuCategory "1" o-- "*" MenuItem
+MenuService ..> MenuRevision : delegates the rules
+MenuService ..> Project
+@enduml

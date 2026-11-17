@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="188px" preserveAspectRatio="none" style="width:473px;height:188px;" version="1.1" viewBox="0 0 473 188" width="473px" zoomAndPan="magnify"><defs/><g><!--MD5=[6754354365917abf8f1a56af1b7e344c]
+class Context--><rect fill="#FFFFFF" height="54.9819" id="Context" style="stroke: #444444; stroke-width: 1.5;" width="110" x="6" y="8"/><ellipse cx="36.75" cy="24" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M39.7188,29.6406 Q39.1406,29.9375 38.5,30.0781 Q37.8594,30.2344 37.1563,30.2344 Q34.6563,30.2344 33.3281,28.5938 Q32.0156,26.9375 32.0156,23.8125 Q32.0156,20.6875 33.3281,19.0313 Q34.6563,17.375 37.1563,17.375 Q37.8594,17.375 38.5,17.5313 Q39.1563,17.6875 39.7188,17.9844 L39.7188,20.7031 Q39.0938,20.125 38.5,19.8594 Q37.9063,19.5781 37.2813,19.5781 Q35.9375,19.5781 35.25,20.6563 Q34.5625,21.7188 34.5625,23.8125 Q34.5625,25.9063 35.25,26.9844 Q35.9375,28.0469 37.2813,28.0469 Q37.9063,28.0469 38.5,27.7813 Q39.0938,27.5 39.7188,26.9219 L39.7188,29.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="43" x="54.25" y="28.656">Context</text><line style="stroke: #444444; stroke-width: 1.5;" x1="7" x2="115" y1="40" y2="40"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="98" x="12" y="55.7589">+contextInterface()</text><!--MD5=[377953f0e8c8c0131a700fca43c84158]
+class Strategy--><rect fill="#FFFFFF" height="54.9819" id="Strategy" style="stroke: #444444; stroke-width: 1.5;" width="77" x="181.5" y="123"/><ellipse cx="196.5" cy="139" fill="#B4A7E5" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M192.4219,134.7656 L192.4219,132.6094 L199.8125,132.6094 L199.8125,134.7656 L197.3438,134.7656 L197.3438,142.8438 L199.8125,142.8438 L199.8125,145 L192.4219,145 L192.4219,142.8438 L194.8906,142.8438 L194.8906,134.7656 L192.4219,134.7656 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="45" x="210.5" y="143.656">Strategy</text><line style="stroke: #444444; stroke-width: 1.5;" x1="182.5" x2="257.5" y1="155" y2="155"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="64" x="187.5" y="170.7589">+algorithm()</text><!--MD5=[f7619b48b8694459c04eed7e4378fd59]
+class ConcreteStrategyA--><rect fill="#FFFFFF" height="54.9819" id="ConcreteStrategyA" style="stroke: #444444; stroke-width: 1.5;" width="138" x="151" y="8"/><ellipse cx="166" cy="24" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M168.9688,29.6406 Q168.3906,29.9375 167.75,30.0781 Q167.1094,30.2344 166.4063,30.2344 Q163.9063,30.2344 162.5781,28.5938 Q161.2656,26.9375 161.2656,23.8125 Q161.2656,20.6875 162.5781,19.0313 Q163.9063,17.375 166.4063,17.375 Q167.1094,17.375 167.75,17.5313 Q168.4063,17.6875 168.9688,17.9844 L168.9688,20.7031 Q168.3438,20.125 167.75,19.8594 Q167.1563,19.5781 166.5313,19.5781 Q165.1875,19.5781 164.5,20.6563 Q163.8125,21.7188 163.8125,23.8125 Q163.8125,25.9063 164.5,26.9844 Q165.1875,28.0469 166.5313,28.0469 Q167.1563,28.0469 167.75,27.7813 Q168.3438,27.5 168.9688,26.9219 L168.9688,29.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="106" x="180" y="28.656">ConcreteStrategyA</text><line style="stroke: #444444; stroke-width: 1.5;" x1="152" x2="288" y1="40" y2="40"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="64" x="157" y="55.7589">+algorithm()</text><!--MD5=[46ce5a71c42e69bc603a1b295a67d4da]
+class ConcreteStrategyB--><rect fill="#FFFFFF" height="54.9819" id="ConcreteStrategyB" style="stroke: #444444; stroke-width: 1.5;" width="138" x="324" y="8"/><ellipse cx="339" cy="24" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M341.9688,29.6406 Q341.3906,29.9375 340.75,30.0781 Q340.1094,30.2344 339.4063,30.2344 Q336.9063,30.2344 335.5781,28.5938 Q334.2656,26.9375 334.2656,23.8125 Q334.2656,20.6875 335.5781,19.0313 Q336.9063,17.375 339.4063,17.375 Q340.1094,17.375 340.75,17.5313 Q341.4063,17.6875 341.9688,17.9844 L341.9688,20.7031 Q341.3438,20.125 340.75,19.8594 Q340.1563,19.5781 339.5313,19.5781 Q338.1875,19.5781 337.5,20.6563 Q336.8125,21.7188 336.8125,23.8125 Q336.8125,25.9063 337.5,26.9844 Q338.1875,28.0469 339.5313,28.0469 Q340.1563,28.0469 340.75,27.7813 Q341.3438,27.5 341.9688,26.9219 L341.9688,29.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="106" x="353" y="28.656">ConcreteStrategyB</text><line style="stroke: #444444; stroke-width: 1.5;" x1="325" x2="461" y1="40" y2="40"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="64" x="330" y="55.7589">+algorithm()</text><!--MD5=[0a7be358f08202a33cfcf8e27bbb9c25]
+link Context to Strategy--><path d="M108.4635,70.2286 C108.4635,70.2286 152.18,101.3 171.96,115.36 " fill="none" id="Context-Strategy" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="182.59,122.91,177.5686,114.4374,178.5136,120.0147,172.9362,120.9597,182.59,122.91" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="178.5136" x2="171.995" y1="120.0147" y2="115.38"/><polygon fill="#FFFFFF" points="98.68,63.28,101.2555,70.0155,108.4635,70.2286,105.888,63.4932,98.68,63.28" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[672aed3ea2dae67a00922df48effe225]
+link ConcreteStrategyA to Strategy--><path d="M220,63.28 C220,75.1 220,89.35 220,102.83 " fill="none" id="ConcreteStrategyA-&gt;Strategy" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="227,102.91,220,122.91,213,102.91,227,102.91" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[0828a89a34d4de90c6add08553e88618]
+link ConcreteStrategyB to Strategy--><path d="M352,63.28 C329.14,78.21 300.34,97.02 275.49,113.26 " fill="none" id="ConcreteStrategyB-&gt;Strategy" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="279.2,119.19,258.63,124.27,271.54,107.47,279.2,119.19" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[cd9fea81b9421f052a2087b15f679a53]
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class Context {
+  +contextInterface()
+}
+interface Strategy {
+  +algorithm()
+}
+class ConcreteStrategyA {
+  +algorithm()
+}
+class ConcreteStrategyB {
+  +algorithm()
+}
+Context o- -> Strategy
+ConcreteStrategyA ..|> Strategy
+ConcreteStrategyB ..|> Strategy
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.13+9-1-deb13u2-Debian
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

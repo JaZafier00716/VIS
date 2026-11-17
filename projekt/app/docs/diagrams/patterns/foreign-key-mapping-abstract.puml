@@ -1,0 +1,28 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class A {
+  -b : B
+}
+class B
+class "table A" as TA <<table>> {
+  PK id
+  FK b_id
+}
+class "table B" as TB <<table>> {
+  PK id
+}
+A --> B
+TA --> TB : b_id
+@enduml

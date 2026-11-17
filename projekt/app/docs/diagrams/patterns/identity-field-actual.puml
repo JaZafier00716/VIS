@@ -1,0 +1,35 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+abstract class DomainObject {
+  -id : Long
+  +getId() : Long
+  +setId(Long)
+  +isNew() : boolean
+}
+class OracleProjectMapper {
+  +insert(Project)
+}
+class Jdbc {
+  insert(sql, idColumn, params...) : long
+}
+class projects <<table>> {
+  PK project_id
+}
+Project --|> DomainObject
+OracleProjectMapper ..> Project : setId(Jdbc.insert(...))
+OracleProjectMapper --> Jdbc
+Jdbc --> projects : reads generated key
+note bottom of Jdbc : MenuRevision has no id, its key is\n(menuId, revisionNo)
+@enduml

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="218px" preserveAspectRatio="none" style="width:328px;height:218px;" version="1.1" viewBox="0 0 328 218" width="328px" zoomAndPan="magnify"><defs/><g><!--MD5=[ed6624c6556d5e7b1bd23032162d20b7]
+class Client--><rect fill="#FFFFFF" height="32" id="Client" style="stroke: #444444; stroke-width: 1.5;" width="64" x="6" y="27"/><ellipse cx="21" cy="43" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M23.9688,48.6406 Q23.3906,48.9375 22.75,49.0781 Q22.1094,49.2344 21.4063,49.2344 Q18.9063,49.2344 17.5781,47.5938 Q16.2656,45.9375 16.2656,42.8125 Q16.2656,39.6875 17.5781,38.0313 Q18.9063,36.375 21.4063,36.375 Q22.1094,36.375 22.75,36.5313 Q23.4063,36.6875 23.9688,36.9844 L23.9688,39.7031 Q23.3438,39.125 22.75,38.8594 Q22.1563,38.5781 21.5313,38.5781 Q20.1875,38.5781 19.5,39.6563 Q18.8125,40.7188 18.8125,42.8125 Q18.8125,44.9063 19.5,45.9844 Q20.1875,47.0469 21.5313,47.0469 Q22.1563,47.0469 22.75,46.7813 Q23.3438,46.5 23.9688,45.9219 L23.9688,48.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="32" x="35" y="47.656">Client</text><!--MD5=[ae336da5efe52b168083e063e86251c2]
+class Base--><rect fill="#FFFFFF" height="69.9638" id="Base" style="stroke: #444444; stroke-width: 1.5;" width="110" x="87" y="138"/><ellipse cx="124.5" cy="154" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M127.4688,159.6406 Q126.8906,159.9375 126.25,160.0781 Q125.6094,160.2344 124.9063,160.2344 Q122.4063,160.2344 121.0781,158.5938 Q119.7656,156.9375 119.7656,153.8125 Q119.7656,150.6875 121.0781,149.0313 Q122.4063,147.375 124.9063,147.375 Q125.6094,147.375 126.25,147.5313 Q126.9063,147.6875 127.4688,147.9844 L127.4688,150.7031 Q126.8438,150.125 126.25,149.8594 Q125.6563,149.5781 125.0313,149.5781 Q123.6875,149.5781 123,150.6563 Q122.3125,151.7188 122.3125,153.8125 Q122.3125,155.9063 123,156.9844 Q123.6875,158.0469 125.0313,158.0469 Q125.6563,158.0469 126.25,157.7813 Q126.8438,157.5 127.4688,156.9219 L127.4688,159.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="28" x="143.5" y="158.656">Base</text><line style="stroke: #444444; stroke-width: 1.5;" x1="88" x2="196" y1="170" y2="170"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="98" x="93" y="185.7589">+isValid() : boolean</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="93" x="93" y="200.7408">+exists() : boolean</text><!--MD5=[dee2a96cae7c44147c97b3368d833822]
+class Normal--><rect fill="#FFFFFF" height="32" id="Normal" style="stroke: #444444; stroke-width: 1.5;" width="74" x="105" y="27"/><ellipse cx="120" cy="43" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M122.9688,48.6406 Q122.3906,48.9375 121.75,49.0781 Q121.1094,49.2344 120.4063,49.2344 Q117.9063,49.2344 116.5781,47.5938 Q115.2656,45.9375 115.2656,42.8125 Q115.2656,39.6875 116.5781,38.0313 Q117.9063,36.375 120.4063,36.375 Q121.1094,36.375 121.75,36.5313 Q122.4063,36.6875 122.9688,36.9844 L122.9688,39.7031 Q122.3438,39.125 121.75,38.8594 Q121.1563,38.5781 120.5313,38.5781 Q119.1875,38.5781 118.5,39.6563 Q117.8125,40.7188 117.8125,42.8125 Q117.8125,44.9063 118.5,45.9844 Q119.1875,47.0469 120.5313,47.0469 Q121.1563,47.0469 121.75,46.7813 Q122.3438,46.5 122.9688,45.9219 L122.9688,48.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="42" x="134" y="47.656">Normal</text><!--MD5=[ab379e9e493fa8e8da7f6ab346fb535e]
+class SC--><rect fill="#FFFFFF" height="69.9638" id="SC" style="stroke: #444444; stroke-width: 1.5;" width="103" x="214.5" y="8"/><ellipse cx="229.5" cy="24" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M232.4688,29.6406 Q231.8906,29.9375 231.25,30.0781 Q230.6094,30.2344 229.9063,30.2344 Q227.4063,30.2344 226.0781,28.5938 Q224.7656,26.9375 224.7656,23.8125 Q224.7656,20.6875 226.0781,19.0313 Q227.4063,17.375 229.9063,17.375 Q230.6094,17.375 231.25,17.5313 Q231.9063,17.6875 232.4688,17.9844 L232.4688,20.7031 Q231.8438,20.125 231.25,19.8594 Q230.6563,19.5781 230.0313,19.5781 Q228.6875,19.5781 228,20.6563 Q227.3125,21.7188 227.3125,23.8125 Q227.3125,25.9063 228,26.9844 Q228.6875,28.0469 230.0313,28.0469 Q230.6563,28.0469 231.25,27.7813 Q231.8438,27.5 232.4688,26.9219 L232.4688,29.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="71" x="243.5" y="28.656">Special Case</text><line style="stroke: #444444; stroke-width: 1.5;" x1="215.5" x2="316.5" y1="40" y2="40"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="79" x="220.5" y="55.7589">+isValid() : false</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="74" x="220.5" y="70.7408">+exists() : false</text><!--MD5=[763d6ea3424bd147cb564cada41e5767]
+link Client to Base--><path d="M50.34,59.19 C65.2,77.48 90.71,108.87 111.04,133.9 " fill="none" id="Client-&gt;Base" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="114.26,137.86,111.7102,128.3469,111.1157,133.9724,105.4901,133.3779,114.26,137.86" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[a5b52ed41703ee150929d5f10bb47053]
+link Normal to Base--><path d="M142,59.19 C142,73.71 142,96.51 142,117.81 " fill="none" id="Normal-&gt;Base" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="149,117.86,142,137.86,135,117.86,149,117.86" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[719214ca01dbcfbacc34dd61bd0725cf]
+link SC to Base--><path d="M232.77,78.3 C219.43,92.08 203.8,108.21 189.31,123.17 " fill="none" id="SC-&gt;Base" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="194.27,128.11,175.32,137.6,184.21,118.37,194.27,128.11" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[6c3f8f49d557db3c2a4a68ec6bac841b]
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class Client
+class Base {
+  +isValid() : boolean
+  +exists() : boolean
+}
+class Normal
+class "Special Case" as SC {
+  +isValid() : false
+  +exists() : false
+}
+Client - -> Base
+Normal - -|> Base
+SC - -|> Base
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.13+9-1-deb13u2-Debian
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

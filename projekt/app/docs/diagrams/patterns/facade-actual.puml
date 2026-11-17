@@ -1,0 +1,31 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class MenuEditorWindow <<Client>>
+class MenuService <<Facade>> {
+  +createMenu(Folder, String, User) : Menu
+  +openLatestRevision(long) : MenuRevision
+  +saveRevision(MenuRevision, String, User) : int
+  +compareRevisions(long, int, int) : RevisionComparison
+}
+class MenuRevision <<Subsystem>>
+interface MenuMapper <<Subsystem>>
+interface ProjectNodeMapper <<Subsystem>>
+interface TransactionRunner <<Subsystem>>
+MenuEditorWindow --> MenuService
+MenuService --> MenuRevision
+MenuService --> MenuMapper
+MenuService --> ProjectNodeMapper
+MenuService --> TransactionRunner
+@enduml

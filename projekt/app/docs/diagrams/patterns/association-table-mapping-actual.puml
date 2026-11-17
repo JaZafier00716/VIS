@@ -1,0 +1,37 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class User {
+  -roles : Set<Role>
+}
+enum Role
+class Product {
+  -allergens : List<Allergen>
+}
+class Allergen <<record>>
+class user_roles <<table>> {
+  FK user_id
+  role_code
+}
+class product_allergens <<table>> {
+  FK product_id
+  FK allergen_id
+}
+class OracleUserMapper
+class OracleProductMapper
+User "*" -- "*" Role
+Product "*" -- "*" Allergen
+OracleUserMapper ..> user_roles
+OracleProductMapper ..> product_allergens
+@enduml

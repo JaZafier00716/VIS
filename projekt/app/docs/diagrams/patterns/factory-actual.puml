@@ -1,0 +1,36 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class AppContext <<Client>>
+class DataAccessFactory <<Factory>> {
+  +transactions() : TransactionRunner
+  +userMapper() : UserMapper
+  +projectMapper() : ProjectMapper
+  +projectNodeMapper() : ProjectNodeMapper
+  +menuMapper() : MenuMapper
+  +shareLinkMapper() : ShareLinkMapper
+  +productMapper() : ProductMapper
+  +menuDocumentRenderer() : MenuDocumentRenderer
+  +documentStorage() : DocumentStorage
+}
+interface MenuMapper <<Product>>
+interface DocumentStorage <<Product>>
+class OracleMenuMapper <<ConcreteProduct>>
+class FileDocumentStorage <<ConcreteProduct>>
+AppContext --> DataAccessFactory
+DataAccessFactory ..> OracleMenuMapper : creates
+DataAccessFactory ..> FileDocumentStorage : creates
+OracleMenuMapper ..|> MenuMapper
+FileDocumentStorage ..|> DocumentStorage
+@enduml

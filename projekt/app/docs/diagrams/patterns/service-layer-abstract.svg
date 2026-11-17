@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="258px" preserveAspectRatio="none" style="width:240px;height:258px;" version="1.1" viewBox="0 0 240 258" width="240px" zoomAndPan="magnify"><defs/><g><!--MD5=[dbb7ba3d0d21354681a0e7a6e103d486]
+class Presentation--><rect fill="#FFFFFF" height="32" id="Presentation" style="stroke: #444444; stroke-width: 1.5;" width="103" x="74.5" y="8"/><ellipse cx="89.5" cy="24" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M92.4688,29.6406 Q91.8906,29.9375 91.25,30.0781 Q90.6094,30.2344 89.9063,30.2344 Q87.4063,30.2344 86.0781,28.5938 Q84.7656,26.9375 84.7656,23.8125 Q84.7656,20.6875 86.0781,19.0313 Q87.4063,17.375 89.9063,17.375 Q90.6094,17.375 91.25,17.5313 Q91.9063,17.6875 92.4688,17.9844 L92.4688,20.7031 Q91.8438,20.125 91.25,19.8594 Q90.6563,19.5781 90.0313,19.5781 Q88.6875,19.5781 88,20.6563 Q87.3125,21.7188 87.3125,23.8125 Q87.3125,25.9063 88,26.9844 Q88.6875,28.0469 90.0313,28.0469 Q90.6563,28.0469 91.25,27.7813 Q91.8438,27.5 92.4688,26.9219 L92.4688,29.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="71" x="103.5" y="28.656">Presentation</text><!--MD5=[e06a275f753604f6e5c15e8b96c0c30a]
+class SL--><rect fill="#FFFFFF" height="54.9819" id="SL" style="stroke: #444444; stroke-width: 1.5;" width="120" x="66" y="100"/><ellipse cx="86.85" cy="116" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M89.8188,121.6406 Q89.2406,121.9375 88.6,122.0781 Q87.9594,122.2344 87.2563,122.2344 Q84.7563,122.2344 83.4281,120.5938 Q82.1156,118.9375 82.1156,115.8125 Q82.1156,112.6875 83.4281,111.0313 Q84.7563,109.375 87.2563,109.375 Q87.9594,109.375 88.6,109.5313 Q89.2563,109.6875 89.8188,109.9844 L89.8188,112.7031 Q89.1938,112.125 88.6,111.8594 Q88.0063,111.5781 87.3813,111.5781 Q86.0375,111.5781 85.35,112.6563 Q84.6625,113.7188 84.6625,115.8125 Q84.6625,117.9063 85.35,118.9844 Q86.0375,120.0469 87.3813,120.0469 Q88.0063,120.0469 88.6,119.7813 Q89.1938,119.5 89.8188,118.9219 L89.8188,121.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="75" x="102.15" y="120.656">Service Layer</text><line style="stroke: #444444; stroke-width: 1.5;" x1="67" x2="185" y1="132" y2="132"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="108" x="72" y="147.7589">+useCaseOperation()</text><!--MD5=[0f565901def650a4b8c0802491169dd0]
+class DomainObject--><rect fill="#FFFFFF" height="32" id="DomainObject" style="stroke: #444444; stroke-width: 1.5;" width="112" x="6" y="215"/><ellipse cx="21" cy="231" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M23.9688,236.6406 Q23.3906,236.9375 22.75,237.0781 Q22.1094,237.2344 21.4063,237.2344 Q18.9063,237.2344 17.5781,235.5938 Q16.2656,233.9375 16.2656,230.8125 Q16.2656,227.6875 17.5781,226.0313 Q18.9063,224.375 21.4063,224.375 Q22.1094,224.375 22.75,224.5313 Q23.4063,224.6875 23.9688,224.9844 L23.9688,227.7031 Q23.3438,227.125 22.75,226.8594 Q22.1563,226.5781 21.5313,226.5781 Q20.1875,226.5781 19.5,227.6563 Q18.8125,228.7188 18.8125,230.8125 Q18.8125,232.9063 19.5,233.9844 Q20.1875,235.0469 21.5313,235.0469 Q22.1563,235.0469 22.75,234.7813 Q23.3438,234.5 23.9688,233.9219 L23.9688,236.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="80" x="35" y="235.656">DomainObject</text><!--MD5=[085457430d2356209d15d1291460c965]
+class Mapper--><rect fill="#FFFFFF" height="32" id="Mapper" style="stroke: #444444; stroke-width: 1.5;" width="76" x="153" y="215"/><ellipse cx="168" cy="231" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M170.9688,236.6406 Q170.3906,236.9375 169.75,237.0781 Q169.1094,237.2344 168.4063,237.2344 Q165.9063,237.2344 164.5781,235.5938 Q163.2656,233.9375 163.2656,230.8125 Q163.2656,227.6875 164.5781,226.0313 Q165.9063,224.375 168.4063,224.375 Q169.1094,224.375 169.75,224.5313 Q170.4063,224.6875 170.9688,224.9844 L170.9688,227.7031 Q170.3438,227.125 169.75,226.8594 Q169.1563,226.5781 168.5313,226.5781 Q167.1875,226.5781 166.5,227.6563 Q165.8125,228.7188 165.8125,230.8125 Q165.8125,232.9063 166.5,233.9844 Q167.1875,235.0469 168.5313,235.0469 Q169.1563,235.0469 169.75,234.7813 Q170.3438,234.5 170.9688,233.9219 L170.9688,236.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="44" x="182" y="235.656">Mapper</text><!--MD5=[cca321126bb11cab0b9a9a056eb6ebc9]
+link Presentation to SL--><path d="M126,40.42 C126,54.81 126,76.74 126,94.86 " fill="none" id="Presentation-&gt;SL" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="126,99.86,130,90.86,126,94.86,122,90.86,126,99.86" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[dde3478da62d786d0f0bed55aa806992]
+link SL to DomainObject--><path d="M109.18,155.17 C98.22,172.56 84.15,194.87 74.24,210.59 " fill="none" id="SL-&gt;DomainObject" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="71.56,214.84,79.7353,209.3478,74.2203,210.6064,72.9616,205.0914,71.56,214.84" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[36689078b0b96b3c757e2e91d8fa528e]
+link SL to Mapper--><path d="M143.08,155.17 C154.22,172.56 168.5,194.87 178.57,210.59 " fill="none" id="SL-&gt;Mapper" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="181.29,214.84,179.8029,205.1041,178.5927,210.6299,173.0668,209.4197,181.29,214.84" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[085553335cf11ecc83f155f3b918d8e6]
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class Presentation
+class "Service Layer" as SL {
+  +useCaseOperation()
+}
+class DomainObject
+class Mapper
+Presentation - -> SL
+SL - -> DomainObject
+SL - -> Mapper
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.13+9-1-deb13u2-Debian
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

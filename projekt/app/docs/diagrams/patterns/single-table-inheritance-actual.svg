@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="308px" preserveAspectRatio="none" style="width:609px;height:308px;" version="1.1" viewBox="0 0 609 308" width="609px" zoomAndPan="magnify"><defs/><g><!--MD5=[6be54bb9102c75bf2bc03973ee86ab0f]
+class ProjectNode--><rect fill="#FFFFFF" height="32" id="ProjectNode" style="stroke: #444444; stroke-width: 1.5;" width="97" x="105" y="219"/><ellipse cx="120" cy="235" fill="#A9DCDF" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M120.1094,230.3438 L118.9531,235.4219 L121.2813,235.4219 L120.1094,230.3438 Z M118.625,228.1094 L121.6094,228.1094 L124.9688,240.5 L122.5156,240.5 L121.75,237.4375 L118.4688,237.4375 L117.7188,240.5 L115.2813,240.5 L118.625,228.1094 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="65" x="134" y="239.656">ProjectNode</text><!--MD5=[d1dcc9c41ef051a777528f9336a950e3]
+class Folder--><rect fill="#FFFFFF" height="32" id="Folder" style="stroke: #444444; stroke-width: 1.5;" width="67" x="6" y="34.5"/><ellipse cx="21" cy="50.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M23.9688,56.1406 Q23.3906,56.4375 22.75,56.5781 Q22.1094,56.7344 21.4063,56.7344 Q18.9063,56.7344 17.5781,55.0938 Q16.2656,53.4375 16.2656,50.3125 Q16.2656,47.1875 17.5781,45.5313 Q18.9063,43.875 21.4063,43.875 Q22.1094,43.875 22.75,44.0313 Q23.4063,44.1875 23.9688,44.4844 L23.9688,47.2031 Q23.3438,46.625 22.75,46.3594 Q22.1563,46.0781 21.5313,46.0781 Q20.1875,46.0781 19.5,47.1563 Q18.8125,48.2188 18.8125,50.3125 Q18.8125,52.4063 19.5,53.4844 Q20.1875,54.5469 21.5313,54.5469 Q22.1563,54.5469 22.75,54.2813 Q23.3438,54 23.9688,53.4219 L23.9688,56.1406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="35" x="35" y="55.156">Folder</text><!--MD5=[59b530d44ae785dc18db921986a9c15c]
+class Document--><rect fill="#FFFFFF" height="32" id="Document" style="stroke: #444444; stroke-width: 1.5;" width="90" x="108.5" y="34.5"/><ellipse cx="123.5" cy="50.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M126.4688,56.1406 Q125.8906,56.4375 125.25,56.5781 Q124.6094,56.7344 123.9063,56.7344 Q121.4063,56.7344 120.0781,55.0938 Q118.7656,53.4375 118.7656,50.3125 Q118.7656,47.1875 120.0781,45.5313 Q121.4063,43.875 123.9063,43.875 Q124.6094,43.875 125.25,44.0313 Q125.9063,44.1875 126.4688,44.4844 L126.4688,47.2031 Q125.8438,46.625 125.25,46.3594 Q124.6563,46.0781 124.0313,46.0781 Q122.6875,46.0781 122,47.1563 Q121.3125,48.2188 121.3125,50.3125 Q121.3125,52.4063 122,53.4844 Q122.6875,54.5469 124.0313,54.5469 Q124.6563,54.5469 125.25,54.2813 Q125.8438,54 126.4688,53.4219 L126.4688,56.1406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="58" x="137.5" y="55.156">Document</text><!--MD5=[f0268dd29ee89052933f031546cb1cab]
+class Menu--><rect fill="#FFFFFF" height="32" id="Menu" style="stroke: #444444; stroke-width: 1.5;" width="64" x="233.5" y="34.5"/><ellipse cx="248.5" cy="50.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M251.4688,56.1406 Q250.8906,56.4375 250.25,56.5781 Q249.6094,56.7344 248.9063,56.7344 Q246.4063,56.7344 245.0781,55.0938 Q243.7656,53.4375 243.7656,50.3125 Q243.7656,47.1875 245.0781,45.5313 Q246.4063,43.875 248.9063,43.875 Q249.6094,43.875 250.25,44.0313 Q250.9063,44.1875 251.4688,44.4844 L251.4688,47.2031 Q250.8438,46.625 250.25,46.3594 Q249.6563,46.0781 249.0313,46.0781 Q247.6875,46.0781 247,47.1563 Q246.3125,48.2188 246.3125,50.3125 Q246.3125,52.4063 247,53.4844 Q247.6875,54.5469 249.0313,54.5469 Q249.6563,54.5469 250.25,54.2813 Q250.8438,54 251.4688,53.4219 L251.4688,56.1406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="32" x="262.5" y="55.156">Menu</text><!--MD5=[de506226be0f9afa42f67f70210fbb09]
+class project_nodes--><rect fill="#FFFFFF" height="125.5977" id="project_nodes" style="stroke: #444444; stroke-width: 1.5;" width="232" x="307.5" y="172"/><ellipse cx="380.25" cy="193.3441" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M383.2188,198.9847 Q382.6406,199.2816 382,199.4222 Q381.3594,199.5785 380.6563,199.5785 Q378.1563,199.5785 376.8281,197.9379 Q375.5156,196.2816 375.5156,193.1566 Q375.5156,190.0316 376.8281,188.3754 Q378.1563,186.7191 380.6563,186.7191 Q381.3594,186.7191 382,186.8754 Q382.6563,187.0316 383.2188,187.3285 L383.2188,190.0472 Q382.5938,189.4691 382,189.2035 Q381.4063,188.9222 380.7813,188.9222 Q379.4375,188.9222 378.75,190.0004 Q378.0625,191.0629 378.0625,193.1566 Q378.0625,195.2504 378.75,196.3285 Q379.4375,197.391 380.7813,197.391 Q381.4063,197.391 382,197.1254 Q382.5938,196.8441 383.2188,196.266 L383.2188,198.9847 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="39" x="420.25" y="189.8281">«table»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="78" x="400.75" y="206.1722">project_nodes</text><line style="stroke: #444444; stroke-width: 1.5;" x1="308.5" x2="538.5" y1="214.6882" y2="214.6882"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="59" x="313.5" y="230.4471">PK node_id</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="50" x="313.5" y="245.429">parent_id</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="220" x="313.5" y="260.4109">node_type : FOLDER / DOCUMENT / MENU</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="29" x="313.5" y="275.3928">name</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="195" x="313.5" y="290.3747">content_type, size_bytes, storage_key</text><!--MD5=[fd485782e8d9ccafc21fc4ad4d1a619d]
+class OracleProjectNodeMapper--><rect fill="#FFFFFF" height="84.9457" id="OracleProjectNodeMapper" style="stroke: #444444; stroke-width: 1.5;" width="182" x="332.5" y="8"/><ellipse cx="347.5" cy="24" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M350.4688,29.6406 Q349.8906,29.9375 349.25,30.0781 Q348.6094,30.2344 347.9063,30.2344 Q345.4063,30.2344 344.0781,28.5938 Q342.7656,26.9375 342.7656,23.8125 Q342.7656,20.6875 344.0781,19.0313 Q345.4063,17.375 347.9063,17.375 Q348.6094,17.375 349.25,17.5313 Q349.9063,17.6875 350.4688,17.9844 L350.4688,20.7031 Q349.8438,20.125 349.25,19.8594 Q348.6563,19.5781 348.0313,19.5781 Q346.6875,19.5781 346,20.6563 Q345.3125,21.7188 345.3125,23.8125 Q345.3125,25.9063 346,26.9844 Q346.6875,28.0469 348.0313,28.0469 Q348.6563,28.0469 349.25,27.7813 Q349.8438,27.5 350.4688,26.9219 L350.4688,29.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="150" x="361.5" y="28.656">OracleProjectNodeMapper</text><line style="stroke: #444444; stroke-width: 1.5;" x1="333.5" x2="513.5" y1="40" y2="40"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="125" x="338.5" y="55.7589">+loadTree(long) : Folder</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="107" x="338.5" y="70.7408">+insert(ProjectNode)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="68" x="338.5" y="85.7227">+delete(long)</text><!--MD5=[e00a2453d2275997178ee80ad4e61083]
+link Folder to ProjectNode--><path d="M49.02,66.75 C67.51,96.34 108.62,162.15 133.4,201.82 " fill="none" id="Folder-&gt;ProjectNode" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="139.42,198.25,144.08,218.93,127.55,205.67,139.42,198.25" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[685d8dc45771b5c7d78dfb1379498212]
+link Document to ProjectNode--><path d="M153.5,66.75 C153.5,95.6 153.5,158.88 153.5,198.8 " fill="none" id="Document-&gt;ProjectNode" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="160.5,198.93,153.5,218.93,146.5,198.93,160.5,198.93" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[7fd9ec83815e4076f3647c54c228118f]
+link Menu to ProjectNode--><path d="M256.14,66.75 C237.98,96.34 197.6,162.15 173.25,201.82 " fill="none" id="Menu-&gt;ProjectNode" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="179.18,205.54,162.75,218.93,167.25,198.22,179.18,205.54" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[ea001ec97fc3828c581fcd3abdbb57cb]
+link OracleProjectNodeMapper to project_nodes--><path d="M423.5,93.37 C423.5,115.08 423.5,142.13 423.5,166.69 " fill="none" id="OracleProjectNodeMapper-&gt;project_nodes" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="423.5,171.89,427.5,162.89,423.5,166.89,419.5,162.89,423.5,171.89" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="173" x="424.5" y="137.897">node_type picks the subclass</text><!--MD5=[306e7b84ab6b21af814ddff0ed098668]
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+abstract class ProjectNode
+class Folder
+class Document
+class Menu
+class project_nodes <<table>> {
+  PK node_id
+  parent_id
+  node_type : FOLDER / DOCUMENT / MENU
+  name
+  content_type, size_bytes, storage_key
+}
+class OracleProjectNodeMapper {
+  +loadTree(long) : Folder
+  +insert(ProjectNode)
+  +delete(long)
+}
+Folder - -|> ProjectNode
+Document - -|> ProjectNode
+Menu - -|> ProjectNode
+OracleProjectNodeMapper ..> project_nodes : node_type picks the subclass
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.13+9-1-deb13u2-Debian
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

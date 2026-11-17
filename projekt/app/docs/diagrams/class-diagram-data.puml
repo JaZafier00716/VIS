@@ -1,0 +1,145 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+  BackgroundColor<<external>> #EEEEEE
+  BorderColor<<external>> #999999
+}
+
+left to right direction
+hide empty members
+
+package "data" {
+  class DataAccessFactory {
+    transactions() : TransactionRunner
+    userMapper() : UserMapper
+    customerMapper() : CustomerMapper
+    projectMapper() : ProjectMapper
+    projectNodeMapper() : ProjectNodeMapper
+    menuMapper() : MenuMapper
+    shareLinkMapper() : ShareLinkMapper
+    productMapper() : ProductMapper
+    menuDocumentRenderer() : MenuDocumentRenderer
+    documentStorage() : DocumentStorage
+  }
+}
+package "data.file" {
+  class FileDocumentStorage {
+    store(String, Path) : void
+    retrieve(String, Path) : void
+    delete(String) : void
+    exists(String) : boolean
+  }
+  class InMemoryDocumentStorage {
+    store(String, Path) : void
+    retrieve(String, Path) : void
+    delete(String) : void
+    exists(String) : boolean
+    content(String) : byte[]
+    size() : int
+  }
+  class PdfMenuRenderer {
+    render(MenuRevision, String, int, PriceStrategy, Path) : void
+  }
+}
+package "data.oracle" {
+  class DataAccessException
+  class Database {
+    {static} init(String, String, String) : Database
+    {static} getInstance() : Database
+    inTransaction(Supplier<T>) : T
+    connection() : Connection
+  }
+  class Jdbc
+  interface "Jdbc.RowMapper" as Jdbc_RowMapper {
+    map(ResultSet) : T
+  }
+  class OracleCustomerMapper {
+    findAll() : List<Customer>
+    findById(long) : Optional<Customer>
+    insert(Customer) : void
+    update(Customer) : void
+    delete(long) : void
+    countProjects(long) : int
+  }
+  class OracleMenuMapper {
+    insertMenu(Menu, long) : void
+    findRevisionHeaders(long) : List<MenuRevision>
+    findLatestHeader(long) : Optional<MenuRevision>
+    findRevision(long, int) : Optional<MenuRevision>
+    insertRevision(MenuRevision) : void
+    overwriteRevision(MenuRevision) : boolean
+    markShared(long, int, LocalDateTime) : boolean
+    findComments(long, int) : List<Comment>
+    findComment(long) : Optional<Comment>
+    insertComment(Comment) : void
+    updateResolution(Comment) : boolean
+    findGuestCount(long) : int
+    findProjectId(long) : long
+    findTitle(long) : String
+  }
+  class OracleProductMapper {
+    findAll() : List<Product>
+    findAllergens() : List<Allergen>
+    insert(Product) : void
+    update(Product) : void
+    delete(long) : void
+    isUsed(long) : boolean
+    loadPhoto(long) : byte[]
+    findPriceHistory(long) : List<PriceChange>
+  }
+  class OracleProjectMapper {
+    findAll() : List<Project>
+    findBySupervisor(long) : List<Project>
+    findById(long) : Optional<Project>
+    insert(Project) : void
+    update(Project) : void
+    search(String, LocalDate, LocalDate, boolean) : List<Project>
+  }
+  class OracleProjectNodeMapper {
+    loadTree(long) : Folder
+    insert(ProjectNode) : void
+    delete(ProjectNode) : void
+  }
+  class OracleShareLinkMapper {
+    findByToken(String) : Optional<ShareLink>
+    findByMenu(long) : List<ShareLink>
+    findActive() : List<ShareLink>
+    insert(ShareLink) : void
+    update(ShareLink) : void
+  }
+  class OracleUserMapper {
+    findAll() : List<User>
+    findById(long) : Optional<User>
+    findByUsername(String) : Optional<User>
+    insert(User) : void
+    update(User) : void
+  }
+}
+interface CustomerMapper <<external>>
+interface DocumentStorage <<external>>
+interface MenuDocumentRenderer <<external>>
+interface MenuMapper <<external>>
+interface ProductMapper <<external>>
+interface ProjectMapper <<external>>
+interface ProjectNodeMapper <<external>>
+interface ShareLinkMapper <<external>>
+interface TransactionRunner <<external>>
+interface UserMapper <<external>>
+FileDocumentStorage ..|> DocumentStorage
+InMemoryDocumentStorage ..|> DocumentStorage
+PdfMenuRenderer ..|> MenuDocumentRenderer
+Database ..|> TransactionRunner
+OracleCustomerMapper ..|> CustomerMapper
+OracleMenuMapper ..|> MenuMapper
+OracleProductMapper ..|> ProductMapper
+OracleProjectMapper ..|> ProjectMapper
+OracleProjectNodeMapper ..|> ProjectNodeMapper
+OracleShareLinkMapper ..|> ShareLinkMapper
+OracleUserMapper ..|> UserMapper
+DataAccessFactory --> Database
+@enduml

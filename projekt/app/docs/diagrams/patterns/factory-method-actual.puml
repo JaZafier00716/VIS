@@ -1,0 +1,40 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+abstract class NodeCreator <<Creator>> {
+  +createIn(Folder, String) : ProjectNode
+  #createNode(String) : ProjectNode
+}
+class "NodeCreator.FolderCreator" as FolderCreator <<ConcreteCreator>>
+class "NodeCreator.MenuCreator" as MenuCreator <<ConcreteCreator>>
+class "NodeCreator.DocumentCreator" as DocumentCreator <<ConcreteCreator>>
+abstract class ProjectNode <<Product>>
+class Folder <<ConcreteProduct>>
+class Menu <<ConcreteProduct>>
+class Document <<ConcreteProduct>>
+class DocumentService <<Client>>
+class MenuService <<Client>>
+FolderCreator --|> NodeCreator
+MenuCreator --|> NodeCreator
+DocumentCreator --|> NodeCreator
+NodeCreator ..> ProjectNode
+FolderCreator ..> Folder
+MenuCreator ..> Menu
+DocumentCreator ..> Document
+Folder --|> ProjectNode
+Menu --|> ProjectNode
+Document --|> ProjectNode
+DocumentService ..> NodeCreator
+MenuService ..> NodeCreator
+@enduml
