@@ -24,3 +24,6 @@ Thumbs.db
 *.fdb_latexmk
 *.lof
 *.lot
+
+# private local setup notes with test passwords
+LOCAL-DEV.md
