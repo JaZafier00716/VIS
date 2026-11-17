@@ -61,7 +61,7 @@ Plain tree (same content):
 |---|---|
 | VIS guiderails | `VIS/projekt/guiderails.md` (digest: `REQ-VIS.md`) |
 | Lab slides | `VIS/presentations/VIS_cv02.pdf` … `VIS_cv07.pdf` |
-| TDS assignment PDF | `VIS/projekt/Semestrální projekt TDS I.pdf` (digest: `REQ-TDS.md`) |
+| TDS assignment PDF | `TDS/Semestrální projekt TDS I.pdf` (digest: `REQ-TDS.md`) |
 | A1 Vision | `VIS/projekt/docs/artefacts/a1-vize.tex` |
 | A2 functional spec (UCs) | `VIS/projekt/docs/artefacts/a2-funkcni-specifikace.tex` |
 | A3 technical spec | `VIS/projekt/docs/artefacts/a3-technicka-specifikace.tex` |

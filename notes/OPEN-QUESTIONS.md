@@ -44,6 +44,6 @@ Single source of truth for anything John still has to decide or check. Remove an
     used by the A3 model and the W1 web sketch.
 11. **Seed share links are mostly expired** (revisions dated 8–40 days ago, links valid 14 days):
     good for the UC11 alternative flow, but create a fresh link for the main-flow demo.
-12. **TDS PDF** is still in `VIS/projekt/`; move it to `TDS/`? (`TDS/README.md` would need its path
+12. ~~TDS PDF location~~ John 2026-11-17: moved to `TDS/` (old VIS copy deleted).
     updated.)
-13. The TDS PDF states no deadlines or grading – ask the TDS teacher.
+13. TDS hand-in format: the assignment PDF is all John has; it names no format or deadline. Hand in the scripts `TDS/db/01–04`, the design notes and `TDS/model` (`catering.dmd` + folder, `Logical.pdf`, `relational.pdf`) as the teacher asks. Still ask the teacher for the deadline.
