@@ -10,6 +10,10 @@ trap 'rm -rf "$STAGE"' EXIT
 
 mkdir -p "$STAGE/$NAME/config" "$STAGE/$NAME/db" "$OUT"
 cp -r app/src app/pom.xml "$STAGE/$NAME/"
+cp app/README.md "$STAGE/$NAME/"
+mkdir -p "$STAGE/$NAME/docs" "$STAGE/$NAME/tools"
+cp -r app/docs/diagrams "$STAGE/$NAME/docs/"
+cp app/tools/class-diagram.py "$STAGE/$NAME/tools/"
 cp app/config/db.properties.example "$STAGE/$NAME/config/"
 cp ../../TDS/db/01_schema.sql ../../TDS/db/02_seed.sql "$STAGE/$NAME/db/"
 

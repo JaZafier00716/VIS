@@ -59,7 +59,7 @@ flock $SP/db.lock flock $SP/mvn.lock env DISPLAY=:1 $M -q -B -f $POM test -Dtest
 ```
 Never run `mvn clean` (other groups compile in the same `target/`). Lock order is always db.lock then mvn.lock.
 The local Oracle DB is shared: `export DOCKER_CONTEXT=desktop-linux`; sqlplus:
-`docker exec -i vis-oracle sqlplus -s CATERING/***REMOVED***@//localhost:1521/FREEPDB1`. Read-only SELECTs need no
+`docker exec -i vis-oracle sqlplus -s CATERING/<CATERING password>@//localhost:1521/FREEPDB1`. Read-only SELECTs need no
 lock. Any DB-changing action holds `flock $SP/db.lock <command>` and must leave the DB at seed. Seed check (read-only):
 ```sql
 SELECT (SELECT COUNT(*) FROM users) u, (SELECT COUNT(*) FROM projects) p, (SELECT COUNT(*) FROM project_nodes) n,
@@ -69,7 +69,7 @@ SELECT (SELECT COUNT(*) FROM users) u, (SELECT COUNT(*) FROM projects) p, (SELEC
 ```
 If unsure, rebuild under the lock:
 ```bash
-flock $SP/db.lock bash -c 'cd /home/jan/Documents/VSB/tretak/TDS/db && for f in 01_schema.sql 02_seed.sql 03_checks.sql; do docker cp "$f" vis-oracle:/tmp/; done && printf "@/tmp/01_schema.sql\n@/tmp/02_seed.sql\n@/tmp/03_checks.sql\nexit\n" | docker exec -i vis-oracle sqlplus -S CATERING/***REMOVED***@//localhost:1521/FREEPDB1'
+flock $SP/db.lock bash -c 'cd /home/jan/Documents/VSB/tretak/TDS/db && for f in 01_schema.sql 02_seed.sql 03_checks.sql; do docker cp "$f" vis-oracle:/tmp/; done && printf "@/tmp/01_schema.sql\n@/tmp/02_seed.sql\n@/tmp/03_checks.sql\nexit\n" | docker exec -i vis-oracle sqlplus -S CATERING/<CATERING password>@//localhost:1521/FREEPDB1'
 ```
 If the DB is down (ORA-12514/01109): `systemctl --user start docker-desktop`, `docker start vis-oracle`, wait for
 "DATABASE IS READY TO USE!" in `docker logs vis-oracle`.

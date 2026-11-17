@@ -1,6 +1,6 @@
 # TDS requirements digest
 
-Condensed from `VIS/projekt/Semestrální projekt TDS I.pdf` ("Semestrální projekt TDS I.", Oracle
+Condensed from `TDS/Semestrální projekt TDS I.pdf` ("Semestrální projekt TDS I.", Oracle
 Academy Database Design & Programming with SQL). The PDF gives no deadlines or grading.
 
 ## General
