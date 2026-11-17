@@ -172,3 +172,4 @@ Single source of truth for progress. Last update: 2026-11-13 (implementation ses
 
 Deadlines: **A5–A7 due 05.12.2026 23:59** to martin.radvansky1@vsb.cz, one file per artefact plus one
 final PDF with all artefacts (cv08 p.26).
+- 2026-11-17: `cv3` is a plain folder in the VIS repo (commit `78a543b`). Its own git history is backed up in `../cv3-git-backup-2026-11-17.bundle` and `../cv3-dotgit-original-2026-11-17`. The VIS history was also cleaned of backups, hand-in and `.idea` (force-push `db0eb94`, `.git` 97 MB → 79 MB; backup `../VIS-backup-2026-11-17b.bundle`).
