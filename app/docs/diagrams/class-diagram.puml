@@ -1,0 +1,280 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+  BackgroundColor<<external>> #EEEEEE
+  BorderColor<<external>> #999999
+}
+
+left to right direction
+hide members
+hide empty members
+skinparam ArrowColor #666666
+
+package "presentation layer" <<Rectangle>> {
+package "presentation.desktop" {
+  class CatalogWindow
+  class CommentsWindow
+  class CompareRevisionsWindow
+  class CustomersWindow
+  class DeleteDialog
+  class DesktopApp
+  class EditProjectDialog
+  class LoginDialog
+  class MainWindow
+  class MenuEditorWindow
+  class MenuItemDialog
+  class "MenuItemDialog.Values" as MenuItemDialog_Values <<record>>
+  class MenuPdfExport
+  class NewProjectDialog
+  class ProjectSearchDialog
+  interface Prompter
+  class "Prompter.Dialogs" as Prompter_Dialogs
+  class QrCode
+  class ShareDialog
+  class Ui
+  class "Ui.FieldErrors" as Ui_FieldErrors
+  class UploadConflictDialog
+  class UsersWindow
+}
+package "presentation.web" {
+  class ExpiredLinkScheduler
+  class ManagerHandler
+  class ManagerPage
+  class "ManagerPage.MenuSummary" as ManagerPage_MenuSummary <<record>>
+  class MenuHandler
+  class MenuPage
+  class "MenuPage.Form" as MenuPage_Form <<record>>
+  class WebMain
+  class WebServer
+}
+}
+package "business layer" <<Rectangle>> {
+package "business.command" {
+  class AddCategoryCommand
+  class AddItemCommand
+  class ChangeItemCommand
+  interface MenuEditCommand
+  class MenuEditor
+  class RemoveCategoryCommand
+  class RemoveItemCommand
+}
+package "business.domain" {
+  class AccessPolicy
+  class Allergen <<record>>
+  class Comment
+  class ConflictException
+  class Customer
+  class Document
+  abstract class DomainObject
+  class DuplicateNameException
+  class Folder
+  class Menu
+  class MenuCategory
+  class MenuItem
+  class MenuRevision
+  interface MenuRevisionListener
+  class Money
+  abstract class NodeCreator
+  class "NodeCreator.FolderCreator" as NodeCreator_FolderCreator
+  class "NodeCreator.MenuCreator" as NodeCreator_MenuCreator
+  class "NodeCreator.DocumentCreator" as NodeCreator_DocumentCreator
+  enum NodeType
+  class PasswordHasher
+  class PriceChange <<record>>
+  class Product
+  class Project
+  abstract class ProjectNode
+  enum ProjectStatus
+  class RevisionComparison
+  enum "RevisionComparison.Status" as RevisionComparison_Status
+  class "RevisionComparison.Row" as RevisionComparison_Row <<record>>
+  enum RevisionState
+  enum Role
+  class ShareLink
+  class UnknownShareLink
+  class User
+  class ValidationException
+}
+package "business.port" {
+  interface CustomerMapper
+  interface DocumentStorage
+  interface MenuDocumentRenderer
+  interface MenuMapper
+  interface ProductMapper
+  interface ProjectMapper
+  interface ProjectNodeMapper
+  interface ShareLinkMapper
+  interface TransactionRunner
+  interface UserMapper
+}
+package "business.pricing" {
+  interface PriceStrategy
+  class PriceWithVat
+  class PriceWithoutVat
+}
+package "business.service" {
+  class AuthService
+  class CatalogService
+  class CustomerService
+  class DocumentService
+  class LinkNotValidException
+  class MenuExportService
+  class MenuService
+  class ProjectService
+  class SharedMenuView <<record>>
+  enum "SharedMenuView.Status" as SharedMenuView_Status
+  class SharingService
+  class UserService
+}
+}
+package "data layer" <<Rectangle>> {
+package "data" {
+  class DataAccessFactory
+}
+package "data.file" {
+  class FileDocumentStorage
+  class InMemoryDocumentStorage
+  class PdfMenuRenderer
+}
+package "data.oracle" {
+  class DataAccessException
+  class Database
+  class Jdbc
+  interface "Jdbc.RowMapper" as Jdbc_RowMapper
+  class OracleCustomerMapper
+  class OracleMenuMapper
+  class OracleProductMapper
+  class OracleProjectMapper
+  class OracleProjectNodeMapper
+  class OracleShareLinkMapper
+  class OracleUserMapper
+}
+}
+package "root" {
+  class AppContext
+}
+note right of AppContext : composition root, creates and wires\nall services, mappers and the storage
+AddCategoryCommand ..|> MenuEditCommand
+AddItemCommand ..|> MenuEditCommand
+ChangeItemCommand ..|> MenuEditCommand
+RemoveCategoryCommand ..|> MenuEditCommand
+RemoveItemCommand ..|> MenuEditCommand
+Comment --|> DomainObject
+Customer --|> DomainObject
+Document --|> ProjectNode
+DuplicateNameException --|> ValidationException
+Folder --|> ProjectNode
+Menu --|> ProjectNode
+MenuCategory --|> DomainObject
+NodeCreator_FolderCreator --|> NodeCreator
+NodeCreator_MenuCreator --|> NodeCreator
+NodeCreator_DocumentCreator --|> NodeCreator
+Product --|> DomainObject
+Project --|> DomainObject
+ProjectNode --|> DomainObject
+ShareLink --|> DomainObject
+UnknownShareLink --|> ShareLink
+User --|> DomainObject
+PriceWithVat ..|> PriceStrategy
+PriceWithoutVat ..|> PriceStrategy
+FileDocumentStorage ..|> DocumentStorage
+InMemoryDocumentStorage ..|> DocumentStorage
+PdfMenuRenderer ..|> MenuDocumentRenderer
+Database ..|> TransactionRunner
+OracleCustomerMapper ..|> CustomerMapper
+OracleMenuMapper ..|> MenuMapper
+OracleProductMapper ..|> ProductMapper
+OracleProjectMapper ..|> ProjectMapper
+OracleProjectNodeMapper ..|> ProjectNodeMapper
+OracleShareLinkMapper ..|> ShareLinkMapper
+OracleUserMapper ..|> UserMapper
+Prompter_Dialogs ..|> Prompter
+AuthService --> TransactionRunner
+AuthService --> UserMapper
+CatalogService --> ProductMapper
+CatalogService --> TransactionRunner
+CatalogWindow --> CatalogService
+CatalogWindow --> Ui
+CatalogWindow --> Ui_FieldErrors
+CommentsWindow --> MenuEditorWindow
+CommentsWindow --> SharingService
+CompareRevisionsWindow --> PriceStrategy
+CustomerService --> CustomerMapper
+CustomerService --> TransactionRunner
+CustomersWindow --> CustomerService
+CustomersWindow --> Ui
+CustomersWindow --> Ui_FieldErrors
+DataAccessFactory --> Database
+DesktopApp --> ExpiredLinkScheduler
+DesktopApp --> WebServer
+DocumentService --> DocumentStorage
+DocumentService --> ProjectMapper
+DocumentService --> ProjectNodeMapper
+DocumentService --> TransactionRunner
+EditProjectDialog --> ProjectService
+EditProjectDialog --> Ui
+EditProjectDialog --> Ui_FieldErrors
+ExpiredLinkScheduler --> SharingService
+LoginDialog --> AuthService
+MainWindow --> CatalogWindow
+MainWindow --> CustomersWindow
+ManagerHandler --> AuthService
+ManagerHandler --> MenuService
+ManagerHandler --> ProjectService
+ManagerHandler --> SharingService
+ManagerPage --> PriceStrategy
+MenuCategory --> MenuItem
+MenuEditor --> MenuEditCommand
+MenuEditorWindow --> MenuEditor
+MenuExportService --> DocumentService
+MenuExportService --> MenuDocumentRenderer
+MenuExportService --> MenuService
+MenuHandler --> SharingService
+MenuItem --> Money
+MenuItem --> Product
+MenuRevision --> Comment
+MenuRevision --> MenuCategory
+MenuRevision --> MenuRevisionListener
+MenuRevision --> RevisionState
+MenuService --> MenuMapper
+MenuService --> ProductMapper
+MenuService --> ProjectMapper
+MenuService --> ProjectNodeMapper
+MenuService --> TransactionRunner
+NewProjectDialog --> ProjectService
+NewProjectDialog --> Ui
+NewProjectDialog --> Ui_FieldErrors
+PriceChange --> Money
+Product --> Allergen
+Product --> Money
+Project --> Customer
+Project --> Folder
+Project --> ProjectStatus
+ProjectSearchDialog --> ProjectService
+ProjectSearchDialog --> Ui
+ProjectSearchDialog --> Ui_FieldErrors
+ProjectService --> CustomerMapper
+ProjectService --> ProjectMapper
+ProjectService --> ProjectNodeMapper
+ProjectService --> TransactionRunner
+RevisionComparison --> MenuRevision
+RevisionComparison --> RevisionComparison_Row
+RevisionComparison_Row --> MenuItem
+RevisionComparison_Row --> Product
+SharingService --> MenuMapper
+SharingService --> ProjectMapper
+SharingService --> ShareLinkMapper
+SharingService --> TransactionRunner
+Ui --> Prompter
+User --> Role
+UserService --> TransactionRunner
+UserService --> UserMapper
+UsersWindow --> Ui
+UsersWindow --> Ui_FieldErrors
+UsersWindow --> UserService
+@enduml

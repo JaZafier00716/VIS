@@ -1,0 +1,474 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+  BackgroundColor<<external>> #EEEEEE
+  BorderColor<<external>> #999999
+}
+
+left to right direction
+hide empty members
+
+package "business.command" {
+  class AddCategoryCommand {
+    execute() : void
+    undo() : void
+    description() : String
+  }
+  class AddItemCommand {
+    execute() : void
+    undo() : void
+    description() : String
+  }
+  class ChangeItemCommand {
+    execute() : void
+    undo() : void
+    description() : String
+  }
+  interface MenuEditCommand {
+    execute() : void
+    undo() : void
+    description() : String
+  }
+  class MenuEditor {
+    execute(MenuEditCommand) : void
+    canUndo() : boolean
+    undo() : String
+  }
+  class RemoveCategoryCommand {
+    execute() : void
+    undo() : void
+    description() : String
+  }
+  class RemoveItemCommand {
+    execute() : void
+    undo() : void
+    description() : String
+  }
+}
+package "business.domain" {
+  class AccessPolicy {
+    {static} canUseDesktopWorker(User) : boolean
+    {static} canUseAdminMode(User) : boolean
+    {static} canUseManagerWeb(User) : boolean
+    {static} canLoginToDesktop(User) : boolean
+    {static} requireWorker(User) : void
+    {static} requireManager(User) : void
+  }
+  class Allergen <<record>> {
+    toString() : String
+  }
+  class Comment {
+    {static} create(long, int, Long, Long, String, String, LocalDateTime) : Comment
+    resolve(long, String, LocalDateTime) : void
+  }
+  class ConflictException
+  class Customer {
+    {static} create(String, String, String, String, String) : Customer
+    update(String, String, String, String, String) : void
+    displayName() : String
+    toString() : String
+  }
+  class Document {
+    {static} checkSize(long) : void
+    type() : NodeType
+    countDocuments() : int
+    formattedSize() : String
+  }
+  abstract class DomainObject
+  class DuplicateNameException
+  class Folder {
+    type() : NodeType
+    countDocuments() : int
+    add(ProjectNode) : void
+    remove(ProjectNode) : void
+    containsName(String) : boolean
+    suggestFreeName(String) : String
+    find(long) : Optional<ProjectNode>
+  }
+  class Menu {
+    type() : NodeType
+    countDocuments() : int
+    hasActiveShareLink() : boolean
+  }
+  class MenuCategory {
+    subtotal(PriceStrategy) : Money
+    findItem(long) : Optional<MenuItem>
+    loadItem(MenuItem) : void
+  }
+  class MenuItem {
+    price(PriceStrategy) : Money
+    copy() : MenuItem
+  }
+  class MenuRevision {
+    {static} first(long) : MenuRevision
+    addCategory(String) : MenuCategory
+    insertCategory(int, MenuCategory) : void
+    removeCategory(MenuCategory) : int
+    addItem(MenuCategory, Product, BigDecimal, Money, String) : MenuItem
+    insertItem(MenuCategory, int, MenuItem) : void
+    changeItem(MenuItem, BigDecimal, Money, String) : void
+    removeItem(MenuCategory, MenuItem) : int
+    markHistorical(int) : void
+    totalPrice(PriceStrategy) : Money
+    pricePerGuest(PriceStrategy, int) : Money
+    findProblems() : List<String>
+    validate() : void
+    createWorkingCopy() : MenuRevision
+    markShared() : void
+    recordSave(String, long, LocalDateTime) : void
+    snapshotForSave(String, long, LocalDateTime) : MenuRevision
+    markStored() : void
+    areCommentsLoaded() : boolean
+    addListener(MenuRevisionListener) : void
+    removeListener(MenuRevisionListener) : void
+    loadCategory(MenuCategory) : void
+    toString() : String
+  }
+  interface MenuRevisionListener {
+    revisionChanged(MenuRevision) : void
+  }
+  class Money {
+    {static} of(BigDecimal) : Money
+    {static} of(String) : Money
+    {static} of(long) : Money
+    amount() : BigDecimal
+    plus(Money) : Money
+    minus(Money) : Money
+    times(BigDecimal) : Money
+    dividedBy(int) : Money
+    format() : String
+    compareTo(Money) : int
+    equals(Object) : boolean
+    hashCode() : int
+    toString() : String
+  }
+  abstract class NodeCreator {
+    createIn(Folder, String) : ProjectNode
+  }
+  class "NodeCreator.FolderCreator" as NodeCreator_FolderCreator
+  class "NodeCreator.MenuCreator" as NodeCreator_MenuCreator
+  class "NodeCreator.DocumentCreator" as NodeCreator_DocumentCreator
+  enum NodeType
+  class PasswordHasher {
+    {static} hash(String) : String
+    {static} hash(String, byte[], int) : String
+    {static} matches(String, String) : boolean
+    {static} main(String[]) : void
+  }
+  class PriceChange <<record>>
+  class Product {
+    {static} create(String, String, String, BigDecimal, BigDecimal, List<Allergen>, byte[]) : Product
+    update(String, String, String, BigDecimal, BigDecimal, List<Allergen>, byte[]) : void
+    toString() : String
+  }
+  class Project {
+    {static} create(String, Customer, LocalDate, String, Integer, long, LocalDate) : Project
+    update(String, LocalDate, String, Integer, String, LocalDate) : void
+    archive() : void
+    reactivate() : void
+    requireNotArchived() : void
+    toString() : String
+  }
+  abstract class ProjectNode {
+    type() : NodeType
+    countDocuments() : int
+    path() : String
+    toString() : String
+  }
+  enum ProjectStatus
+  class RevisionComparison {
+    changes() : List<Row>
+    olderTotal(PriceStrategy) : Money
+    newerTotal(PriceStrategy) : Money
+    difference(PriceStrategy) : Money
+  }
+  enum "RevisionComparison.Status" as RevisionComparison_Status
+  class "RevisionComparison.Row" as RevisionComparison_Row <<record>>
+  enum RevisionState
+  enum Role
+  class ShareLink {
+    {static} create(long, int, LocalDateTime) : ShareLink
+    isValid(LocalDateTime) : boolean
+    exists() : boolean
+    deactivate() : void
+  }
+  class UnknownShareLink {
+    isValid(LocalDateTime) : boolean
+    exists() : boolean
+  }
+  class User {
+    {static} create(String, String, String, String, Set<Role>) : User
+    {static} passwordError(String) : String
+    checkPassword(String) : boolean
+    changePassword(String) : void
+    changeRoles(Set<Role>) : void
+    hasRole(Role) : boolean
+  }
+  class ValidationException {
+    {static} throwIfAny(Map<String, String>) : void
+  }
+}
+package "business.port" {
+  interface CustomerMapper {
+    findAll() : List<Customer>
+    findById(long) : Optional<Customer>
+    insert(Customer) : void
+    update(Customer) : void
+    delete(long) : void
+    countProjects(long) : int
+  }
+  interface DocumentStorage {
+    store(String, Path) : void
+    retrieve(String, Path) : void
+    delete(String) : void
+    exists(String) : boolean
+  }
+  interface MenuDocumentRenderer {
+    render(MenuRevision, String, int, PriceStrategy, Path) : void
+  }
+  interface MenuMapper {
+    insertMenu(Menu, long) : void
+    findRevisionHeaders(long) : List<MenuRevision>
+    findRevision(long, int) : Optional<MenuRevision>
+    findLatestHeader(long) : Optional<MenuRevision>
+    insertRevision(MenuRevision) : void
+    overwriteRevision(MenuRevision) : boolean
+    markShared(long, int, LocalDateTime) : boolean
+    findComments(long, int) : List<Comment>
+    findComment(long) : Optional<Comment>
+    insertComment(Comment) : void
+    updateResolution(Comment) : boolean
+    findGuestCount(long) : int
+    findProjectId(long) : long
+    findTitle(long) : String
+  }
+  interface ProductMapper {
+    findAll() : List<Product>
+    findAllergens() : List<Allergen>
+    insert(Product) : void
+    update(Product) : void
+    delete(long) : void
+    isUsed(long) : boolean
+    loadPhoto(long) : byte[]
+    findPriceHistory(long) : List<PriceChange>
+  }
+  interface ProjectMapper {
+    findAll() : List<Project>
+    findById(long) : Optional<Project>
+    insert(Project) : void
+    update(Project) : void
+    findBySupervisor(long) : List<Project>
+    search(String, LocalDate, LocalDate, boolean) : List<Project>
+  }
+  interface ProjectNodeMapper {
+    loadTree(long) : Folder
+    insert(ProjectNode) : void
+    delete(ProjectNode) : void
+  }
+  interface ShareLinkMapper {
+    findByToken(String) : Optional<ShareLink>
+    findByMenu(long) : List<ShareLink>
+    findActive() : List<ShareLink>
+    insert(ShareLink) : void
+    update(ShareLink) : void
+  }
+  interface TransactionRunner {
+    inTransaction(Supplier<T>) : T
+    inTransaction(Runnable) : void
+  }
+  interface UserMapper {
+    findAll() : List<User>
+    findById(long) : Optional<User>
+    findByUsername(String) : Optional<User>
+    insert(User) : void
+    update(User) : void
+  }
+}
+package "business.pricing" {
+  interface PriceStrategy {
+    lineTotal(MenuItem) : Money
+    label() : String
+  }
+  class PriceWithVat {
+    lineTotal(MenuItem) : Money
+    label() : String
+  }
+  class PriceWithoutVat {
+    lineTotal(MenuItem) : Money
+    label() : String
+  }
+}
+package "business.service" {
+  class AuthService {
+    login(String, String) : User
+    loginDesktop(String, String) : User
+    findActiveUser(long) : Optional<User>
+  }
+  class CatalogService {
+    findProducts() : List<Product>
+    findAllergens() : List<Allergen>
+    loadPhoto(long) : byte[]
+    findPriceHistory(long) : List<PriceChange>
+    create(String, String, String, BigDecimal, BigDecimal, List<Allergen>, byte[]) : Product
+    update(long, String, String, String, BigDecimal, BigDecimal, List<Allergen>, byte[]) : Product
+    delete(long) : void
+  }
+  class CustomerService {
+    findAll() : List<Customer>
+    search(String) : List<Customer>
+    create(String, String, String, String, String) : Customer
+    update(long, String, String, String, String, String) : Customer
+    delete(long) : void
+  }
+  class DocumentService {
+    createFolder(Folder, String) : Folder
+    listContent(Folder) : List<ProjectNode>
+    createDocument(Folder, Path, String) : Document
+    createDocument(Folder, Path, String, String) : Document
+    downloadDocuments(List<Document>, Path) : int
+    deleteNodes(List<ProjectNode>) : void
+  }
+  class LinkNotValidException
+  class MenuExportService {
+    {static} fileName(Menu, int) : String
+    exportPdf(Menu, int, Folder, PriceStrategy) : Document
+    exportPdf(Menu, int, Folder, PriceStrategy, String) : Document
+  }
+  class MenuService {
+    createMenu(Folder, String, User) : Menu
+    openLatestRevision(long) : MenuRevision
+    openRevision(long, int) : MenuRevision
+    compareRevisions(long, int, int) : RevisionComparison
+    listRevisions(long) : List<MenuRevision>
+    findProducts() : List<Product>
+    createWorkingCopy(MenuRevision) : MenuRevision
+    saveRevision(MenuRevision, String, User) : int
+    projectIdOf(long) : long
+    guestCount(long) : int
+    title(long) : String
+  }
+  class ProjectService {
+    findAllCustomers() : List<Customer>
+    findAllProjects() : List<Project>
+    createProject(String, Long, LocalDate, String, Integer, User) : Project
+    updateProject(long, String, LocalDate, String, Integer, String) : Project
+    archiveProject(long) : Project
+    reactivateProject(long, User) : Project
+    searchProjects(String, LocalDate, LocalDate, boolean) : List<Project>
+    searchManagedProjects(User, String) : List<Project>
+    findManagedProject(User, long) : Optional<Project>
+    loadTree(long) : Folder
+  }
+  class SharedMenuView <<record>>
+  enum "SharedMenuView.Status" as SharedMenuView_Status
+  class SharingService {
+    shareRevision(MenuRevision) : ShareLink
+    shareUrl(ShareLink) : String
+    findValidLink(long) : Optional<ShareLink>
+    openSharedMenu(String) : SharedMenuView
+    addComment(String, String, String, Long, Long) : Comment
+    listComments(long, int) : List<Comment>
+    countUnresolved(long, int) : long
+    resolveComment(long, String, User) : Comment
+    deactivateExpiredLinks() : int
+  }
+  class UserService {
+    findAllUsers(User) : List<User>
+    createUser(User, String, String, String, String, Set<Role>) : User
+    updateUser(User, long, Set<Role>, boolean, String) : User
+  }
+}
+AddCategoryCommand ..|> MenuEditCommand
+AddItemCommand ..|> MenuEditCommand
+ChangeItemCommand ..|> MenuEditCommand
+RemoveCategoryCommand ..|> MenuEditCommand
+RemoveItemCommand ..|> MenuEditCommand
+Comment --|> DomainObject
+Customer --|> DomainObject
+Document --|> ProjectNode
+DuplicateNameException --|> ValidationException
+Folder --|> ProjectNode
+Menu --|> ProjectNode
+MenuCategory --|> DomainObject
+NodeCreator_FolderCreator --|> NodeCreator
+NodeCreator_MenuCreator --|> NodeCreator
+NodeCreator_DocumentCreator --|> NodeCreator
+Product --|> DomainObject
+Project --|> DomainObject
+ProjectNode --|> DomainObject
+ShareLink --|> DomainObject
+UnknownShareLink --|> ShareLink
+User --|> DomainObject
+PriceWithVat ..|> PriceStrategy
+PriceWithoutVat ..|> PriceStrategy
+AddCategoryCommand --> MenuCategory
+AddCategoryCommand --> MenuRevision
+AddItemCommand --> MenuCategory
+AddItemCommand --> MenuItem
+AddItemCommand --> MenuRevision
+AddItemCommand --> Money
+AddItemCommand --> Product
+AuthService --> TransactionRunner
+AuthService --> UserMapper
+CatalogService --> ProductMapper
+CatalogService --> TransactionRunner
+ChangeItemCommand --> MenuItem
+ChangeItemCommand --> MenuRevision
+ChangeItemCommand --> Money
+CustomerService --> CustomerMapper
+CustomerService --> TransactionRunner
+DocumentService --> DocumentStorage
+DocumentService --> ProjectMapper
+DocumentService --> ProjectNodeMapper
+DocumentService --> TransactionRunner
+MenuCategory --> MenuItem
+MenuEditor --> MenuEditCommand
+MenuEditor --> MenuRevision
+MenuExportService --> DocumentService
+MenuExportService --> MenuDocumentRenderer
+MenuExportService --> MenuService
+MenuItem --> Money
+MenuItem --> Product
+MenuRevision --> Comment
+MenuRevision --> MenuCategory
+MenuRevision --> MenuRevisionListener
+MenuRevision --> RevisionState
+MenuService --> MenuMapper
+MenuService --> ProductMapper
+MenuService --> ProjectMapper
+MenuService --> ProjectNodeMapper
+MenuService --> TransactionRunner
+PriceChange --> Money
+Product --> Allergen
+Product --> Money
+Project --> Customer
+Project --> Folder
+Project --> ProjectStatus
+ProjectService --> CustomerMapper
+ProjectService --> ProjectMapper
+ProjectService --> ProjectNodeMapper
+ProjectService --> TransactionRunner
+RemoveCategoryCommand --> MenuCategory
+RemoveCategoryCommand --> MenuRevision
+RemoveItemCommand --> MenuCategory
+RemoveItemCommand --> MenuItem
+RemoveItemCommand --> MenuRevision
+RevisionComparison --> MenuRevision
+RevisionComparison --> RevisionComparison_Row
+RevisionComparison_Row --> MenuItem
+RevisionComparison_Row --> Product
+SharedMenuView --> MenuRevision
+SharedMenuView --> ShareLink
+SharingService --> MenuMapper
+SharingService --> ProjectMapper
+SharingService --> ShareLinkMapper
+SharingService --> TransactionRunner
+User --> Role
+UserService --> TransactionRunner
+UserService --> UserMapper
+@enduml

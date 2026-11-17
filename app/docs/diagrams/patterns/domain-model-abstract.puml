@@ -1,0 +1,27 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class Entity {
+  +businessRule()
+  +validate()
+}
+class OtherEntity {
+  +businessRule()
+}
+class Service {
+  +useCase()
+}
+Entity "1" o-- "*" OtherEntity
+Service ..> Entity : delegates the rules
+@enduml

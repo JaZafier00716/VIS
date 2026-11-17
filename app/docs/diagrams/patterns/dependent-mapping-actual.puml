@@ -1,0 +1,29 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class MenuRevision
+class MenuCategory
+class MenuItem
+class OracleMenuMapper {
+  +insertRevision(MenuRevision)
+  +overwriteRevision(MenuRevision) : boolean
+  -insertContent(MenuRevision)
+}
+MenuRevision "1" *-- "*" MenuCategory
+MenuCategory "1" *-- "*" MenuItem
+OracleMenuMapper ..> MenuRevision
+OracleMenuMapper ..> MenuCategory : menu_categories
+OracleMenuMapper ..> MenuItem : menu_items
+note bottom of MenuItem : no mapper of its own, written by\nOracleMenuMapper.insertContent
+@enduml

@@ -1,0 +1,38 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+package "presentation.desktop / presentation.web" {
+  class MenuEditorWindow
+  class MenuHandler
+}
+package "business" {
+  class "service.MenuService" as MenuService
+  class "service.SharingService" as SharingService
+  class "domain.MenuRevision" as MenuRevision
+  interface "port.MenuMapper" as MenuMapper
+}
+package "data.oracle" {
+  class OracleMenuMapper
+}
+class AppContext <<composition root>>
+MenuEditorWindow --> MenuService
+MenuHandler --> SharingService
+SharingService --> MenuMapper
+MenuService --> MenuRevision
+MenuService --> MenuMapper
+OracleMenuMapper ..|> MenuMapper
+OracleMenuMapper --> MenuRevision
+AppContext ..> OracleMenuMapper : creates via DataAccessFactory
+AppContext ..> MenuService : creates
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class Client
+class Invoker {
+  +execute(Command)
+  +undo()
+}
+interface Command {
+  +execute()
+  +undo()
+}
+class ConcreteCommand {
+  +execute()
+  +undo()
+}
+class Receiver {
+  +action()
+}
+Client ..> ConcreteCommand : creates
+Invoker o--> Command
+ConcreteCommand ..|> Command
+ConcreteCommand --> Receiver
+@enduml

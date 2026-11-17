@@ -1,0 +1,42 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+abstract class ProjectNode <<Component>> {
+  +type() : NodeType
+  +countDocuments() : int
+  +isDeletable() : boolean
+  +path() : String
+}
+class Document <<Leaf>> {
+  +countDocuments() : int
+  +isDeletable() : boolean
+}
+class Menu <<Leaf>> {
+  +countDocuments() : int
+  +isDeletable() : boolean
+}
+class Folder <<Composite>> {
+  +countDocuments() : int
+  +isDeletable() : boolean
+  +add(ProjectNode)
+  +remove(ProjectNode)
+  +find(long) : Optional<ProjectNode>
+}
+class DocumentService <<Client>>
+Document --|> ProjectNode
+Menu --|> ProjectNode
+Folder --|> ProjectNode
+Folder o-- "*" ProjectNode : children
+DocumentService --> ProjectNode
+@enduml

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="258px" preserveAspectRatio="none" style="width:390px;height:258px;" version="1.1" viewBox="0 0 390 258" width="390px" zoomAndPan="magnify"><defs/><g><!--MD5=[ed6624c6556d5e7b1bd23032162d20b7]
+class Client--><rect fill="#FFFFFF" height="32" id="Client" style="stroke: #444444; stroke-width: 1.5;" width="64" x="160.5" y="8"/><ellipse cx="175.5" cy="24" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M178.4688,29.6406 Q177.8906,29.9375 177.25,30.0781 Q176.6094,30.2344 175.9063,30.2344 Q173.4063,30.2344 172.0781,28.5938 Q170.7656,26.9375 170.7656,23.8125 Q170.7656,20.6875 172.0781,19.0313 Q173.4063,17.375 175.9063,17.375 Q176.6094,17.375 177.25,17.5313 Q177.9063,17.6875 178.4688,17.9844 L178.4688,20.7031 Q177.8438,20.125 177.25,19.8594 Q176.6563,19.5781 176.0313,19.5781 Q174.6875,19.5781 174,20.6563 Q173.3125,21.7188 173.3125,23.8125 Q173.3125,25.9063 174,26.9844 Q174.6875,28.0469 176.0313,28.0469 Q176.6563,28.0469 177.25,27.7813 Q177.8438,27.5 178.4688,26.9219 L178.4688,29.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="32" x="189.5" y="28.656">Client</text><!--MD5=[790e9955d9690e5344ead96b2c38e22e]
+class Facade--><rect fill="#FFFFFF" height="54.9819" id="Facade" style="stroke: #444444; stroke-width: 1.5;" width="112" x="136.5" y="100"/><ellipse cx="169.5" cy="116" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M172.4688,121.6406 Q171.8906,121.9375 171.25,122.0781 Q170.6094,122.2344 169.9063,122.2344 Q167.4063,122.2344 166.0781,120.5938 Q164.7656,118.9375 164.7656,115.8125 Q164.7656,112.6875 166.0781,111.0313 Q167.4063,109.375 169.9063,109.375 Q170.6094,109.375 171.25,109.5313 Q171.9063,109.6875 172.4688,109.9844 L172.4688,112.7031 Q171.8438,112.125 171.25,111.8594 Q170.6563,111.5781 170.0313,111.5781 Q168.6875,111.5781 168,112.6563 Q167.3125,113.7188 167.3125,115.8125 Q167.3125,117.9063 168,118.9844 Q168.6875,120.0469 170.0313,120.0469 Q170.6563,120.0469 171.25,119.7813 Q171.8438,119.5 172.4688,118.9219 L172.4688,121.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="40" x="187.5" y="120.656">Facade</text><line style="stroke: #444444; stroke-width: 1.5;" x1="137.5" x2="247.5" y1="132" y2="132"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="100" x="142.5" y="147.7589">+simpleOperation()</text><!--MD5=[bb64820b314493a9861c72cb625a8aa9]
+class SubsystemA--><rect fill="#FFFFFF" height="32" id="SubsystemA" style="stroke: #444444; stroke-width: 1.5;" width="101" x="6" y="215"/><ellipse cx="21" cy="231" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M23.9688,236.6406 Q23.3906,236.9375 22.75,237.0781 Q22.1094,237.2344 21.4063,237.2344 Q18.9063,237.2344 17.5781,235.5938 Q16.2656,233.9375 16.2656,230.8125 Q16.2656,227.6875 17.5781,226.0313 Q18.9063,224.375 21.4063,224.375 Q22.1094,224.375 22.75,224.5313 Q23.4063,224.6875 23.9688,224.9844 L23.9688,227.7031 Q23.3438,227.125 22.75,226.8594 Q22.1563,226.5781 21.5313,226.5781 Q20.1875,226.5781 19.5,227.6563 Q18.8125,228.7188 18.8125,230.8125 Q18.8125,232.9063 19.5,233.9844 Q20.1875,235.0469 21.5313,235.0469 Q22.1563,235.0469 22.75,234.7813 Q23.3438,234.5 23.9688,233.9219 L23.9688,236.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="69" x="35" y="235.656">SubsystemA</text><!--MD5=[1fab542a7640d87de22474f430655a8b]
+class SubsystemB--><rect fill="#FFFFFF" height="32" id="SubsystemB" style="stroke: #444444; stroke-width: 1.5;" width="101" x="142" y="215"/><ellipse cx="157" cy="231" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M159.9688,236.6406 Q159.3906,236.9375 158.75,237.0781 Q158.1094,237.2344 157.4063,237.2344 Q154.9063,237.2344 153.5781,235.5938 Q152.2656,233.9375 152.2656,230.8125 Q152.2656,227.6875 153.5781,226.0313 Q154.9063,224.375 157.4063,224.375 Q158.1094,224.375 158.75,224.5313 Q159.4063,224.6875 159.9688,224.9844 L159.9688,227.7031 Q159.3438,227.125 158.75,226.8594 Q158.1563,226.5781 157.5313,226.5781 Q156.1875,226.5781 155.5,227.6563 Q154.8125,228.7188 154.8125,230.8125 Q154.8125,232.9063 155.5,233.9844 Q156.1875,235.0469 157.5313,235.0469 Q158.1563,235.0469 158.75,234.7813 Q159.3438,234.5 159.9688,233.9219 L159.9688,236.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="69" x="171" y="235.656">SubsystemB</text><!--MD5=[e76136d17d62123ccb5c43566a609773]
+class SubsystemC--><rect fill="#FFFFFF" height="32" id="SubsystemC" style="stroke: #444444; stroke-width: 1.5;" width="101" x="278" y="215"/><ellipse cx="293" cy="231" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M295.9688,236.6406 Q295.3906,236.9375 294.75,237.0781 Q294.1094,237.2344 293.4063,237.2344 Q290.9063,237.2344 289.5781,235.5938 Q288.2656,233.9375 288.2656,230.8125 Q288.2656,227.6875 289.5781,226.0313 Q290.9063,224.375 293.4063,224.375 Q294.1094,224.375 294.75,224.5313 Q295.4063,224.6875 295.9688,224.9844 L295.9688,227.7031 Q295.3438,227.125 294.75,226.8594 Q294.1563,226.5781 293.5313,226.5781 Q292.1875,226.5781 291.5,227.6563 Q290.8125,228.7188 290.8125,230.8125 Q290.8125,232.9063 291.5,233.9844 Q292.1875,235.0469 293.5313,235.0469 Q294.1563,235.0469 294.75,234.7813 Q295.3438,234.5 295.9688,233.9219 L295.9688,236.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="69" x="307" y="235.656">SubsystemC</text><!--MD5=[b443b131f9e558b5ae61c4966c336f30]
+link Client to Facade--><path d="M192.5,40.42 C192.5,54.81 192.5,76.74 192.5,94.86 " fill="none" id="Client-&gt;Facade" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="192.5,99.86,196.5,90.86,192.5,94.86,188.5,90.86,192.5,99.86" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[c3f86f8d74b4e066ba868a6edc0572c9]
+link Facade to SubsystemA--><path d="M156.77,155.17 C132.86,173.01 102.03,196.02 80.91,211.79 " fill="none" id="Facade-&gt;SubsystemA" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="76.81,214.84,86.415,212.662,80.8169,211.8492,81.6297,206.251,76.81,214.84" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[f39e41ad5211903ab3d7966e2c662c6d]
+link Facade to SubsystemB--><path d="M192.5,155.17 C192.5,172.27 192.5,194.11 192.5,209.78 " fill="none" id="Facade-&gt;SubsystemB" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="192.5,214.84,196.5,205.84,192.5,209.84,188.5,205.84,192.5,214.84" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[1ca5051ccc7992b78564d8786c6cd284]
+link Facade to SubsystemC--><path d="M228.23,155.17 C252.14,173.01 282.97,196.02 304.09,211.79 " fill="none" id="Facade-&gt;SubsystemC" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="308.19,214.84,303.3703,206.251,304.1831,211.8492,298.585,212.662,308.19,214.84" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[f87a1b1b6ee1733142515cc84fd70870]
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class Client
+class Facade {
+  +simpleOperation()
+}
+class SubsystemA
+class SubsystemB
+class SubsystemC
+Client - -> Facade
+Facade - -> SubsystemA
+Facade - -> SubsystemB
+Facade - -> SubsystemC
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.13+9-1-deb13u2-Debian
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

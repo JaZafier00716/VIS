@@ -1,0 +1,29 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class SharingService {
+  +findValidLink(long) : Optional<ShareLink>
+  +openSharedMenu(String) : SharedMenuView
+}
+class ShareLink {
+  +isValid(LocalDateTime) : boolean
+  +exists() : boolean
+}
+class UnknownShareLink <<Special Case>> {
+  +isValid(LocalDateTime) : false
+  +exists() : false
+}
+SharingService --> ShareLink
+UnknownShareLink --|> ShareLink
+@enduml

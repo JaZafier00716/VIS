@@ -1,0 +1,31 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class MenuRevision <<Subject>> {
+  -listeners : List<MenuRevisionListener>
+  +addListener(MenuRevisionListener)
+  +removeListener(MenuRevisionListener)
+}
+interface MenuRevisionListener <<Observer>> {
+  +revisionChanged(MenuRevision)
+}
+class MenuEditorWindow <<ConcreteObserver>> {
+  -listener : MenuRevisionListener
+  -refresh()
+}
+MenuRevision o--> "*" MenuRevisionListener
+MenuEditorWindow ..> MenuRevisionListener : holds a lambda
+MenuEditorWindow ..> MenuRevision : addListener(listener)
+note bottom of MenuEditorWindow : listener = r -> { dirty = true; refresh(); }
+@enduml

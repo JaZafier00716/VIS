@@ -1,0 +1,24 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class Client
+interface Gateway {
+  +operation()
+}
+class GatewayImpl
+class "External resource" as R
+Client --> Gateway
+GatewayImpl ..|> Gateway
+GatewayImpl --> R
+@enduml

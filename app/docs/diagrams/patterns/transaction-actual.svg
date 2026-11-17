@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="240px" preserveAspectRatio="none" style="width:691px;height:240px;" version="1.1" viewBox="0 0 691 240" width="691px" zoomAndPan="magnify"><defs/><g><!--MD5=[f72869ef7e3ff3293e98fb51a806b8fd]
+class MenuService--><rect fill="#FFFFFF" height="32" id="MenuService" style="stroke: #444444; stroke-width: 1.5;" width="105" x="6" y="32.5"/><ellipse cx="21" cy="48.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M23.9688,54.1406 Q23.3906,54.4375 22.75,54.5781 Q22.1094,54.7344 21.4063,54.7344 Q18.9063,54.7344 17.5781,53.0938 Q16.2656,51.4375 16.2656,48.3125 Q16.2656,45.1875 17.5781,43.5313 Q18.9063,41.875 21.4063,41.875 Q22.1094,41.875 22.75,42.0313 Q23.4063,42.1875 23.9688,42.4844 L23.9688,45.2031 Q23.3438,44.625 22.75,44.3594 Q22.1563,44.0781 21.5313,44.0781 Q20.1875,44.0781 19.5,45.1563 Q18.8125,46.2188 18.8125,48.3125 Q18.8125,50.4063 19.5,51.4844 Q20.1875,52.5469 21.5313,52.5469 Q22.1563,52.5469 22.75,52.2813 Q23.3438,52 23.9688,51.4219 L23.9688,54.1406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="73" x="35" y="53.156">MenuService</text><!--MD5=[9820c03a2633e4268cdd208103d2616f]
+class DocumentService--><rect fill="#FFFFFF" height="32" id="DocumentService" style="stroke: #444444; stroke-width: 1.5;" width="131" x="146" y="32.5"/><ellipse cx="161" cy="48.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M163.9688,54.1406 Q163.3906,54.4375 162.75,54.5781 Q162.1094,54.7344 161.4063,54.7344 Q158.9063,54.7344 157.5781,53.0938 Q156.2656,51.4375 156.2656,48.3125 Q156.2656,45.1875 157.5781,43.5313 Q158.9063,41.875 161.4063,41.875 Q162.1094,41.875 162.75,42.0313 Q163.4063,42.1875 163.9688,42.4844 L163.9688,45.2031 Q163.3438,44.625 162.75,44.3594 Q162.1563,44.0781 161.5313,44.0781 Q160.1875,44.0781 159.5,45.1563 Q158.8125,46.2188 158.8125,48.3125 Q158.8125,50.4063 159.5,51.4844 Q160.1875,52.5469 161.5313,52.5469 Q162.1563,52.5469 162.75,52.2813 Q163.3438,52 163.9688,51.4219 L163.9688,54.1406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="99" x="175" y="53.156">DocumentService</text><!--MD5=[90cc776ba65cffa8b16b8b01d52a6348]
+class ProjectService--><rect fill="#FFFFFF" height="32" id="ProjectService" style="stroke: #444444; stroke-width: 1.5;" width="112" x="312.5" y="32.5"/><ellipse cx="327.5" cy="48.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M330.4688,54.1406 Q329.8906,54.4375 329.25,54.5781 Q328.6094,54.7344 327.9063,54.7344 Q325.4063,54.7344 324.0781,53.0938 Q322.7656,51.4375 322.7656,48.3125 Q322.7656,45.1875 324.0781,43.5313 Q325.4063,41.875 327.9063,41.875 Q328.6094,41.875 329.25,42.0313 Q329.9063,42.1875 330.4688,42.4844 L330.4688,45.2031 Q329.8438,44.625 329.25,44.3594 Q328.6563,44.0781 328.0313,44.0781 Q326.6875,44.0781 326,45.1563 Q325.3125,46.2188 325.3125,48.3125 Q325.3125,50.4063 326,51.4844 Q326.6875,52.5469 328.0313,52.5469 Q328.6563,52.5469 329.25,52.2813 Q329.8438,52 330.4688,51.4219 L330.4688,54.1406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="80" x="341.5" y="53.156">ProjectService</text><!--MD5=[8cf43a993d3865805a3ef96946ecb33e]
+class TransactionRunner--><rect fill="#FFFFFF" height="80.652" id="TransactionRunner" style="stroke: #444444; stroke-width: 1.5;" width="172" x="165.5" y="149"/><ellipse cx="197.6" cy="170.3441" fill="#B4A7E5" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M193.5219,166.1097 L193.5219,163.9535 L200.9125,163.9535 L200.9125,166.1097 L198.4438,166.1097 L198.4438,174.1879 L200.9125,174.1879 L200.9125,176.3441 L193.5219,176.3441 L193.5219,174.1879 L195.9906,174.1879 L195.9906,166.1097 L193.5219,166.1097 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="248.9" y="166.8281">«port»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="102" x="215.4" y="183.1722">TransactionRunner</text><line style="stroke: #444444; stroke-width: 1.5;" x1="166.5" x2="336.5" y1="191.6882" y2="191.6882"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="160" x="171.5" y="207.4471">+inTransaction(Supplier&lt;T&gt;) : T</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="133" x="171.5" y="222.429">+inTransaction(Runnable)</text><!--MD5=[ed3afe56f065d25b4329669e73deaf58]
+class Database--><rect fill="#FFFFFF" height="80.652" id="Database" style="stroke: #444444; stroke-width: 1.5;" width="172" x="459.5" y="8"/><ellipse cx="480.35" cy="29.3441" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M483.3188,34.9847 Q482.7406,35.2816 482.1,35.4222 Q481.4594,35.5785 480.7563,35.5785 Q478.2563,35.5785 476.9281,33.9379 Q475.6156,32.2816 475.6156,29.1566 Q475.6156,26.0316 476.9281,24.3754 Q478.2563,22.7191 480.7563,22.7191 Q481.4594,22.7191 482.1,22.8754 Q482.7563,23.0316 483.3188,23.3285 L483.3188,26.0472 Q482.6938,25.4691 482.1,25.2035 Q481.5063,24.9222 480.8813,24.9222 Q479.5375,24.9222 478.85,26.0004 Q478.1625,27.0629 478.1625,29.1566 Q478.1625,31.2504 478.85,32.3285 Q479.5375,33.391 480.8813,33.391 Q481.5063,33.391 482.1,33.1254 Q482.6938,32.8441 483.3188,32.266 L483.3188,34.9847 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="131" x="493.65" y="25.8281">«Transaction, Singleton»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="54" x="532.15" y="42.1722">Database</text><line style="stroke: #444444; stroke-width: 1.5;" x1="460.5" x2="630.5" y1="50.6882" y2="50.6882"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="160" x="465.5" y="66.4471">+inTransaction(Supplier&lt;T&gt;) : T</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="139" x="465.5" y="81.429">+connection() : Connection</text><path d="M411.5,167 L411.5,212.412 A0,0 0 0 0 411.5,212.412 L679.5,212.412 A0,0 0 0 0 679.5,212.412 L679.5,177 L669.5,167 L549.5,167 L545.5,89.33 L541.5,167 L411.5,167 A0,0 0 0 0 411.5,167 " fill="#FFFFE0" style="stroke: #999999; stroke-width: 1.0;"/><path d="M669.5,167 L669.5,177 L679.5,177 L669.5,167 " fill="#FFFFE0" style="stroke: #999999; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="247" x="417.5" y="185.897">commit at the end, rollback on exception,</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="239" x="417.5" y="203.603">nested call joins the running transaction</text><!--MD5=[1d8ff9d749d729be77fbe65a5b00a8e1]
+link MenuService to TransactionRunner--><path d="M79.52,64.64 C106.39,83.99 154,118.28 192.33,145.88 " fill="none" id="MenuService-&gt;TransactionRunner" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="196.48,148.87,191.5039,140.3707,192.4191,145.953,186.8367,146.8681,196.48,148.87" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[65715b378a47c9fd789e618af9638b2a]
+link DocumentService to TransactionRunner--><path d="M215.86,64.64 C221.29,83.52 230.82,116.62 238.65,143.86 " fill="none" id="DocumentService-&gt;TransactionRunner" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="240.1,148.87,241.4545,139.1147,238.717,144.0651,233.7666,141.3276,240.1,148.87" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[f9ee156728fdd206f1417e7cbb8adc52]
+link ProjectService to TransactionRunner--><path d="M355.76,64.64 C339.67,83.75 311.3,117.45 288.22,144.88 " fill="none" id="ProjectService-&gt;TransactionRunner" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="284.85,148.87,293.7177,144.5848,288.0804,145.0536,287.6115,139.4162,284.85,148.87" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[58a3194bea7d7009a09a4eb99035623b]
+link Database to TransactionRunner--><path d="M461.64,89.15 C427.9,105.1 388.67,123.65 353.3,140.37 " fill="none" id="Database-&gt;TransactionRunner" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="356.28,146.7,335.21,148.92,350.3,134.04,356.28,146.7" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[ad1ac327423fa3c663c64401ea7b8baf]
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class MenuService
+class DocumentService
+class ProjectService
+interface TransactionRunner <<port>> {
+  +inTransaction(Supplier<T>) : T
+  +inTransaction(Runnable)
+}
+class Database <<Transaction, Singleton>> {
+  +inTransaction(Supplier<T>) : T
+  +connection() : Connection
+}
+MenuService - -> TransactionRunner
+DocumentService - -> TransactionRunner
+ProjectService - -> TransactionRunner
+Database ..|> TransactionRunner
+note bottom of Database : commit at the end, rollback on exception,\nnested call joins the running transaction
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.13+9-1-deb13u2-Debian
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

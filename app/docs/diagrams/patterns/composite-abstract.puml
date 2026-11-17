@@ -1,0 +1,31 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+abstract class Component {
+  +operation()
+}
+class Leaf {
+  +operation()
+}
+class Composite {
+  +operation()
+  +add(Component)
+  +remove(Component)
+}
+class Client
+Leaf --|> Component
+Composite --|> Component
+Composite o-- "*" Component : children
+Client --> Component
+@enduml

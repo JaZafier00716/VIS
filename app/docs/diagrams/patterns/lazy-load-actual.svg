@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="290px" preserveAspectRatio="none" style="width:510px;height:290px;" version="1.1" viewBox="0 0 510 290" width="510px" zoomAndPan="magnify"><defs/><g><!--MD5=[3e139e63e8838473a8b628562e32ef10]
+class MenuRevision--><rect fill="#FFFFFF" height="122.9094" id="MenuRevision" style="stroke: #444444; stroke-width: 1.5;" width="248" x="23.6" y="8"/><ellipse cx="104.35" cy="24" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M107.3188,29.6406 Q106.7406,29.9375 106.1,30.0781 Q105.4594,30.2344 104.7563,30.2344 Q102.2563,30.2344 100.9281,28.5938 Q99.6156,26.9375 99.6156,23.8125 Q99.6156,20.6875 100.9281,19.0313 Q102.2563,17.375 104.7563,17.375 Q105.4594,17.375 106.1,17.5313 Q106.7563,17.6875 107.3188,17.9844 L107.3188,20.7031 Q106.6938,20.125 106.1,19.8594 Q105.5063,19.5781 104.8813,19.5781 Q103.5375,19.5781 102.85,20.6563 Q102.1625,21.7188 102.1625,23.8125 Q102.1625,25.9063 102.85,26.9844 Q103.5375,28.0469 104.8813,28.0469 Q105.5063,28.0469 106.1,27.7813 Q106.6938,27.5 107.3188,26.9219 L107.3188,29.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="78" x="124.85" y="28.656">MenuRevision</text><line style="stroke: #444444; stroke-width: 1.5;" x1="24.6" x2="270.6" y1="40" y2="40"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="148" x="29.6" y="55.7589">-comments : List&lt;Comment&gt;</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="236" x="29.6" y="70.7408">-commentLoader : Supplier&lt;List&lt;Comment&gt;&gt;</text><line style="stroke: #444444; stroke-width: 1.5;" x1="24.6" x2="270.6" y1="77.9638" y2="77.9638"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="159" x="29.6" y="93.7227">+setCommentLoader(Supplier)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="175" x="29.6" y="108.7046">+getComments() : List&lt;Comment&gt;</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="176" x="29.6" y="123.6865">+areCommentsLoaded() : boolean</text><!--MD5=[f00eb536a9a7777239991fde64d8d2ba]
+class OracleMenuMapper--><rect fill="#FFFFFF" height="69.9638" id="OracleMenuMapper" style="stroke: #444444; stroke-width: 1.5;" width="274" x="10.6" y="210"/><ellipse cx="86.85" cy="226" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M89.8188,231.6406 Q89.2406,231.9375 88.6,232.0781 Q87.9594,232.2344 87.2563,232.2344 Q84.7563,232.2344 83.4281,230.5938 Q82.1156,228.9375 82.1156,225.8125 Q82.1156,222.6875 83.4281,221.0313 Q84.7563,219.375 87.2563,219.375 Q87.9594,219.375 88.6,219.5313 Q89.2563,219.6875 89.8188,219.9844 L89.8188,222.7031 Q89.1938,222.125 88.6,221.8594 Q88.0063,221.5781 87.3813,221.5781 Q86.0375,221.5781 85.35,222.6563 Q84.6625,223.7188 84.6625,225.8125 Q84.6625,227.9063 85.35,228.9844 Q86.0375,230.0469 87.3813,230.0469 Q88.0063,230.0469 88.6,229.7813 Q89.1938,229.5 89.8188,228.9219 L89.8188,231.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="113" x="107.35" y="230.656">OracleMenuMapper</text><line style="stroke: #444444; stroke-width: 1.5;" x1="11.6" x2="283.6" y1="242" y2="242"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="262" x="16.6" y="257.7589">+findRevision(long, int) : Optional&lt;MenuRevision&gt;</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="223" x="16.6" y="272.7408">+findComments(long, int) : List&lt;Comment&gt;</text><!--MD5=[8adf1054a73413e5f23de27423411e6e]
+class ProductMapper--><rect fill="#FFFFFF" height="54.9819" id="ProductMapper" style="stroke: #444444; stroke-width: 1.5;" width="143" x="307.1" y="42"/><ellipse cx="334.25" cy="58" fill="#B4A7E5" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M330.1719,53.7656 L330.1719,51.6094 L337.5625,51.6094 L337.5625,53.7656 L335.0938,53.7656 L335.0938,61.8438 L337.5625,61.8438 L337.5625,64 L330.1719,64 L330.1719,61.8438 L332.6406,61.8438 L332.6406,53.7656 L330.1719,53.7656 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="84" x="350.95" y="62.656">ProductMapper</text><line style="stroke: #444444; stroke-width: 1.5;" x1="308.1" x2="449.1" y1="74" y2="74"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="131" x="313.1" y="89.7589">+loadPhoto(long) : byte[]</text><!--MD5=[18f36f7dc2a0ce2bf02bef5a7d2282e1]
+link OracleMenuMapper to MenuRevision--><path d="M216.68,209.87 C233.35,196.65 244.4,180.06 236.6,161 C232.94,152.05 227.91,143.51 222.11,135.51 " fill="none" id="OracleMenuMapper-&gt;MenuRevision" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="218.8,131.11,221,140.71,221.8,135.11,227.4,135.91,218.8,131.11" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="259" x="239.6" y="175.897">setCommentLoader(() -&gt; findComments(...))</text><!--MD5=[25acd1d256885f61839d17c82995c6e7]
+link MenuRevision to OracleMenuMapper--><path d="M23.36,127.73 C7.35,142.86 0.26,160.49 12.6,180 C19.33,190.64 28.37,199.55 38.59,207 " fill="none" id="MenuRevision-&gt;OracleMenuMapper" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="42.72,209.89,37.6427,201.4507,38.6245,207.0217,33.0535,208.0035,42.72,209.89" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="214" x="13.6" y="175.897">first getComments() runs the loader</text><!--MD5=[f7d88b58d74432423609f434806223b0]
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class MenuRevision {
+  -comments : List<Comment>
+  -commentLoader : Supplier<List<Comment>>
+  +setCommentLoader(Supplier)
+  +getComments() : List<Comment>
+  +areCommentsLoaded() : boolean
+}
+class OracleMenuMapper {
+  +findRevision(long, int) : Optional<MenuRevision>
+  +findComments(long, int) : List<Comment>
+}
+interface ProductMapper {
+  +loadPhoto(long) : byte[]
+}
+OracleMenuMapper ..> MenuRevision : setCommentLoader(() -> findComments(...))
+MenuRevision ..> OracleMenuMapper : first getComments() runs the loader
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.13+9-1-deb13u2-Debian
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

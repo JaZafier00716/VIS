@@ -1,0 +1,35 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+abstract class ProjectNode
+class Folder
+class Document
+class Menu
+class project_nodes <<table>> {
+  PK node_id
+  parent_id
+  node_type : FOLDER / DOCUMENT / MENU
+  name
+  content_type, size_bytes, storage_key
+}
+class OracleProjectNodeMapper {
+  +loadTree(long) : Folder
+  +insert(ProjectNode)
+  +delete(long)
+}
+Folder --|> ProjectNode
+Document --|> ProjectNode
+Menu --|> ProjectNode
+OracleProjectNodeMapper ..> project_nodes : node_type picks the subclass
+@enduml

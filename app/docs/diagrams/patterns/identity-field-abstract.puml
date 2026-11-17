@@ -1,0 +1,27 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class "Domain object" as DO {
+  -id : Long
+}
+class Mapper {
+  +insert(DO)
+}
+class "Table" as T <<table>> {
+  PK id
+}
+Mapper ..> DO : sets id after insert
+Mapper --> T
+DO .. T : id = primary key
+@enduml

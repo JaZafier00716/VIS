@@ -1,0 +1,26 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+abstract class Base
+class SubA
+class SubB
+class "single table" as T <<table>> {
+  PK id
+  type (discriminator)
+  columns of all subclasses
+}
+SubA --|> Base
+SubB --|> Base
+Mapper ..> T : type decides the subclass
+@enduml

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="214px" preserveAspectRatio="none" style="width:378px;height:214px;" version="1.1" viewBox="0 0 378 214" width="378px" zoomAndPan="magnify"><defs/><g><!--MD5=[535a81a6192cddc4d2624fef9fce4fda]
+class DO--><rect fill="#FFFFFF" height="32" id="DO" style="stroke: #444444; stroke-width: 1.5;" width="113" x="252" y="145.5"/><ellipse cx="267" cy="161.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M269.9688,167.1406 Q269.3906,167.4375 268.75,167.5781 Q268.1094,167.7344 267.4063,167.7344 Q264.9063,167.7344 263.5781,166.0938 Q262.2656,164.4375 262.2656,161.3125 Q262.2656,158.1875 263.5781,156.5313 Q264.9063,154.875 267.4063,154.875 Q268.1094,154.875 268.75,155.0313 Q269.4063,155.1875 269.9688,155.4844 L269.9688,158.2031 Q269.3438,157.625 268.75,157.3594 Q268.1563,157.0781 267.5313,157.0781 Q266.1875,157.0781 265.5,158.1563 Q264.8125,159.2188 264.8125,161.3125 Q264.8125,163.4063 265.5,164.4844 Q266.1875,165.5469 267.5313,165.5469 Q268.1563,165.5469 268.75,165.2813 Q269.3438,165 269.9688,164.4219 L269.9688,167.1406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="81" x="281" y="166.156">Domain object</text><!--MD5=[085457430d2356209d15d1291460c965]
+class Mapper--><rect fill="#FFFFFF" height="84.9457" id="Mapper" style="stroke: #444444; stroke-width: 1.5;" width="81" x="10" y="119"/><ellipse cx="28.15" cy="135" fill="#B4A7E5" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M24.0719,130.7656 L24.0719,128.6094 L31.4625,128.6094 L31.4625,130.7656 L28.9938,130.7656 L28.9938,138.8438 L31.4625,138.8438 L31.4625,141 L24.0719,141 L24.0719,138.8438 L26.5406,138.8438 L26.5406,130.7656 L24.0719,130.7656 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="42" x="42.85" y="139.656">Mapper</text><line style="stroke: #444444; stroke-width: 1.5;" x1="11" x2="90" y1="151" y2="151"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="69" x="16" y="166.7589">+find(id) : DO</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="59" x="16" y="181.7408">+insert(DO)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="66" x="16" y="196.7227">+update(DO)</text><!--MD5=[57ecaf5250c63cd1b5ea01f573a98659]
+class ConcreteMapper--><rect fill="#FFFFFF" height="32" id="ConcreteMapper" style="stroke: #444444; stroke-width: 1.5;" width="127" x="114" y="8"/><ellipse cx="129" cy="24" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M131.9688,29.6406 Q131.3906,29.9375 130.75,30.0781 Q130.1094,30.2344 129.4063,30.2344 Q126.9063,30.2344 125.5781,28.5938 Q124.2656,26.9375 124.2656,23.8125 Q124.2656,20.6875 125.5781,19.0313 Q126.9063,17.375 129.4063,17.375 Q130.1094,17.375 130.75,17.5313 Q131.4063,17.6875 131.9688,17.9844 L131.9688,20.7031 Q131.3438,20.125 130.75,19.8594 Q130.1563,19.5781 129.5313,19.5781 Q128.1875,19.5781 127.5,20.6563 Q126.8125,21.7188 126.8125,23.8125 Q126.8125,25.9063 127.5,26.9844 Q128.1875,28.0469 129.5313,28.0469 Q130.1563,28.0469 130.75,27.7813 Q131.3438,27.5 131.9688,26.9219 L131.9688,29.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="95" x="143" y="28.656">ConcreteMapper</text><!--MD5=[ed3afe56f065d25b4329669e73deaf58]
+class Database--><rect fill="#FFFFFF" height="32" id="Database" style="stroke: #444444; stroke-width: 1.5;" width="86" x="130.5" y="145.5"/><ellipse cx="145.5" cy="161.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M148.4688,167.1406 Q147.8906,167.4375 147.25,167.5781 Q146.6094,167.7344 145.9063,167.7344 Q143.4063,167.7344 142.0781,166.0938 Q140.7656,164.4375 140.7656,161.3125 Q140.7656,158.1875 142.0781,156.5313 Q143.4063,154.875 145.9063,154.875 Q146.6094,154.875 147.25,155.0313 Q147.9063,155.1875 148.4688,155.4844 L148.4688,158.2031 Q147.8438,157.625 147.25,157.3594 Q146.6563,157.0781 146.0313,157.0781 Q144.6875,157.0781 144,158.1563 Q143.3125,159.2188 143.3125,161.3125 Q143.3125,163.4063 144,164.4844 Q144.6875,165.5469 146.0313,165.5469 Q146.6563,165.5469 147.25,165.2813 Q147.8438,165 148.4688,164.4219 L148.4688,167.1406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="54" x="159.5" y="166.156">Database</text><!--MD5=[dbb8b4f13c7b21394f9d757e58732f45]
+class Service--><rect fill="#FFFFFF" height="32" id="Service" style="stroke: #444444; stroke-width: 1.5;" width="73" x="6" y="8"/><ellipse cx="21" cy="24" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M23.9688,29.6406 Q23.3906,29.9375 22.75,30.0781 Q22.1094,30.2344 21.4063,30.2344 Q18.9063,30.2344 17.5781,28.5938 Q16.2656,26.9375 16.2656,23.8125 Q16.2656,20.6875 17.5781,19.0313 Q18.9063,17.375 21.4063,17.375 Q22.1094,17.375 22.75,17.5313 Q23.4063,17.6875 23.9688,17.9844 L23.9688,20.7031 Q23.3438,20.125 22.75,19.8594 Q22.1563,19.5781 21.5313,19.5781 Q20.1875,19.5781 19.5,20.6563 Q18.8125,21.7188 18.8125,23.8125 Q18.8125,25.9063 19.5,26.9844 Q20.1875,28.0469 21.5313,28.0469 Q22.1563,28.0469 22.75,27.7813 Q23.3438,27.5 23.9688,26.9219 L23.9688,29.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="41" x="35" y="28.656">Service</text><!--MD5=[5635c4ed21f60030ebd71074b23e065d]
+link ConcreteMapper to Mapper--><path d="M163.42,40.02 C148.84,55.58 125.15,80.85 103.23,104.24 " fill="none" id="ConcreteMapper-&gt;Mapper" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="108.33,109.04,89.55,118.84,98.12,99.46,108.33,109.04" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[c30e732f33f63a2a3f6b54801dd79cdc]
+link ConcreteMapper to DO--><path d="M192.02,40.02 C216.02,64.84 263.92,114.39 290.2,141.57 " fill="none" id="ConcreteMapper-&gt;DO" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="293.92,145.41,290.5332,136.1618,290.4419,141.8179,284.7858,141.7267,293.92,145.41" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="127" x="239.5" y="84.897">maps rows to objects</text><!--MD5=[4929dd2f9b2f21d722373ceb9b38a14a]
+link ConcreteMapper to Database--><path d="M177.06,40.02 C176.34,64.44 174.91,112.77 174.1,140.22 " fill="none" id="ConcreteMapper-&gt;Database" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="173.95,145.41,178.2307,136.5401,174.1071,140.4125,170.2347,136.2888,173.95,145.41" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="24" x="176.5" y="84.897">SQL</text><!--MD5=[ffdf816c4d1fda5a23b86194c669861b]
+link Service to Mapper--><path d="M43.39,40.02 C44.43,57.72 46.22,87.98 47.74,113.75 " fill="none" id="Service-&gt;Mapper" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="48.04,118.84,51.5185,109.6259,47.7539,113.8482,43.5316,110.0836,48.04,118.84" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[ca77504e5878106b5abdbd6d1d7a5dd5]
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class "Domain object" as DO
+interface Mapper {
+  +find(id) : DO
+  +insert(DO)
+  +update(DO)
+}
+class ConcreteMapper
+class Database
+ConcreteMapper ..|> Mapper
+ConcreteMapper ..> DO : maps rows to objects
+ConcreteMapper - -> Database : SQL
+Service - -> Mapper
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.13+9-1-deb13u2-Debian
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

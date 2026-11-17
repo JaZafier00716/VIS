@@ -1,0 +1,31 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class MenuRevision {
+  -comments : List<Comment>
+  -commentLoader : Supplier<List<Comment>>
+  +setCommentLoader(Supplier)
+  +getComments() : List<Comment>
+  +areCommentsLoaded() : boolean
+}
+class OracleMenuMapper {
+  +findRevision(long, int) : Optional<MenuRevision>
+  +findComments(long, int) : List<Comment>
+}
+interface ProductMapper {
+  +loadPhoto(long) : byte[]
+}
+OracleMenuMapper ..> MenuRevision : setCommentLoader(() -> findComments(...))
+MenuRevision ..> OracleMenuMapper : first getComments() runs the loader
+@enduml

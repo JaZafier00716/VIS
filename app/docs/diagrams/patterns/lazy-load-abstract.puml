@@ -1,0 +1,25 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class "Domain object" as DO {
+  -data : List
+  -loader : Supplier
+  +getData() : List
+}
+class Mapper {
+  +find(id) : DO
+}
+Mapper ..> DO : sets the loader
+DO ..> Mapper : loads on first access
+@enduml

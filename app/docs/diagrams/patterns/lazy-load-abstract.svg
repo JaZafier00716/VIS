@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="245px" preserveAspectRatio="none" style="width:241px;height:245px;" version="1.1" viewBox="0 0 241 245" width="241px" zoomAndPan="magnify"><defs/><g><!--MD5=[535a81a6192cddc4d2624fef9fce4fda]
+class DO--><rect fill="#FFFFFF" height="92.9457" id="DO" style="stroke: #444444; stroke-width: 1.5;" width="113" x="41" y="8"/><ellipse cx="56" cy="24" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M58.9688,29.6406 Q58.3906,29.9375 57.75,30.0781 Q57.1094,30.2344 56.4063,30.2344 Q53.9063,30.2344 52.5781,28.5938 Q51.2656,26.9375 51.2656,23.8125 Q51.2656,20.6875 52.5781,19.0313 Q53.9063,17.375 56.4063,17.375 Q57.1094,17.375 57.75,17.5313 Q58.4063,17.6875 58.9688,17.9844 L58.9688,20.7031 Q58.3438,20.125 57.75,19.8594 Q57.1563,19.5781 56.5313,19.5781 Q55.1875,19.5781 54.5,20.6563 Q53.8125,21.7188 53.8125,23.8125 Q53.8125,25.9063 54.5,26.9844 Q55.1875,28.0469 56.5313,28.0469 Q57.1563,28.0469 57.75,27.7813 Q58.3438,27.5 58.9688,26.9219 L58.9688,29.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="81" x="70" y="28.656">Domain object</text><line style="stroke: #444444; stroke-width: 1.5;" x1="42" x2="153" y1="40" y2="40"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="54" x="47" y="55.7589">-data : List</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="91" x="47" y="70.7408">-loader : Supplier</text><line style="stroke: #444444; stroke-width: 1.5;" x1="42" x2="153" y1="77.9638" y2="77.9638"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="80" x="47" y="93.7227">+getData() : List</text><!--MD5=[085457430d2356209d15d1291460c965]
+class Mapper--><rect fill="#FFFFFF" height="54.9819" id="Mapper" style="stroke: #444444; stroke-width: 1.5;" width="81" x="57" y="180"/><ellipse cx="74.25" cy="196" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M77.2188,201.6406 Q76.6406,201.9375 76,202.0781 Q75.3594,202.2344 74.6563,202.2344 Q72.1563,202.2344 70.8281,200.5938 Q69.5156,198.9375 69.5156,195.8125 Q69.5156,192.6875 70.8281,191.0313 Q72.1563,189.375 74.6563,189.375 Q75.3594,189.375 76,189.5313 Q76.6563,189.6875 77.2188,189.9844 L77.2188,192.7031 Q76.5938,192.125 76,191.8594 Q75.4063,191.5781 74.7813,191.5781 Q73.4375,191.5781 72.75,192.6563 Q72.0625,193.7188 72.0625,195.8125 Q72.0625,197.9063 72.75,198.9844 Q73.4375,200.0469 74.7813,200.0469 Q75.4063,200.0469 76,199.7813 Q76.5938,199.5 77.2188,198.9219 L77.2188,201.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="44" x="88.75" y="200.656">Mapper</text><line style="stroke: #444444; stroke-width: 1.5;" x1="58" x2="137" y1="212" y2="212"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="69" x="63" y="227.7589">+find(id) : DO</text><!--MD5=[1e4dd37f1b046a33612094a5fcb97f07]
+link Mapper to DO--><path d="M121.97,179.99 C128.66,171.11 135.02,160.72 138.5,150 C143.22,135.48 140.23,120.14 134.15,106.14 " fill="none" id="Mapper-&gt;DO" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="131.98,101.44,132.1256,111.2878,134.078,105.9785,139.3872,107.931,131.98,101.44" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="88" x="141.5" y="145.897">sets the loader</text><!--MD5=[b4d8dd89bdafdd90203b89d2ddb959b7]
+link DO to Mapper--><path d="M40.86,86 C16.99,103.14 -2.59,125.89 10.5,150 C19.61,166.78 36.1,179.35 52.29,188.33 " fill="none" id="DO-&gt;Mapper" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="56.85,190.76,50.7951,182.9922,52.4394,188.4048,47.0268,190.0492,56.85,190.76" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="118" x="11.5" y="145.897">loads on first access</text><!--MD5=[432ef0471213b53bc8683243d3e1d84d]
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class "Domain object" as DO {
+  -data : List
+  -loader : Supplier
+  +getData() : List
+}
+class Mapper {
+  +find(id) : DO
+}
+Mapper ..> DO : sets the loader
+DO ..> Mapper : loads on first access
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.13+9-1-deb13u2-Debian
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

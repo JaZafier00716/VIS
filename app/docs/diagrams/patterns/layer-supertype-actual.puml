@@ -1,0 +1,37 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+abstract class DomainObject <<Layer Supertype>> {
+  -id : Long
+  +getId() : Long
+  +setId(Long)
+  +isNew() : boolean
+}
+abstract class ProjectNode
+class Project
+class Customer
+class User
+class Product
+class Comment
+class ShareLink
+class MenuCategory
+ProjectNode --|> DomainObject
+Project --|> DomainObject
+Customer --|> DomainObject
+User --|> DomainObject
+Product --|> DomainObject
+Comment --|> DomainObject
+ShareLink --|> DomainObject
+MenuCategory --|> DomainObject
+@enduml

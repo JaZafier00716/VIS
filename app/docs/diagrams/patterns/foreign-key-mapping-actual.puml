@@ -1,0 +1,32 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class Project {
+  -customer : Customer
+}
+class Customer
+class projects <<table>> {
+  PK project_id
+  FK customer_id
+}
+class customers <<table>> {
+  PK customer_id
+}
+class OracleProjectMapper {
+  SELECT ... FROM projects p\nJOIN customers c ON c.customer_id = p.customer_id
+}
+Project --> Customer
+projects --> customers : customer_id
+OracleProjectMapper ..> Project : builds with Customer
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class Client
+class Domain {
+  -versionAtLoad
+}
+class Mapper {
+  +update(Domain) : boolean
+}
+class ConflictException
+Client --> Mapper
+Mapper ..> Domain : WHERE version = versionAtLoad
+Client ..> ConflictException : update returned false
+@enduml

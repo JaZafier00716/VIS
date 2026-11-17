@@ -1,0 +1,25 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class Owner
+class Dependent
+class OwnerMapper {
+  +insert(Owner)
+  +update(Owner)
+}
+Owner "1" *-- "*" Dependent
+OwnerMapper ..> Owner
+OwnerMapper ..> Dependent : saves and loads with the owner
+note bottom of Dependent : no mapper of its own
+@enduml

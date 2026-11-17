@@ -1,0 +1,39 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class MenuEditorWindow <<presentation>>
+class MenuHandler <<presentation>>
+class MenuService <<Service Layer>> {
+  +createMenu(Folder, String, User) : Menu
+  +openLatestRevision(long) : MenuRevision
+  +saveRevision(MenuRevision, String, User) : int
+  +createWorkingCopy(MenuRevision) : MenuRevision
+}
+class SharingService <<Service Layer>> {
+  +shareRevision(MenuRevision) : ShareLink
+  +addComment(...) : Comment
+}
+class ProjectService <<Service Layer>>
+class DocumentService <<Service Layer>>
+class AuthService <<Service Layer>>
+class MenuRevision
+interface MenuMapper
+interface TransactionRunner
+MenuEditorWindow --> MenuService
+MenuHandler --> SharingService
+MenuService --> MenuRevision
+MenuService --> MenuMapper
+MenuService --> TransactionRunner
+SharingService --> MenuMapper
+@enduml

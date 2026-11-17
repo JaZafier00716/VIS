@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="316px" preserveAspectRatio="none" style="width:332px;height:316px;" version="1.1" viewBox="0 0 332 316" width="332px" zoomAndPan="magnify"><defs/><g><!--MD5=[2c589014e840926a718801db2289e0a7]
+class Creator--><rect fill="#FFFFFF" height="69.9638" id="Creator" style="stroke: #444444; stroke-width: 1.5;" width="154" x="6" y="142"/><ellipse cx="58.25" cy="158" fill="#A9DCDF" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M58.3594,153.3438 L57.2031,158.4219 L59.5313,158.4219 L58.3594,153.3438 Z M56.875,151.1094 L59.8594,151.1094 L63.2188,163.5 L60.7656,163.5 L60,160.4375 L56.7188,160.4375 L55.9688,163.5 L53.5313,163.5 L56.875,151.1094 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="41" x="78.75" y="162.656">Creator</text><line style="stroke: #444444; stroke-width: 1.5;" x1="7" x2="159" y1="174" y2="174"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="79" x="12" y="189.7589">+anOperation()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="142" x="12" y="204.7408">#factoryMethod() : Product</text><!--MD5=[9fa9675923b2c821721124a66decc968]
+class ConcreteCreator--><rect fill="#FFFFFF" height="54.9819" id="ConcreteCreator" style="stroke: #444444; stroke-width: 1.5;" width="154" x="93" y="8"/><ellipse cx="120.6" cy="24" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M123.5688,29.6406 Q122.9906,29.9375 122.35,30.0781 Q121.7094,30.2344 121.0063,30.2344 Q118.5063,30.2344 117.1781,28.5938 Q115.8656,26.9375 115.8656,23.8125 Q115.8656,20.6875 117.1781,19.0313 Q118.5063,17.375 121.0063,17.375 Q121.7094,17.375 122.35,17.5313 Q123.0063,17.6875 123.5688,17.9844 L123.5688,20.7031 Q122.9438,20.125 122.35,19.8594 Q121.7563,19.5781 121.1313,19.5781 Q119.7875,19.5781 119.1,20.6563 Q118.4125,21.7188 118.4125,23.8125 Q118.4125,25.9063 119.1,26.9844 Q119.7875,28.0469 121.1313,28.0469 Q121.7563,28.0469 122.35,27.7813 Q122.9438,27.5 123.5688,26.9219 L123.5688,29.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="94" x="137.4" y="28.656">ConcreteCreator</text><line style="stroke: #444444; stroke-width: 1.5;" x1="94" x2="246" y1="40" y2="40"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="142" x="99" y="55.7589">#factoryMethod() : Product</text><!--MD5=[72136138052d025cffdce3c22fbd185f]
+class Product--><rect fill="#FFFFFF" height="32" id="Product" style="stroke: #444444; stroke-width: 1.5;" width="74" x="133" y="273"/><ellipse cx="148" cy="289" fill="#B4A7E5" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M143.9219,284.7656 L143.9219,282.6094 L151.3125,282.6094 L151.3125,284.7656 L148.8438,284.7656 L148.8438,292.8438 L151.3125,292.8438 L151.3125,295 L143.9219,295 L143.9219,292.8438 L146.3906,292.8438 L146.3906,284.7656 L143.9219,284.7656 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="42" x="162" y="293.656">Product</text><!--MD5=[990132e04f994323e3060f5453bb4352]
+class ConcreteProduct--><rect fill="#FFFFFF" height="32" id="ConcreteProduct" style="stroke: #444444; stroke-width: 1.5;" width="126" x="195" y="161"/><ellipse cx="210" cy="177" fill="#ADD1B2" rx="11" ry="11" style="stroke: #444444; stroke-width: 1.0;"/><path d="M212.9688,182.6406 Q212.3906,182.9375 211.75,183.0781 Q211.1094,183.2344 210.4063,183.2344 Q207.9063,183.2344 206.5781,181.5938 Q205.2656,179.9375 205.2656,176.8125 Q205.2656,173.6875 206.5781,172.0313 Q207.9063,170.375 210.4063,170.375 Q211.1094,170.375 211.75,170.5313 Q212.4063,170.6875 212.9688,170.9844 L212.9688,173.7031 Q212.3438,173.125 211.75,172.8594 Q211.1563,172.5781 210.5313,172.5781 Q209.1875,172.5781 208.5,173.6563 Q207.8125,174.7188 207.8125,176.8125 Q207.8125,178.9063 208.5,179.9844 Q209.1875,181.0469 210.5313,181.0469 Q211.1563,181.0469 211.75,180.7813 Q212.3438,180.5 212.9688,179.9219 L212.9688,182.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="94" x="224" y="181.656">ConcreteProduct</text><!--MD5=[5b21eba990a5dc033dc58c57cba043f2]
+link ConcreteCreator to Creator--><path d="M153.43,63.07 C142.59,80.46 128.06,103.75 115.01,124.67 " fill="none" id="ConcreteCreator-&gt;Creator" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="120.81,128.59,104.29,141.86,108.94,121.19,120.81,128.59" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[247670c3429422e1722415a4e21d545f]
+link ConcreteProduct to Product--><path d="M245.76,193.3 C232.63,209.71 211.41,236.24 194.76,257.05 " fill="none" id="ConcreteProduct-&gt;Product" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="200.09,261.59,182.13,272.83,189.16,252.84,200.09,261.59" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[423becb7af04490ee7f6b3c77f432651]
+link Creator to Product--><path d="M110.05,212.2 C124.73,230.76 142.34,253.03 154.67,268.61 " fill="none" id="Creator-&gt;Product" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="158,272.82,155.5436,263.2824,154.8939,268.9018,149.2745,268.2521,158,272.82" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[d9a668b74f14d95d6628992b70368a5d]
+link ConcreteCreator to ConcreteProduct--><path d="M186.76,63.07 C203.94,90.3 230.26,132.03 245.64,156.4 " fill="none" id="ConcreteCreator-&gt;ConcreteProduct" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="248.38,160.75,246.9548,151.0048,245.7095,156.5229,240.1914,155.2776,248.38,160.75" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="43" x="217" y="107.897">creates</text><!--MD5=[2f4e83d9512cb960f52309df7fec771d]
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+abstract class Creator {
+  +anOperation()
+  #factoryMethod() : Product
+}
+class ConcreteCreator {
+  #factoryMethod() : Product
+}
+interface Product
+class ConcreteProduct
+ConcreteCreator - -|> Creator
+ConcreteProduct ..|> Product
+Creator ..> Product
+ConcreteCreator ..> ConcreteProduct : creates
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.13+9-1-deb13u2-Debian
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

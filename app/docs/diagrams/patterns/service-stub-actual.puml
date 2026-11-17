@@ -1,0 +1,28 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+}
+skinparam note {
+  BackgroundColor #FFFFE0
+  BorderColor #999999
+}
+hide empty members
+
+class DocumentService
+interface DocumentStorage
+class FileDocumentStorage
+class InMemoryDocumentStorage <<Service Stub>> {
+  -files : Map
+  +content(String) : byte[]
+  +size() : int
+}
+class DocumentServiceTest <<test>>
+DocumentService --> DocumentStorage
+FileDocumentStorage ..|> DocumentStorage
+InMemoryDocumentStorage ..|> DocumentStorage
+DocumentServiceTest ..> InMemoryDocumentStorage
+@enduml
