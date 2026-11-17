@@ -9,7 +9,127 @@ Java application for managing catering projects: project folders, documents, men
 - Oracle Database 19c or newer. For local development Oracle Database Free in Docker works (image `gvenzl/oracle-free`, service name `FREEPDB1`).
 - A display for the desktop client and for the JavaFX tests (those tests are skipped without one)
 
-## Database
+## Database server
+
+The application needs an Oracle database (19c or newer) with the schema user that owns the tables. Two setups are used. Only the three `db.*` keys in `config/db.properties` change between them: `db.url`, `db.user` and `db.password`.
+
+Placeholders like `<SYS password>` stand for your own values. Never commit real passwords.
+
+### A) Local Oracle in Docker (development)
+
+This is the setup used during development: Oracle Database 23ai Free in Docker, container `vis-oracle`, pluggable database `FREEPDB1`, schema user `CATERING`.
+
+| Setting | Value |
+|---|---|
+| Image | `gvenzl/oracle-free:23.7-slim` |
+| Container | `vis-oracle` (restart policy `unless-stopped`) |
+| Data volume | `vis-oracle-data` mounted at `/opt/oracle/oradata` |
+| Host / port | `localhost` / `1521` |
+| Service name | `FREEPDB1` |
+
+**First start.** This creates the container, the database and the `CATERING` user in one step. The image creates `APP_USER` with its password automatically.
+
+```bash
+docker run -d --name vis-oracle -p 1521:1521 \
+  -v vis-oracle-data:/opt/oracle/oradata \
+  -e ORACLE_PASSWORD=<SYS password> \
+  -e APP_USER=CATERING -e APP_USER_PASSWORD=<CATERING password> \
+  --restart unless-stopped gvenzl/oracle-free:23.7-slim
+docker logs -f vis-oracle      # wait for "DATABASE IS READY TO USE!"
+```
+
+If the container already exists without the user, create it as SYSTEM:
+
+```bash
+docker exec -i vis-oracle sqlplus -s system/<SYS password>@//localhost:1521/FREEPDB1 <<'SQL'
+CREATE USER catering IDENTIFIED BY "<CATERING password>" QUOTA UNLIMITED ON users;
+GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE, CREATE TRIGGER, CREATE VIEW,
+      CREATE PROCEDURE, CREATE SYNONYM TO catering;
+SQL
+```
+
+**Everyday commands**
+
+```bash
+docker start vis-oracle        # start (after a reboot)
+docker stop vis-oracle         # stop
+docker ps --filter name=vis-oracle   # status
+docker logs -f vis-oracle      # log, ready when "DATABASE IS READY TO USE!" appears
+docker exec -it vis-oracle sqlplus CATERING/<CATERING password>@//localhost:1521/FREEPDB1
+```
+
+On Linux with Docker Desktop, start it first with `systemctl --user start docker-desktop`. The CLI context is `desktop-linux`.
+
+**Create the schema and data** with sqlplus inside the container (run from the folder with the scripts):
+
+```bash
+for f in 01_schema.sql 02_seed.sql 03_checks.sql 04_queries.sql; do docker cp "$f" vis-oracle:/tmp/; done
+printf 'SET SERVEROUTPUT ON\n@/tmp/01_schema.sql\n@/tmp/02_seed.sql\n@/tmp/03_checks.sql\nexit\n' \
+  | docker exec -i vis-oracle sqlplus -S CATERING/<CATERING password>@//localhost:1521/FREEPDB1
+```
+
+`01_schema.sql` drops and recreates its own objects, so running 01 → 02 again resets the data. `04_queries.sql` is the query catalogue and is optional for the application.
+
+The SQL Developer alternative: create a new connection with user `CATERING`, host `localhost`, port `1521` and service name `FREEPDB1`. Open each script and run it with F5 (Run Script).
+
+**Reset everything** (deletes all data):
+
+```bash
+docker rm -f vis-oracle && docker volume rm vis-oracle-data
+```
+
+Then run the first-start command again.
+
+**`config/db.properties`**
+
+```properties
+db.url=jdbc:oracle:thin:@//localhost:1521/FREEPDB1
+db.user=CATERING
+db.password=<CATERING password>
+```
+
+### B) University server dbsys.cs.vsb.cz
+
+The final database runs on the school Oracle server. You use your own school schema there, so there is no Docker and no user creation.
+
+| Setting | Value |
+|---|---|
+| Host | `dbsys.cs.vsb.cz` |
+| Port | `1521` `<to confirm>` |
+| Service name | `<to confirm>` (ask the teacher or take it from your SQL Developer connection) |
+| User | `<login>` (your school login) |
+| Password | `<password>` (your school database password) |
+
+The server is reachable from the university network. From home, connect to the VŠB VPN first `<to confirm>`.
+
+**SQL Developer:** create a new connection with the user `<login>`, the password, host `dbsys.cs.vsb.cz`, port `1521` and the service name above. Use "Test" to check it, then "Save" and "Connect". Open `01_schema.sql`, `02_seed.sql`, `03_checks.sql` and `04_queries.sql` in this order and run each with F5 (Run Script). The assignment requires SQL Developer for work with the school database.
+
+**sqlplus** (if installed on your machine):
+
+```bash
+sqlplus <login>/<password>@//dbsys.cs.vsb.cz:1521/<service name>
+SQL> SET SERVEROUTPUT ON
+SQL> @01_schema.sql
+SQL> @02_seed.sql
+SQL> @03_checks.sql
+SQL> @04_queries.sql
+```
+
+**Privileges.** The schema needs CREATE TABLE, SEQUENCE, TRIGGER and VIEW. Two blocks in `04_queries.sql` need more and are commented out:
+- the external table (SQL S08: `CREATE DIRECTORY` plus `ORGANIZATION EXTERNAL ... ORACLE_LOADER`)
+- `CREATE PUBLIC SYNONYM`
+
+Enable them only if your school account has `CREATE ANY DIRECTORY` / `CREATE PUBLIC SYNONYM`. The external table also needs the CSV file on the database server.
+
+**`config/db.properties`**
+
+```properties
+db.url=jdbc:oracle:thin:@//dbsys.cs.vsb.cz:1521/<service name>
+db.user=<login>
+db.password=<password>
+```
+
+## Database scripts
 
 The scripts are in the TDS part of the project. In the hand-in zip they are copied to `db/`. Run them as the application schema user (for example `CATERING`), in this order:
 
