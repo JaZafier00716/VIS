@@ -1,0 +1,370 @@
+@startuml
+skinparam packageStyle rectangle
+hide empty members
+
+package presentation {
+  class Main
+  class Cv05Demonstrations
+  class Cv06Demonstrations
+  class Cv07Demonstrations
+  class Cv08Demonstrations
+  class Cv09Demonstrations
+}
+package configuration {
+  class ApplicationContext <<composition root>>
+  enum CustomerMapping {
+    CTI
+    STI
+  }
+  enum StorageType {
+    JSON
+    H2
+  }
+  enum ShippingMode {
+    STUB
+    GATEWAY
+  }
+}
+package business.service {
+  class CustomerService
+  class MaterialService
+  class OrderService
+  class PlaceOrderService <<CV05 scenario A>>
+  class OrderPricingService <<CV08>> {
+    calculate(orderId, discount): OrderPriceSummary
+    calculatePrice(orderId, IPricingStrategy): Money
+  }
+  class OrderDocumentService <<CV09>> {
+    createDocument(orderId, DocumentCreator): OrderDocument
+  }
+  interface IShippingService <<CV08>> {
+    quote(pieces): ShippingQuote
+  }
+}
+package business.repository {
+  interface CustomerRepository
+  interface AddressRepository
+  interface MaterialRepository
+  interface FinishRepository
+  interface OrderRepository
+  interface UnitOfWorkControl {
+    commit()
+    rollback()
+  }
+}
+package business.domainmodel {
+  abstract class BaseEntity <<Layer Supertype>> {
+    id
+    createdAt
+    updatedAt
+    markUpdated()
+  }
+  class Money <<Value Object>> {
+    amount: BigDecimal
+    currency
+    plus(Money)
+    times(quantity)
+  }
+  interface DiscountPolicy <<Special Case>> {
+    apply(Money): Money
+  }
+  class PercentageDiscount
+  class NoDiscount
+  class ShippingQuote <<value>> {
+    price: Money
+    deliveryDays
+  }
+  abstract class Customer {
+    email
+    phone
+    {abstract} getDisplayName()
+  }
+  class PersonCustomer {
+    firstName
+    lastName
+    birthDate
+  }
+  class CompanyCustomer {
+    companyName
+    ico
+    dic
+    contactPerson
+  }
+  class BillingAddress <<value>> {
+    street
+    city
+    zipCode
+    country
+  }
+  class Address {
+    customerId
+    street
+    city
+    zipCode
+    country
+  }
+  class Order <<CV09 Subject>> {
+    customerId
+    materialId
+    status
+    number: Integer
+    assignNumber(int)
+    confirm() / startProduction() / prepareForExpedition()
+    registerObserver(IOrderObserver)
+    unregisterObserver(IOrderObserver)
+    publishStatusChanges()
+  }
+  class OrderItem {
+    lineNumber
+    materialId
+    quantity
+    unitPrice: Money
+    totalPrice(): Money
+  }
+  class OrderSpecification <<value>> {
+    width
+    height
+    depth
+    designNotes
+  }
+  class ProductConfiguration <<value>> {
+    color
+    machining
+    options
+  }
+  class Material {
+    name
+  }
+  class Finish {
+    name
+  }
+  enum OrderStatus
+}
+package dataaccess {
+  class UnitOfWork
+  class IdentityMap
+  class GatewayEntityPersister
+  interface StorageTransaction
+  class "…DataMapper" as DataMapper <<Data Mapper>>
+  interface "…Gateway" as Gateway <<Table Data Gateway>>
+  class "H2…Gateway" as H2Gateway
+  class "Json…Gateway" as JsonGateway
+  class H2Database
+  class OrderMapper
+  class ProductConfigurationSerializer
+}
+package dataaccess.mapper.customer <<CV07 Inheritance Mappers>> {
+  abstract class CustomerInheritanceMapper {
+    toCommon(customer)
+    {abstract} toPart(customer)
+    {abstract} toDomain(common, part)
+  }
+  class PersonCustomerMapper
+  class CompanyCustomerMapper
+  interface CustomerTables
+  class CtiCustomerTables <<CTI>>
+  class StiCustomerTables <<STI>>
+}
+package "dataaccess.gateway (customer tables)" {
+  interface CustomerGateway <<customers>>
+  interface PersonCustomerGateway <<person_customers>>
+  interface CompanyCustomerGateway <<company_customers>>
+  interface StiCustomerGateway <<customers_sti>>
+}
+
+package dataaccess.shipping <<CV08>> {
+  class ShippingGateway <<Gateway>>
+  class ShippingServiceStub <<Service Stub>>
+  class ShippingMapper <<Mapper>>
+  class SimulatedShippingApi <<external system>>
+}
+
+' CV09 – GoF patterns, all in the business layer
+package business.service.numbering <<CV09 Singleton>> {
+  class OrderNumberGenerator <<Singleton>> {
+    {static} -INSTANCE: OrderNumberGenerator
+    -OrderNumberGenerator()
+    {static} getInstance(): OrderNumberGenerator
+    getNextNumber(): int
+  }
+}
+package business.pricing <<CV09 Strategy>> {
+  interface IPricingStrategy {
+    getName(): String
+    calculate(Order): Money
+  }
+  class StandardPricing
+  class CompanyPricing
+}
+package business.document <<CV09 Factory Method>> {
+  abstract class DocumentCreator <<Creator>> {
+    {abstract} #createDocument(Order): OrderDocument
+    +produce(Order): OrderDocument
+    +render(Order): String
+  }
+  class ConfirmationCreator
+  class DeliveryNoteCreator
+  class InvoiceCreator
+  abstract class OrderDocument <<Product>> {
+    {abstract} getTitle()
+    {abstract} getContent()
+  }
+  class OrderConfirmation
+  class DeliveryNote
+  class Invoice
+}
+package business.observer <<CV09 Observer>> {
+  interface IOrderObserver {
+    statusChanged(order, oldStatus, newStatus)
+  }
+  class ProductionObserver
+  class ExpeditionObserver
+}
+package business.command <<CV09 Command>> {
+  interface IOrderCommand {
+    getName()
+    getOrderId()
+    execute()
+  }
+  class ConfirmOrderCommand
+  class StartProductionCommand
+  class PrepareExpeditionCommand
+  class OrderCommandExecutor <<Invoker>> {
+    execute(IOrderCommand): CommandLogEntry
+    getLog(): List<CommandLogEntry>
+  }
+  class CommandLogEntry <<record>> {
+    time
+    operation
+    orderId
+    success
+    message
+  }
+}
+
+package cv04 <<isolated comparison>> {
+  class TdgOrderService
+  class RdgOrderService
+  class OrderRecord <<Active Record>>
+  class DataMapperDemonstration
+}
+
+BaseEntity <|-- Customer
+BaseEntity <|-- Order
+BaseEntity <|-- Material
+BaseEntity <|-- Finish
+BaseEntity <|-- Address
+DiscountPolicy <|.. PercentageDiscount
+DiscountPolicy <|.. NoDiscount
+OrderItem --> Money
+ShippingQuote --> Money
+OrderPricingService --> OrderService
+OrderPricingService --> IShippingService
+OrderPricingService --> DiscountPolicy
+ShippingGateway ..|> IShippingService
+ShippingServiceStub ..|> IShippingService
+ShippingGateway --> ShippingMapper
+ShippingGateway --> SimulatedShippingApi
+ShippingMapper --> ShippingQuote
+ApplicationContext --> ShippingMode
+ApplicationContext --> OrderPricingService
+Main --> OrderPricingService
+Cv08Demonstrations --> ApplicationContext
+Customer <|-- PersonCustomer
+Customer <|-- CompanyCustomer
+Customer *-- "0..1" BillingAddress : Embedded Value
+Customer "1" o-- "*" Address : Lazy Load
+Order --> Customer : Foreign Key Mapping\n(customerId), Lazy Load
+Order *-- "*" OrderItem : Dependent Mapping
+Order *-- "1" OrderSpecification : Embedded Value
+OrderItem *-- "0..1" ProductConfiguration : Serialized LOB
+Material "*" -- "*" Finish : Association Table Mapping
+Order --> OrderStatus
+
+Main --> PlaceOrderService
+Main --> OrderService
+Main --> CustomerService
+Main --> MaterialService
+Cv05Demonstrations --> ApplicationContext
+Cv06Demonstrations --> ApplicationContext
+Cv07Demonstrations --> ApplicationContext
+ApplicationContext --> CustomerMapping
+CustomerInheritanceMapper <|-- PersonCustomerMapper
+CustomerInheritanceMapper <|-- CompanyCustomerMapper
+CtiCustomerTables ..|> CustomerTables
+StiCustomerTables ..|> CustomerTables
+CtiCustomerTables --> PersonCustomerMapper
+CtiCustomerTables --> CompanyCustomerMapper
+StiCustomerTables --> PersonCustomerMapper
+StiCustomerTables --> CompanyCustomerMapper
+CtiCustomerTables --> CustomerGateway
+CtiCustomerTables --> PersonCustomerGateway
+CtiCustomerTables --> CompanyCustomerGateway
+StiCustomerTables --> StiCustomerGateway
+DataMapper --> CustomerTables : customers
+ApplicationContext --> UnitOfWork
+ApplicationContext --> DataMapper
+PlaceOrderService --> OrderRepository
+PlaceOrderService --> UnitOfWorkControl
+OrderService --> OrderRepository
+CustomerService --> CustomerRepository
+MaterialService --> MaterialRepository
+DataMapper ..|> CustomerRepository
+DataMapper ..|> OrderRepository
+DataMapper --> Gateway
+DataMapper --> UnitOfWork : register / Identity Map
+UnitOfWork ..|> UnitOfWorkControl
+UnitOfWork --> IdentityMap
+UnitOfWork --> GatewayEntityPersister
+UnitOfWork --> StorageTransaction
+GatewayEntityPersister --> Gateway
+GatewayEntityPersister --> OrderMapper
+H2Gateway ..|> Gateway
+JsonGateway ..|> Gateway
+H2Gateway --> H2Database
+OrderMapper --> ProductConfigurationSerializer
+DataMapperDemonstration --> PlaceOrderService
+TdgOrderService --> H2Database
+RdgOrderService --> H2Database
+OrderRecord --> H2Database
+
+' CV09 relations
+OrderService ..> OrderNumberGenerator : getInstance().getNextNumber()
+IPricingStrategy <|.. StandardPricing
+IPricingStrategy <|.. CompanyPricing
+CompanyPricing --> StandardPricing
+OrderPricingService ..> IPricingStrategy : strategy chosen by caller
+DocumentCreator <|-- ConfirmationCreator
+DocumentCreator <|-- DeliveryNoteCreator
+DocumentCreator <|-- InvoiceCreator
+OrderDocument <|-- OrderConfirmation
+OrderDocument <|-- DeliveryNote
+OrderDocument <|-- Invoice
+DocumentCreator ..> OrderDocument : factory method creates
+ConfirmationCreator ..> OrderConfirmation
+DeliveryNoteCreator ..> DeliveryNote
+InvoiceCreator ..> Invoice
+OrderDocument --> Order
+OrderDocumentService --> OrderService
+OrderDocumentService ..> DocumentCreator
+IOrderObserver <|.. ProductionObserver
+IOrderObserver <|.. ExpeditionObserver
+Order "1" o-- "*" IOrderObserver : notifies after commit
+OrderService o-- "*" IOrderObserver : registerObserver
+IOrderCommand <|.. ConfirmOrderCommand
+IOrderCommand <|.. StartProductionCommand
+IOrderCommand <|.. PrepareExpeditionCommand
+ConfirmOrderCommand --> OrderService : receiver
+StartProductionCommand --> OrderService : receiver
+PrepareExpeditionCommand --> OrderService : receiver
+OrderCommandExecutor --> IOrderCommand : execute()
+OrderCommandExecutor *-- "*" CommandLogEntry : log
+ApplicationContext --> OrderDocumentService
+Main --> OrderCommandExecutor
+Main --> OrderDocumentService
+Main ..> IPricingStrategy : selects
+Main ..> DocumentCreator : selects
+Main ..> IOrderObserver : registers
+Cv09Demonstrations --> ApplicationContext
+Cv09Demonstrations --> OrderCommandExecutor
+@enduml
