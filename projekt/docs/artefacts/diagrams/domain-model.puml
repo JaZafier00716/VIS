@@ -12,15 +12,17 @@ class User {
   passwordHash
   active
 }
-class Role {
-  name
+enum Role <<enumeration>> {
+  ADMIN
+  WORKER
+  MANAGER
 }
 class Customer {
   name
   email
   phone
   companyName
-  address
+  city
 }
 class Project {
   name
@@ -33,7 +35,6 @@ class Project {
 abstract class ProjectNode {
   name
   createdAt
-  modifiedAt
 }
 class Folder
 class Document {
@@ -43,15 +44,13 @@ class Document {
 }
 class Menu
 class MenuRevision {
-  number
+  revisionNo
   createdAt
-  modifiedAt
   note
   state : RevisionState
 }
 class MenuCategory {
   name
-  position
 }
 class MenuItem {
   quantity
@@ -62,11 +61,12 @@ class Product {
   name
   description
   unit
-  defaultPrice
+  currentPrice
+  vatRate
   photo
 }
 class Allergen {
-  code
+  id
   name
 }
 class ShareLink {
@@ -77,7 +77,7 @@ class ShareLink {
 }
 class Comment {
   authorName
-  text
+  body
   createdAt
   resolved
   resolutionNote
@@ -87,6 +87,7 @@ class Comment {
 User "0..*" -- "1..*" Role : má >
 Customer "1" -- "0..*" Project : objednává >
 User "1" -- "0..*" Project : odpovídá za >
+User "0..1" -- "0..*" User : nadřízený (manažer) >
 Project "1" *-- "1" Folder : kořenová složka >
 ProjectNode <|-- Folder
 ProjectNode <|-- Document
@@ -107,7 +108,7 @@ enum ProjectStatus <<enumeration>> {
   ARCHIVED
 }
 enum RevisionState <<enumeration>> {
-  DRAFT
+  WORKING
   SHARED
 }
 @enduml

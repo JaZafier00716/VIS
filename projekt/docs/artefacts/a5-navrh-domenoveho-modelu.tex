@@ -297,7 +297,7 @@ Každý vzor v této kapitole je v kódu. U vzoru je uvedená třída, která ho
   \item[Composite] \texttt{ProjectNode} je společný typ uzlů stromu. \texttt{Folder} je složený uzel s dětmi, \texttt{Document} a \texttt{Menu} jsou listy. Například \texttt{countDocuments} a \texttt{isDeletable} se volají stejně na složku i na list.
   \item[Factory] \texttt{DataAccessFactory} vytváří všechny objekty datové vrstvy podle konfigurace. Zbytek aplikace nezná konkrétní třídy mapperů ani úložiště.
   \item[Factory Method] \texttt{NodeCreator.createIn} provede společné kroky (kontrola názvu a vložení do složky). Abstraktní metoda \texttt{createNode} nechá potomky \texttt{FolderCreator}, \texttt{MenuCreator} a \texttt{DocumentCreator} rozhodnout, jaký uzel vznikne.
-  \item[Singleton] \texttt{Database} má jedinou instanci. Vytvoří ji \texttt{Database.init} při startu a mappery ji získají přes \texttt{getInstance}.
+  \item[Singleton] \texttt{Database} má jedinou instanci. Vytvoří ji \texttt{Database.init} při startu (volá ji \texttt{DataAccessFactory}). Mappery ji používají přes pomocnou třídu \texttt{Jdbc}, která ji získá metodou \texttt{getInstance}.
   \item[Facade] Služby v \texttt{business.service} jsou fasádou aplikační vrstvy pro desktopové okno i webový server (viz Service Layer).
   \item[Strategy] \texttt{PriceStrategy} určuje výpočet ceny řádku menu. \texttt{PriceWithoutVat} počítá cenu bez DPH a \texttt{PriceWithVat} s DPH. Uživatel strategii přepíná v editoru menu i na webu zákazníka.
   \item[Observer] \texttt{MenuRevision} je pozorovaný objekt a po každé úspěšné změně volá \texttt{MenuRevisionListener.revisionChanged}. \texttt{MenuEditorWindow} se registruje jako posluchač a obnoví tabulku a součty.

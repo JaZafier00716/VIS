@@ -21,7 +21,7 @@ UC & Rozhraní & Třída UI & Metoda aplikační služby \\
 UC & Rozhraní & Třída UI & Metoda aplikační služby \\
 \midrule
 \endhead
-\ucref{01} & desktop, web & \texttt{LoginDialog}, \texttt{ManagerHandler} & \texttt{AuthService.login} \\
+\ucref{01} & desktop, web & \texttt{LoginDialog}, \texttt{ManagerHandler} & \texttt{AuthService.loginDesktop} (desktop), \texttt{login} a \texttt{findActiveUser} (web) \\
 \textbf{\ucref{02}} & desktop & \texttt{NewProjectDialog}, \texttt{MainWindow}, \texttt{UploadConflictDialog} & \texttt{ProjectService.createProject}, \texttt{DocumentService.createFolder}, \texttt{createDocument}, \texttt{downloadDocuments} \\
 \ucref{03} & desktop & \texttt{EditProjectDialog} & \texttt{ProjectService.updateProject}, \texttt{archiveProject}, \texttt{reactivateProject} \\
 \ucref{04} & desktop & \texttt{ProjectSearchDialog} & \texttt{ProjectService.searchProjects} \\
@@ -35,7 +35,7 @@ UC & Rozhraní & Třída UI & Metoda aplikační služby \\
 \ucref{12} & web & \texttt{MenuHandler}, \texttt{MenuPage} & \texttt{SharingService.openSharedMenu} \\
 \textbf{\ucref{13}} & desktop & \texttt{CommentsWindow} & \texttt{SharingService.listComments}, \texttt{resolveComment} \\
 \ucref{14} & desktop & \texttt{MenuEditorWindow}, \texttt{MenuPdfExport} & \texttt{MenuExportService.exportPdf} \\
-\ucref{15} & web & \texttt{ManagerHandler}, \texttt{ManagerPage} & \texttt{ProjectService.findAllProjects}, \texttt{loadTree}, \texttt{MenuService.openLatestRevision} \\
+\ucref{15} & web & \texttt{ManagerHandler}, \texttt{ManagerPage} & \texttt{ProjectService.searchManagedProjects}, \texttt{findManagedProject}, \texttt{loadTree}, \texttt{MenuService.openLatestRevision}, \texttt{projectIdOf} \\
 \textbf{\ucref{16}} & desktop & \texttt{UsersWindow} & \texttt{UserService.createUser}, \texttt{updateUser} \\
 \ucref{17} & desktop & \texttt{MainWindow}, \texttt{UsersWindow} & \texttt{UserService.findAllUsers} \\
 \ucref{18} & plánovač & \texttt{ExpiredLinkScheduler} & \texttt{SharingService.deactivateExpiredLinks} \\
@@ -44,7 +44,7 @@ UC & Rozhraní & Třída UI & Metoda aplikační služby \\
 \end{xltabular}
 }
 
-Případ užití \ucref{18} nemá uživatelské rozhraní. Plánovač \texttt{ExpiredLinkScheduler} spouští deaktivaci prošlých odkazů hned po startu desktopové aplikace i samostatného webového serveru a potom jednou denně.
+Případ užití \ucref{18} nemá uživatelské rozhraní. Plánovač \texttt{ExpiredLinkScheduler} spouští deaktivaci prošlých odkazů hned po startu samostatného webového serveru (\texttt{WebMain}) a potom jednou denně. Desktopová aplikace jej spustí jen při \texttt{web.embedded=true}.
 
 Následující postupy předvádějí podrobně popsané případy užití v běžící aplikaci. Vycházejí z testovacích dat, která naplní databázi (například projekt \uv{Svatba Novákovi} s menu \uv{Svatební menu} a \uv{Půlnoční raut}). S testovacími daty se dodávají i ukázkové účty. Role se sčítají a pravidla jsou ve třídě \texttt{AccessPolicy}. Pracovníka s rolí administrátora představuje uživatel \texttt{jzamostny}, administrátora bez role pracovníka uživatel \texttt{mkral} (po přihlášení se otevře rovnou správa uživatelů) a manažera bez dalších rolí uživatel \texttt{tsvoboda}. Manažer se do desktopové aplikace nepřihlásí a dostane odkaz na webový přehled. Ve webovém přehledu vidí jen projekty pracovníků, kteří mu podléhají. Uživatel \texttt{mkral} je zároveň manažerem uživatele \texttt{jzamostny}, a proto ve webovém přehledu vidí jeho projekty včetně projektu \uv{Svatba Novákovi}. Všechny ukázkové účty mají heslo \texttt{heslo123}, které je nutné v ostrém provozu změnit. Kontrolu stavu po ukončení případu užití lze provést dotazem SQL do uvedených tabulek. Odpovídá části \uv{Stav systému po ukončení případu užití} ve funkční specifikaci.
 
